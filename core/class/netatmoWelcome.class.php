@@ -25,31 +25,32 @@ if (!class_exists('NAWelcomeApiClient')) {
 class netatmoWelcome extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
+	private static $_client = null;
+
 	/*     * ***********************Methode static*************************** */
 
-	public function syncWithNetatmo() {
-		$client = new NAWelcomeApiClient(array(
-			'client_id' => config::byKey('client_id', 'netatmoWelcome'),
-			'client_secret' => config::byKey('client_secret', 'netatmoWelcome'),
-			'username' => config::byKey('username', 'netatmoWelcome'),
-			'password' => config::byKey('password', 'netatmoWelcome'),
-			'scope' => NAScopes::SCOPE_READ_STATION,
-		));
-		$tokens = $client->getAccessToken();
-
-	}
-
-	public static function cron15() {
-		try {
-			$client = new NAWelcomeApiClient(array(
+	public function getClient() {
+		if (self::$_client == null) {
+			self::$_client = new NAWelcomeApiClient(array(
 				'client_id' => config::byKey('client_id', 'netatmoWelcome'),
 				'client_secret' => config::byKey('client_secret', 'netatmoWelcome'),
 				'username' => config::byKey('username', 'netatmoWelcome'),
 				'password' => config::byKey('password', 'netatmoWelcome'),
-				'scope' => NAScopes::SCOPE_READ_STATION,
+				'scope' => array(NAScopes::SCOPE_READ_CAMERA, NAScopes::SCOPE_WRITE_CAMERA),
 			));
+			self::$_client->getAccessToken();
+		}
+		return self::$_client;
+	}
+
+	public function syncWithNetatmo() {
+		$client = self::getClient();
+	}
+
+	public static function cron15() {
+		try {
 			try {
-				$tokens = $client->getAccessToken();
+				$client = self::getClient();
 				if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 0) {
 					config::save('numberFailed', 0, 'netatmoWelcome');
 				}
