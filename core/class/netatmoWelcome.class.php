@@ -54,7 +54,7 @@ class netatmoWelcome extends eqLogic {
 				if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 0) {
 					config::save('numberFailed', 0, 'netatmoWelcome');
 				}
-			} catch (NAClientException $ex) {
+			} catch (NAClientException $e) {
 				if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 3) {
 					log::add('netatmoWelcome', 'error', __('Erreur sur synchro netatmo weather ', __FILE__) . '(' . config::byKey('numberFailed', 'netatmoWelcome', 0) . ')' . $e->getMessage());
 				} else {
