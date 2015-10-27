@@ -22,4 +22,5 @@ if (!jeedom::apiAccess(init('apikey'))) {
 	echo 'Clef API non valide, vous n\'etes pas autorisé à effectuer cette action (jeeWelcome)';
 	die();
 }
-netatmoWelcome::cron15();
+
+netatmoWelcome::refresh_info();

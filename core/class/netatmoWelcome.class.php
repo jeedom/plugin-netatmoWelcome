@@ -149,9 +149,10 @@ class netatmoWelcome extends eqLogic {
 
 		}
 		$client->subscribeToWebhook(network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . config::byKey('api'));
+		self::refresh_info();
 	}
 
-	public static function cron15() {
+	public static function refresh_info() {
 		try {
 			try {
 				$client = self::getClient();
@@ -344,7 +345,7 @@ class netatmoWelcomeCmd extends cmd {
 
 	public function execute($_options = array()) {
 		if ($this->getLogicalId() == 'refresh') {
-			netatmoWelcome::cron15();
+			netatmoWelcome::refresh_info();
 		}
 	}
 
