@@ -217,6 +217,13 @@ class netatmoWelcome extends eqLogic {
 				if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($message)) {
 					$cmd->event($message);
 				}
+				$mc = cache::byKey('netatmoWeatherWidgetmobile' . $eqLogic->getId());
+				$mc->remove();
+				$mc = cache::byKey('netatmoWeatherWidgetdashboard' . $eqLogic->getId());
+				$mc->remove();
+				$eqLogic->toHtml('mobile');
+				$eqLogic->toHtml('dashboard');
+				$eqLogic->refreshWidget();
 			}
 		} catch (Exception $e) {
 
@@ -268,6 +275,9 @@ class netatmoWelcome extends eqLogic {
 		$event = $this->getCmd('info', 'lastEvent');
 		if (is_object($event)) {
 			$replace['#' . $event->getLogicalId() . '#'] = $event->execCmd();
+			if ($version == 'mobile') {
+				$replace['#' . $event->getLogicalId() . '#'] = str_replace(' - ', '<br/>', $replace['#' . $event->getLogicalId() . '#']);
+			}
 		}
 
 		foreach ($this->getCmd('action') as $cmd) {

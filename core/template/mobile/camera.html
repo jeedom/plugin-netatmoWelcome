@@ -1,0 +1,24 @@
+<div class="camera"  data-camera_uid="#uid#">
+	<center><strong>#name#</strong></center>
+	<center>Statut <span class="state"></span></center>
+	<center>Carte SD <span class="stateSd"></span></center>
+	<center>Alim <span class="stateAlim"></span></center>
+
+	<script>
+		if('#state#' == 1){
+			$('.camera[data-camera_uid="#uid#"] .state').append('<i class="fa fa-check"></i>')
+		}else{
+			$('.camera[data-camera_uid="#uid#"] .state').append('<i class="fa fa-times"></i>')
+		}
+		if('#stateSd#' == 1){
+			$('.camera[data-camera_uid="#uid#"] .stateSd').append('<i class="fa fa-check"></i>')
+		}else{
+			$('.camera[data-camera_uid="#uid#"] .stateSd').append('<i class="fa fa-times"></i>')
+		}
+		if('#stateAlim#' == 1){
+			$('.camera[data-camera_uid="#uid#"] .stateAlim').append('<i class="fa fa-check"></i>')
+		}else{
+			$('.camera[data-camera_uid="#uid#"] .stateAlim').append('<i class="fa fa-times"></i>')
+		}
+	</script>
+</div>
