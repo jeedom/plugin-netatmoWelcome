@@ -1,0 +1,40 @@
+<div class="eqLogic eqLogic-widget" style="min-width:160px;background-color: #background_color#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="dashboard">
+	<span class="statusCmd" style="position : absolute;left : 5px; width : 30px;z-index: 1030;"></span>
+	<i class='fa fa-refresh pull-right cursor refresh' style="margin-top: 3px;margin-right: 3px;"></i>
+	<i class='fa fa-file-text pull-right cursor bt_event' style="margin-top: 3px;margin-right: 3px;"></i>
+	<i class='fa fa-camera pull-right cursor bt_camera' style="margin-top: 3px;margin-right: 3px;"></i>
+	<i class='fa fa-user pull-right cursor bt_user' style="margin-top: 3px;margin-right: 3px;"></i>
+	<span class="cmd cmd-widget" data-cmd_id="#refresh_id#" style="display:none;"></span>
+	<center class="widget-name"><a href="#eqLink#" style="font-size : 1.3em;"> #name#  </a></center>
+	<div class="user">
+		#user#
+	</div>
+	<div class="event" style="display:none;overflow:auto;">
+		<center>#lastEvent#</center>
+	</div>
+	<div class="camera" style="display:none;overflow:auto;">
+		#camera#
+	</div>
+	<script type="text/javascript">
+		$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
+			jeedom.cmd.execute({id: '#refresh_id#'});
+		});
+		$('.eqLogic[data-eqLogic_uid=#uid#] .event').height($('.eqLogic[data-eqLogic_uid=#uid#]').height() - 20);
+		$('.eqLogic[data-eqLogic_uid=#uid#] .camera').height($('.eqLogic[data-eqLogic_uid=#uid#]').height() - 20);
+		$('.eqLogic[data-eqLogic_uid=#uid#] .bt_event').on('click', function () {
+			$('.eqLogic[data-eqLogic_uid=#uid#] .event').show();
+			$('.eqLogic[data-eqLogic_uid=#uid#] .user').hide();
+			$('.eqLogic[data-eqLogic_uid=#uid#] .camera').hide();
+		});
+		$('.eqLogic[data-eqLogic_uid=#uid#] .bt_camera').on('click', function () {
+			$('.eqLogic[data-eqLogic_uid=#uid#] .event').hide();
+			$('.eqLogic[data-eqLogic_uid=#uid#] .user').hide();
+			$('.eqLogic[data-eqLogic_uid=#uid#] .camera').show();
+		});
+		$('.eqLogic[data-eqLogic_uid=#uid#] .bt_user').on('click', function () {
+			$('.eqLogic[data-eqLogic_uid=#uid#] .event').hide();
+			$('.eqLogic[data-eqLogic_uid=#uid#] .user').show();
+			$('.eqLogic[data-eqLogic_uid=#uid#] .camera').hide();
+		});
+	</script>
+</div>

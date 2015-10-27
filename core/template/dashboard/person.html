@@ -1,0 +1,13 @@
+<div style="width : 150px;margin-left : 5px;" class="pull-left person"  data-person_uid="#uid#">
+	<center><strong>#name#</strong></center>
+	<center><span class="isHere" style="font-size : 1.8em;"></span></center>
+	<center>Vu la derniere fois</center>
+	<center>#lastSeen#</center>
+	<script>
+		if('#isHere#' == 1){
+			$('.person[data-person_uid=#uid#] .isHere').append('<span class="fa-stack fa-lg"><i class="fa fa-user fa-stack-1x"></i></span>')
+		}else{
+			$('.person[data-person_uid=#uid#] .isHere').append('<span class="fa-stack fa-lg"><i class="fa fa-user fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-danger"></i></span>')
+		}
+	</script>
+</div>

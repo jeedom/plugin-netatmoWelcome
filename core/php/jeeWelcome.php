@@ -22,8 +22,4 @@ if (!jeedom::apiAccess(init('apikey'))) {
 	echo 'Clef API non valide, vous n\'etes pas autorisé à effectuer cette action (jeeWelcome)';
 	die();
 }
-log::add('netatmoWelcome', 'debug', 'Webhookcall');
-log::add('netatmoWelcome', 'debug', print_r($_GET, true));
-log::add('netatmoWelcome', 'debug', print_r($_POST, true));
-log::add('netatmoWelcome', 'debug', print_r(file_get_contents("php://input"), true));
 netatmoWelcome::cron15();

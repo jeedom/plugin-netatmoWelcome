@@ -45,7 +45,7 @@ class netatmoWelcome extends eqLogic {
 
 	public function syncWithNetatmo() {
 		$client = self::getClient();
-		$response = $client->getData(NULL, 10);
+		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
 		foreach ($homes as $home) {
 			$eqLogic = eqLogic::byLogicalId($home->getVar('id'), 'netatmoWelcome');
@@ -59,10 +59,12 @@ class netatmoWelcome extends eqLogic {
 				$eqLogic->setIsVisible(1);
 				$eqLogic->save();
 			}
+			$list_person = array();
 			$persons = $home->getPersons();
 			foreach ($persons as $person) {
 				$person_array = utils::o2a($person);
 				$person_array = $person_array['object'];
+				$list_person[$person_array['id']] = $person_array['pseudo'];
 				$cmd = $eqLogic->getCmd('info', 'isHere' . $person_array['id']);
 				if (!is_object($cmd)) {
 					$cmd = new netatmoWelcomeCmd();
@@ -86,10 +88,13 @@ class netatmoWelcome extends eqLogic {
 					$cmd->save();
 				}
 			}
+			$eqLogic->setConfiguration('user_list', $list_person);
+			$list_camera = array();
 			$cameras = $home->getCameras();
 			foreach ($cameras as $camera) {
 				$camera_array = utils::o2a($camera);
 				$camera_array = $camera_array['object'];
+				$list_camera[$camera_array['id']] = $camera_array['name'];
 				$cmd = $eqLogic->getCmd('info', 'state' . $camera_array['id']);
 				if (!is_object($cmd)) {
 					$cmd = new netatmoWelcomeCmd();
@@ -124,6 +129,8 @@ class netatmoWelcome extends eqLogic {
 					$cmd->save();
 				}
 			}
+			$eqLogic->setConfiguration('camera_list', $list_camera);
+			$eqLogic->save();
 			$cmd = $eqLogic->getCmd('info', 'lastEvent');
 			if (!is_object($cmd)) {
 				$cmd = new netatmoWelcomeCmd();
@@ -216,6 +223,115 @@ class netatmoWelcome extends eqLogic {
 	}
 
 	/*     * *********************Methode d'instance************************* */
+
+	public function postSave() {
+		$refresh = $this->getCmd(null, 'refresh');
+		if (!is_object($refresh)) {
+			$refresh = new netatmoWeatherCmd();
+			$refresh->setName(__('Rafraichir', __FILE__));
+		}
+		$refresh->setEqLogic_id($this->getId());
+		$refresh->setLogicalId('refresh');
+		$refresh->setType('action');
+		$refresh->setSubType('other');
+		$refresh->save();
+	}
+
+	public function toHtml($_version = 'dashboard') {
+		if ($this->getIsEnable() != 1) {
+			return '';
+		}
+		if (!$this->hasRight('r')) {
+			return '';
+		}
+		$version = jeedom::versionAlias($_version);
+		if ($this->getDisplay('hideOn' . $version) == 1) {
+			return '';
+		}
+		$mc = cache::byKey('netatmoWelcomeWidget' . jeedom::versionAlias($_version) . $this->getId());
+		if ($mc->getValue() != '') {
+			//return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
+		}
+		$replace = array(
+			'#name#' => $this->getName(),
+			'#id#' => $this->getId(),
+			'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
+			'#eqLink#' => $this->getLinkToConfiguration(),
+			'#uid#' => 'netatmoWelcome' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
+		);
+		$refresh = $this->getCmd('action', 'refresh');
+		if (is_object($refresh)) {
+			$replace['#' . $refresh->getLogicalId() . '_id#'] = $refresh->getId();
+		}
+
+		$event = $this->getCmd('info', 'lastEvent');
+		if (is_object($event)) {
+			$replace['#' . $event->getLogicalId() . '#'] = $event->execCmd();
+		}
+
+		foreach ($this->getCmd('action') as $cmd) {
+			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+		}
+
+		$replace['#user#'] = '';
+		foreach ($this->getConfiguration('user_list') as $id => $pseudo) {
+			$replace_user = array(
+				'#name#' => $pseudo,
+				'#uid#' => 'netatmoWelcome' . $id . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
+				'#lastSeen#' => '',
+				'#isHere#' => '',
+			);
+			$cmd = $this->getCmd('info', 'isHere' . $id);
+			if (is_object($cmd)) {
+				$replace_user['#isHere#'] = $cmd->execCmd();
+			}
+			$cmd = $this->getCmd('info', 'lastSeen' . $id);
+			if (is_object($cmd)) {
+				$replace_user['#lastSeen#'] = $cmd->execCmd();
+			}
+			$replace['#user#'] .= template_replace($replace_user, getTemplate('core', $version, 'person', 'netatmoWelcome'));
+		}
+		$replace['#camera#'] = '';
+		foreach ($this->getConfiguration('camera_list') as $id => $name) {
+			$replace_camera = array(
+				'#name#' => $name,
+				'#uid#' => 'netatmoWelcome' . $id . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
+				'#lastSeen#' => '',
+				'#isHere#' => '',
+			);
+			$cmd = $this->getCmd('info', 'state' . $id);
+			if (is_object($cmd)) {
+				$replace_camera['#state#'] = $cmd->execCmd();
+			}
+			$cmd = $this->getCmd('info', 'stateSd' . $id);
+			if (is_object($cmd)) {
+				$replace_camera['#stateSd#'] = $cmd->execCmd();
+			}
+			$cmd = $this->getCmd('info', 'stateAlim' . $id);
+			if (is_object($cmd)) {
+				$replace_camera['#stateAlim#'] = $cmd->execCmd();
+			}
+			$replace['#camera#'] .= template_replace($replace_camera, getTemplate('core', $version, 'camera', 'netatmoWelcome'));
+		}
+
+		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
+			$replace['#name#'] = '';
+			$replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
+		}
+		if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
+			$replace['#name#'] = '<br/>';
+			$replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
+		}
+		$parameters = $this->getDisplay('parameters');
+		if (is_array($parameters)) {
+			foreach ($parameters as $key => $value) {
+				$replace['#' . $key . '#'] = $value;
+			}
+		}
+		$html = template_replace($replace, getTemplate('core', $version, 'welcome', 'netatmoWelcome'));
+		cache::set('netatmoWelcomeWidget' . $version . $this->getId(), $html, 0);
+		return $html;
+	}
 
 }
 
