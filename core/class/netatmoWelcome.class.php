@@ -136,6 +136,12 @@ class netatmoWelcome extends eqLogic {
 				$cmd->save();
 			}
 		}
+		try {
+			$client->dropWebhook();
+		} catch (Exception $e) {
+
+		}
+		$client->subscribeToWebhook(network::getNetworkAccess('external') . '/plugins/netatmoWeather/core/php/jeeWelcome.php?apikey=' . config::byKey('api'));
 	}
 
 	public static function cron15() {
@@ -219,10 +225,6 @@ class netatmoWelcomeCmd extends cmd {
 	/*     * ***********************Methode static*************************** */
 
 	/*     * *********************Methode d'instance************************* */
-
-	public function dontRemoveCmd() {
-		return true;
-	}
 
 	public function execute($_options = array()) {
 		if ($this->getLogicalId() == 'refresh') {
