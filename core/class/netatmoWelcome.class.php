@@ -258,7 +258,7 @@ class netatmoWelcome extends eqLogic {
 		}
 		$mc = cache::byKey('netatmoWelcomeWidget' . jeedom::versionAlias($_version) . $this->getId());
 		if ($mc->getValue() != '') {
-			//return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
+			return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
 		}
 		$replace = array(
 			'#name#' => $this->getName(),
