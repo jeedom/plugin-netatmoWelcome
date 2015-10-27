@@ -217,9 +217,9 @@ class netatmoWelcome extends eqLogic {
 				if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($message)) {
 					$cmd->event($message);
 				}
-				$mc = cache::byKey('netatmoWeatherWidgetmobile' . $eqLogic->getId());
+				$mc = cache::byKey('netatmoWelcomeWidgetmobile' . $eqLogic->getId());
 				$mc->remove();
-				$mc = cache::byKey('netatmoWeatherWidgetdashboard' . $eqLogic->getId());
+				$mc = cache::byKey('netatmoWelcomeWidgetdashboard' . $eqLogic->getId());
 				$mc->remove();
 				$eqLogic->toHtml('mobile');
 				$eqLogic->toHtml('dashboard');
