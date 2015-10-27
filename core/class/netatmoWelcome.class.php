@@ -141,7 +141,7 @@ class netatmoWelcome extends eqLogic {
 		} catch (Exception $e) {
 
 		}
-		$client->subscribeToWebhook(network::getNetworkAccess('external') . '/plugins/netatmoWeather/core/php/jeeWelcome.php?apikey=' . config::byKey('api'));
+		$client->subscribeToWebhook(network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . config::byKey('api'));
 	}
 
 	public static function cron15() {
