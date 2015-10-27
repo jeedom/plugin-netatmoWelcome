@@ -2,7 +2,7 @@
 if (!class_exists('NAApiClient')) {
 	require_once "NAApiClient.php";
 }
-if (!class_exists('NARestErrorCode')) {
+if (!class_exists('NAResponseHandler')) {
 	require_once dirname(__FILE__) . "/../Handlers/NAResponseHandler.php";
 }
 
