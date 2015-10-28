@@ -12,7 +12,7 @@ image::../images/netatmoWelcome2.png[]
 
 == Recupération des informations de connexion
 
-Pour intégrer votre station, vous devez posséder un client_id et un client_secret généré sur le site http://dev.netatmo.com.
+Pour intégrer votre Welcome, vous devez posséder un client_id et un client_secret généré sur le site http://dev.netatmo.com.
 
 Une fois dessus cliquez sur start : 
 
