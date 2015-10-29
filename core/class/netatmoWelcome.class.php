@@ -152,7 +152,7 @@ class netatmoWelcome extends eqLogic {
 		self::refresh_info();
 	}
 
-	public static function cron15{
+	public static function cron15() {
 		self::refresh_info();
 	}
 
