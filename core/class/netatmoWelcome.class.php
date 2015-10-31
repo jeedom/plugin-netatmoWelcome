@@ -138,7 +138,7 @@ class netatmoWelcome extends eqLogic {
 				$cmd->setLogicalId('lastEvent');
 				$cmd->setType('info');
 				$cmd->setSubType('string');
-				$cmd->setName(__('Dernier évènement', __FILE__));
+				$cmd->setName(__('Derniers évènements', __FILE__));
 				$cmd->setEventOnly(1);
 				$cmd->save();
 			}
@@ -171,7 +171,7 @@ class netatmoWelcome extends eqLogic {
 				}
 				return;
 			}
-			$response = $client->getData(NULL, 5);
+			$response = $client->getData(NULL, 10);
 			$homes = $response->getData();
 			foreach ($homes as $home) {
 				$eqLogic = eqLogic::byLogicalId($home->getVar('id'), 'netatmoWelcome');
