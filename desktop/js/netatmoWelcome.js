@@ -30,8 +30,11 @@ function addCmdToTable(_cmd) {
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}"></td>';
     tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="display : none;" />';
     tr += '<td>';
-    if(!isset(_cmd.type) || _cmd.type == 'info' ){
+    if(isset(_cmd.type) &&  _cmd.type == 'info' ){
         tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" /></span>';
+    }
+    if(isset(_cmd.logicalId) && ((_cmd.logicalId.indexOf('state') >= 0 && _cmd.logicalId.indexOf('stateSd') < 0 && _cmd.logicalId.indexOf('stateAlim') < 0)  || _cmd.logicalId.indexOf('isHere') >= 0) ){
+        tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-l1key="isVisible" data-label-text="{{Afficher}}" data-size="mini" checked/></span>';
     }
     tr += '</td>';
     tr += '<td>';
@@ -39,6 +42,7 @@ function addCmdToTable(_cmd) {
         tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
         tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
     }
+    tr += '<i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i></td>';
     tr += '</tr>';
     $('#table_cmd tbody').append(tr);
     $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');

@@ -64,6 +64,9 @@ class netatmoWelcome extends eqLogic {
 			foreach ($persons as $person) {
 				$person_array = utils::o2a($person);
 				$person_array = $person_array['object'];
+				if (!isset($person_array['pseudo']) || $person_array['pseudo'] == '') {
+					continue;
+				}
 				$list_person[$person_array['id']] = $person_array['pseudo'];
 				$cmd = $eqLogic->getCmd('info', 'isHere' . $person_array['id']);
 				if (!is_object($cmd)) {
@@ -128,6 +131,19 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setEventOnly(1);
 					$cmd->save();
 				}
+				$cmd = $eqLogic->getCmd('info', 'movement' . $camera_array['id']);
+				if (!is_object($cmd)) {
+					$cmd = new netatmoWelcomeCmd();
+					$cmd->setEqLogic_id($eqLogic->getId());
+					$cmd->setLogicalId('movement' . $camera_array['id']);
+					$cmd->setType('info');
+					$cmd->setSubType('binary');
+					$cmd->setName(__('Mouvement', __FILE__) . ' ' . $camera_array['name']);
+					$cmd->setEventOnly(1);
+					$cmd->setConfiguration('returnStateTime', 1);
+					$cmd->setConfiguration('returnStateValue', 0);
+					$cmd->save();
+				}
 			}
 			$eqLogic->setConfiguration('camera_list', $list_camera);
 			$eqLogic->save();
@@ -147,10 +163,10 @@ class netatmoWelcome extends eqLogic {
 			if (!is_object($cmd)) {
 				$cmd = new netatmoWelcomeCmd();
 				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('lastEvent');
+				$cmd->setLogicalId('lastOneEvent');
 				$cmd->setType('info');
 				$cmd->setSubType('string');
-				$cmd->setName(__('Dernier évènement', __FILE__));
+				$cmd->setName(__('Evènement', __FILE__));
 				$cmd->setEventOnly(1);
 				$cmd->save();
 			}
@@ -225,6 +241,14 @@ class netatmoWelcome extends eqLogic {
 					}
 				}
 				$events = $home->getEvents();
+
+				if ($events[0]->getTime() > (strtotime('now') - 60) && $events[0]->getEventType() == 'movement') {
+					$cmd = $eqLogic->getCmd('info', 'movement' . $events[0]->getCameraId());
+					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue(1)) {
+						$cmd->event(1);
+					}
+				}
+
 				$message = date('Y-m-d H:i:s', $events[0]->getTime()) . ' - ' . $events[0]->getMessage();
 				$cmd = $eqLogic->getCmd('info', 'lastOneEvent');
 				if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($message)) {
@@ -264,6 +288,13 @@ class netatmoWelcome extends eqLogic {
 		$refresh->setType('action');
 		$refresh->setSubType('other');
 		$refresh->save();
+		$mc = cache::byKey('netatmoWelcomeWidgetmobile' . $this->getId());
+		$mc->remove();
+		$mc = cache::byKey('netatmoWelcomeWidgetdashboard' . $this->getId());
+		$mc->remove();
+		$this->toHtml('mobile');
+		$this->toHtml('dashboard');
+		$this->refreshWidget();
 	}
 
 	public function toHtml($_version = 'dashboard') {
@@ -307,13 +338,16 @@ class netatmoWelcome extends eqLogic {
 
 		$replace['#user#'] = '';
 		foreach ($this->getConfiguration('user_list') as $id => $pseudo) {
+			$cmd = $this->getCmd('info', 'isHere' . $id);
+			if ($cmd->getIsVisible() == 0) {
+				continue;
+			}
 			$replace_user = array(
 				'#name#' => $pseudo,
 				'#uid#' => 'netatmoWelcome' . $id . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
 				'#lastSeen#' => '',
 				'#isHere#' => '',
 			);
-			$cmd = $this->getCmd('info', 'isHere' . $id);
 			if (is_object($cmd)) {
 				$replace_user['#isHere#'] = $cmd->execCmd();
 			}
@@ -325,13 +359,16 @@ class netatmoWelcome extends eqLogic {
 		}
 		$replace['#camera#'] = '';
 		foreach ($this->getConfiguration('camera_list') as $id => $name) {
+			$cmd = $this->getCmd('info', 'state' . $id);
+			if ($cmd->getIsVisible() == 0) {
+				continue;
+			}
 			$replace_camera = array(
 				'#name#' => $name,
 				'#uid#' => 'netatmoWelcome' . $id . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
 				'#lastSeen#' => '',
 				'#isHere#' => '',
 			);
-			$cmd = $this->getCmd('info', 'state' . $id);
 			if (is_object($cmd)) {
 				$replace_camera['#state#'] = $cmd->execCmd();
 			}
