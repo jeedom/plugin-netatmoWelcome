@@ -280,7 +280,7 @@ class netatmoWelcome extends eqLogic {
 	public function postSave() {
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
-			$refresh = new netatmoWeatherCmd();
+			$refresh = new netatmoWelcomeCmd();
 			$refresh->setName(__('Rafraichir', __FILE__));
 		}
 		$refresh->setEqLogic_id($this->getId());
