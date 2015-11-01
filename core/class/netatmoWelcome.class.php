@@ -142,6 +142,18 @@ class netatmoWelcome extends eqLogic {
 				$cmd->setEventOnly(1);
 				$cmd->save();
 			}
+
+			$cmd = $eqLogic->getCmd('info', 'lastOneEvent');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('lastEvent');
+				$cmd->setType('info');
+				$cmd->setSubType('string');
+				$cmd->setName(__('Dernier évènement', __FILE__));
+				$cmd->setEventOnly(1);
+				$cmd->save();
+			}
 		}
 		try {
 			$client->dropWebhook();
@@ -213,6 +225,11 @@ class netatmoWelcome extends eqLogic {
 					}
 				}
 				$events = $home->getEvents();
+				$message = date('Y-m-d H:i:s', $events[0]->getTime()) . ' - ' . $events[0]->getMessage();
+				$cmd = $eqLogic->getCmd('info', 'lastOneEvent');
+				if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($message)) {
+					$cmd->event($message);
+				}
 				$message = '';
 				foreach ($events as $event) {
 					$message .= date('Y-m-d H:i:s', $event->getTime()) . ' - ' . $event->getMessage() . '<br/>';
