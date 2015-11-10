@@ -5,9 +5,6 @@ if (!class_exists('NAApiClient')) {
 if (!class_exists('NAResponseHandler')) {
 	require_once dirname(__FILE__) . "/../Handlers/NAResponseHandler.php";
 }
-if (!class_exists('NASDKErrorException')) {
-	require_once dirname(__FILE__) . '/../Exceptions/NAClientException.php';
-}
 
 /**
  * NETATMO Welcome API PHP CLIENT
