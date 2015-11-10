@@ -68,6 +68,8 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom = eqLogic::byLogicalId($camera_array['id'], 'camera');
 				if (!is_object($camera_jeedom)) {
 					$camera_jeedom = new camera();
+					$camera_jeedom->setDisplay('height', '240px');
+					$camera_jeedom->setDisplay('width', '320px');
 				}
 				$camera_jeedom->setName($camera->getName());
 				$camera_jeedom->setIsEnable(1);
@@ -82,8 +84,6 @@ class netatmoWelcome extends eqLogic {
 					$camera_jeedom->setConfiguration('port', 80);
 				}
 				$camera_jeedom->setLogicalId($camera_array['id']);
-				$camera_jeedom->setDisplay('height', '240px');
-				$camera_jeedom->setDisplay('width', '320px');
 				$camera_jeedom->save();
 			}
 		}
