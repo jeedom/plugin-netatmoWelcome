@@ -29,8 +29,8 @@ class netatmoWelcome extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
-	public function getClient($_scope = NAScopes::SCOPE_READ_CAMERA) {
-		if (self::$_client == null) {
+	public function getClient($_scope = NAScopes::SCOPE_READ_CAMERA, $_force = false) {
+		if (self::$_client == null || $_force) {
 			self::$_client = new NAWelcomeApiClient(array(
 				'client_id' => config::byKey('client_id', 'netatmoWelcome'),
 				'client_secret' => config::byKey('client_secret', 'netatmoWelcome'),
@@ -41,6 +41,52 @@ class netatmoWelcome extends eqLogic {
 			self::$_client->getAccessToken();
 		}
 		return self::$_client;
+	}
+
+	public function createCamera() {
+		$client = self::getClient(NAScopes::SCOPE_READ_CAMERA . ' ' . NAScopes::SCOPE_ACCESS_CAMERA, true);
+		$response = $client->getData(NULL, 1);
+		$homes = $response->getData();
+		foreach ($homes as $home) {
+			$cameras = $home->getCameras();
+			foreach ($cameras as $camera) {
+				$camera_array = utils::o2a($camera);
+				$camera_array = $camera_array['object'];
+				$url = $camera->getVpnUrl();
+				if ($camera->isLocal()) {
+					try {
+						$request_http = new com_http($url . '/command/ping');
+						$result = json_decode(trim($request_http->exec(1, 2)), true);
+						$url = $result['local_url'];
+					} catch (Exception $e) {
+
+					}
+				}
+				$url .= '/live/snapshot_720.jpg';
+				$url_parse = parse_url($url);
+				$plugin = plugin::byId('camera');
+				$camera_jeedom = eqLogic::byLogicalId($camera_array['id'], 'camera');
+				if (!is_object($camera_jeedom)) {
+					$camera_jeedom = new camera();
+				}
+				$camera_jeedom->setName($camera->getName());
+				$camera_jeedom->setIsEnable(1);
+				$camera_jeedom->setIsVisible(1);
+				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
+				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
+				$camera_jeedom->setEqType_name('camera');
+				$camera_jeedom->setConfiguration('protocole', $url_parse['scheme']);
+				if ($url_parse['scheme'] == 'https') {
+					$camera_jeedom->setConfiguration('port', 443);
+				} else {
+					$camera_jeedom->setConfiguration('port', 80);
+				}
+				$camera_jeedom->setLogicalId($camera_array['id']);
+				$camera_jeedom->setDisplay('height', '240px');
+				$camera_jeedom->setDisplay('width', '320px');
+				$camera_jeedom->save();
+			}
+		}
 	}
 
 	public function syncWithNetatmo() {
@@ -178,6 +224,11 @@ class netatmoWelcome extends eqLogic {
 		}
 		$client->subscribeToWebhook(network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . config::byKey('api'));
 		self::refresh_info();
+		try {
+			self::createCamera();
+		} catch (Exception $e) {
+
+		}
 	}
 
 	public static function cron15() {
