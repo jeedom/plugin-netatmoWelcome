@@ -122,7 +122,6 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubType('binary');
 					$cmd->setName(__('Présence', __FILE__) . ' ' . $person_array['pseudo']);
-					$cmd->setEventOnly(1);
 					$cmd->save();
 				}
 				$cmd = $eqLogic->getCmd('info', 'lastSeen' . $person_array['id']);
@@ -133,7 +132,6 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubType('string');
 					$cmd->setName(__('Derniere fois', __FILE__) . ' ' . $person_array['pseudo']);
-					$cmd->setEventOnly(1);
 					$cmd->save();
 				}
 			}
@@ -152,7 +150,6 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubType('binary');
 					$cmd->setName(__('Status', __FILE__) . ' ' . $camera_array['name']);
-					$cmd->setEventOnly(1);
 					$cmd->save();
 				}
 				$cmd = $eqLogic->getCmd('info', 'stateSd' . $camera_array['id']);
@@ -163,7 +160,6 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubType('binary');
 					$cmd->setName(__('Status SD', __FILE__) . ' ' . $camera_array['name']);
-					$cmd->setEventOnly(1);
 					$cmd->save();
 				}
 				$cmd = $eqLogic->getCmd('info', 'stateAlim' . $camera_array['id']);
@@ -174,7 +170,6 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubType('binary');
 					$cmd->setName(__('Status alim', __FILE__) . ' ' . $camera_array['name']);
-					$cmd->setEventOnly(1);
 					$cmd->save();
 				}
 				$cmd = $eqLogic->getCmd('info', 'movement' . $camera_array['id']);
@@ -185,7 +180,6 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubType('binary');
 					$cmd->setName(__('Mouvement', __FILE__) . ' ' . $camera_array['name']);
-					$cmd->setEventOnly(1);
 					$cmd->setConfiguration('returnStateTime', 1);
 					$cmd->setConfiguration('returnStateValue', 0);
 					$cmd->save();
@@ -201,7 +195,6 @@ class netatmoWelcome extends eqLogic {
 				$cmd->setType('info');
 				$cmd->setSubType('string');
 				$cmd->setName(__('Derniers évènements', __FILE__));
-				$cmd->setEventOnly(1);
 				$cmd->save();
 			}
 
@@ -213,7 +206,6 @@ class netatmoWelcome extends eqLogic {
 				$cmd->setType('info');
 				$cmd->setSubType('string');
 				$cmd->setName(__('Evènement', __FILE__));
-				$cmd->setEventOnly(1);
 				$cmd->save();
 			}
 		}
