@@ -236,7 +236,7 @@ class netatmoWelcome extends eqLogic {
 				}
 			} catch (NAClientException $e) {
 				if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 3) {
-					log::add('netatmoWelcome', 'error', __('Erreur sur synchro netatmo weather ', __FILE__) . ' (' . config::byKey('numberFailed', 'netatmoWelcome', 0) . ') ' . $e->getMessage());
+					log::add('netatmoWelcome', 'error', __('Erreur sur synchro netatmo welcome ', __FILE__) . ' (' . config::byKey('numberFailed', 'netatmoWelcome', 0) . ') ' . $e->getMessage());
 				} else {
 					config::save('numberFailed', config::byKey('numberFailed', 'netatmoWelcome', 0) + 1, 'netatmoWelcome');
 				}
