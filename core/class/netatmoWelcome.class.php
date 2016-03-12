@@ -306,12 +306,6 @@ class netatmoWelcome extends eqLogic {
 				if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($message)) {
 					$cmd->event($message);
 				}
-				$mc = cache::byKey('netatmoWelcomeWidgetmobile' . $eqLogic->getId());
-				$mc->remove();
-				$mc = cache::byKey('netatmoWelcomeWidgetdashboard' . $eqLogic->getId());
-				$mc->remove();
-				$eqLogic->toHtml('mobile');
-				$eqLogic->toHtml('dashboard');
 				$eqLogic->refreshWidget();
 			}
 		} catch (Exception $e) {
@@ -332,12 +326,6 @@ class netatmoWelcome extends eqLogic {
 		$refresh->setType('action');
 		$refresh->setSubType('other');
 		$refresh->save();
-		$mc = cache::byKey('netatmoWelcomeWidgetmobile' . $this->getId());
-		$mc->remove();
-		$mc = cache::byKey('netatmoWelcomeWidgetdashboard' . $this->getId());
-		$mc->remove();
-		$this->toHtml('mobile');
-		$this->toHtml('dashboard');
 		$this->refreshWidget();
 	}
 
