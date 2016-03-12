@@ -26,6 +26,7 @@ class netatmoWelcome extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
 	private static $_client = null;
+	public static $_widgetPossibility = array('custom' => true);
 
 	/*     * ***********************Methode static*************************** */
 
@@ -341,32 +342,15 @@ class netatmoWelcome extends eqLogic {
 	}
 
 	public function toHtml($_version = 'dashboard') {
-		if ($this->getIsEnable() != 1) {
-			return '';
-		}
-		if (!$this->hasRight('r')) {
-			return '';
+		$replace = $this->preToHtml($_version);
+		if (!is_array($replace)) {
+			return $replace;
 		}
 		$version = jeedom::versionAlias($_version);
-		if ($this->getDisplay('hideOn' . $version) == 1) {
-			return '';
-		}
-		$mc = cache::byKey('netatmoWelcomeWidget' . jeedom::versionAlias($_version) . $this->getId());
-		if ($mc->getValue() != '') {
-			return preg_replace("/" . preg_quote(self::UIDDELIMITER) . "(.*?)" . preg_quote(self::UIDDELIMITER) . "/", self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER, $mc->getValue());
-		}
-		$replace = array(
-			'#name#' => $this->getName(),
-			'#id#' => $this->getId(),
-			'#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
-			'#eqLink#' => $this->getLinkToConfiguration(),
-			'#uid#' => 'netatmoWelcome' . $this->getId() . self::UIDDELIMITER . mt_rand() . self::UIDDELIMITER,
-		);
 		$refresh = $this->getCmd('action', 'refresh');
 		if (is_object($refresh)) {
 			$replace['#' . $refresh->getLogicalId() . '_id#'] = $refresh->getId();
 		}
-
 		$event = $this->getCmd('info', 'lastEvent');
 		if (is_object($event)) {
 			$replace['#' . $event->getLogicalId() . '#'] = $event->execCmd();
@@ -374,11 +358,9 @@ class netatmoWelcome extends eqLogic {
 				$replace['#' . $event->getLogicalId() . '#'] = str_replace(' - ', '<br/>', $replace['#' . $event->getLogicalId() . '#']);
 			}
 		}
-
 		foreach ($this->getCmd('action') as $cmd) {
 			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 		}
-
 		$replace['#user#'] = '';
 		foreach ($this->getConfiguration('user_list') as $id => $pseudo) {
 			$cmd = $this->getCmd('info', 'isHere' . $id);
@@ -425,23 +407,8 @@ class netatmoWelcome extends eqLogic {
 			}
 			$replace['#camera#'] .= template_replace($replace_camera, getTemplate('core', $version, 'camera', 'netatmoWelcome'));
 		}
-
-		if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
-			$replace['#name#'] = '';
-			$replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
-		}
-		if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
-			$replace['#name#'] = '<br/>';
-			$replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
-		}
-		$parameters = $this->getDisplay('parameters');
-		if (is_array($parameters)) {
-			foreach ($parameters as $key => $value) {
-				$replace['#' . $key . '#'] = $value;
-			}
-		}
 		$html = template_replace($replace, getTemplate('core', $version, 'welcome', 'netatmoWelcome'));
-		cache::set('netatmoWelcomeWidget' . $version . $this->getId(), $html, 0);
+		cache::set('widgetHtml' . $version . $this->getId(), $html, 0);
 		return $html;
 	}
 
