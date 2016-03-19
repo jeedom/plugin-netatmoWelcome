@@ -405,6 +405,8 @@ class netatmoWelcome extends eqLogic {
 class netatmoWelcomeCmd extends cmd {
 	/*     * *************************Attributs****************************** */
 
+	public static $_widgetPossibility = array('custom' => false);
+
 	/*     * ***********************Methode static*************************** */
 
 	/*     * *********************Methode d'instance************************* */
