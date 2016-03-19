@@ -396,7 +396,7 @@ class netatmoWelcome extends eqLogic {
 			$replace['#camera#'] .= template_replace($replace_camera, getTemplate('core', $version, 'camera', 'netatmoWelcome'));
 		}
 		$html = template_replace($replace, getTemplate('core', $version, 'welcome', 'netatmoWelcome'));
-		cache::set('widgetHtml' . $version . $this->getId(), $html, 0);
+		cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
 		return $html;
 	}
 
