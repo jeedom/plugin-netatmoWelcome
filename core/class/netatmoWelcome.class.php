@@ -77,6 +77,7 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom->setIsVisible(1);
 				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
 				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
+				$camera_jeedom->setConfiguration('device', 'welcome');
 				$camera_jeedom->setEqType_name('camera');
 				$camera_jeedom->setConfiguration('protocole', $url_parse['scheme']);
 				if ($url_parse['scheme'] == 'https') {
