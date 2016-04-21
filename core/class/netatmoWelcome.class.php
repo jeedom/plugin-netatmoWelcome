@@ -77,7 +77,6 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom->setIsVisible(1);
 				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
 				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
-				$camera_jeedom->setConfiguration('device', 'welcome');
 				$camera_jeedom->setEqType_name('camera');
 				$camera_jeedom->setConfiguration('protocole', $url_parse['scheme']);
 				if ($url_parse['scheme'] == 'https') {
@@ -89,6 +88,22 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom->save();
 			}
 		}
+	}
+	
+	public function getFromThermostat() {
+		$client_id = config::byKey('client_id', 'netatmoThermostat');
+		$client_secret = config::byKey('client_secret', 'netatmoThermostat');
+		$username = config::byKey('username', 'netatmoThermostat');
+		$password = config::byKey('password', 'netatmoThermostat');
+		return (array($client_id,$client_secret,$username,$password));
+	}
+	
+	public function getFromWeather() {
+		$client_id = config::byKey('client_id', 'netatmoWeather');
+		$client_secret = config::byKey('client_secret', 'netatmoWeather');
+		$username = config::byKey('username', 'netatmoWeather');
+		$password = config::byKey('password', 'netatmoWeather');
+		return (array($client_id,$client_secret,$username,$password));
 	}
 
 	public function syncWithNetatmo() {
