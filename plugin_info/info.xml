@@ -3,12 +3,9 @@
     <id>netatmoWelcome</id>
     <name>Netatmo Welcome</name>
     <description>Plugin pour les caméras netatmo Welcome</description>
-    <icon>fa fa-video-camera</icon>
     <licence>AGPL</licence>
-    <author>Loïc Gevrey</author>
-    <installation>Aucune</installation>
+    <author>Loïc</author>
     <require>2.2</require>
-    <version>1</version>
     <category>security</category>
 </info>
 
