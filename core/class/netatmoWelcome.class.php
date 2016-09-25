@@ -30,7 +30,7 @@ class netatmoWelcome extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
-	public function getClient($_scope = NAScopes::SCOPE_READ_CAMERA, $_force = false) {
+	public function getClient($_scope = Netatmo\Common\NAScopes::SCOPE_READ_CAMERA, $_force = false) {
 		if (self::$_client == null || $_force) {
 			self::$_client = new NAWelcomeApiClient(array(
 				'client_id' => config::byKey('client_id', 'netatmoWelcome'),
@@ -45,7 +45,7 @@ class netatmoWelcome extends eqLogic {
 	}
 
 	public function createCamera() {
-		$client = self::getClient(NAScopes::SCOPE_READ_CAMERA . ' ' . NAScopes::SCOPE_ACCESS_CAMERA, true);
+		$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA, true);
 		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
 		foreach ($homes as $home) {
@@ -111,6 +111,7 @@ class netatmoWelcome extends eqLogic {
 		$client = self::getClient();
 		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
+		log::add('welcome','debug',print_r($homes,true));
 		foreach ($homes as $home) {
 			$eqLogic = eqLogic::byLogicalId($home->getVar('id'), 'netatmoWelcome');
 			if (!is_object($eqLogic)) {
@@ -127,7 +128,6 @@ class netatmoWelcome extends eqLogic {
 			$persons = $home->getPersons();
 			foreach ($persons as $person) {
 				$person_array = utils::o2a($person);
-				$person_array = $person_array['object'];
 				if (!isset($person_array['pseudo']) || $person_array['pseudo'] == '') {
 					continue;
 				}
@@ -270,7 +270,6 @@ class netatmoWelcome extends eqLogic {
 				$persons = $home->getPersons();
 				foreach ($persons as $person) {
 					$person_array = utils::o2a($person);
-					$person_array = $person_array['object'];
 					$cmd = $eqLogic->getCmd('info', 'isHere' . $person_array['id']);
 					$here = ($person_array['out_of_sight'] == 1) ? 0 : 1;
 					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($here)) {
@@ -284,7 +283,6 @@ class netatmoWelcome extends eqLogic {
 				$cameras = $home->getCameras();
 				foreach ($cameras as $camera) {
 					$camera_array = utils::o2a($camera);
-					$camera_array = $camera_array['object'];
 					$state = ($camera_array['status'] == 'on') ? 1 : 0;
 					$cmd = $eqLogic->getCmd('info', 'state' . $camera_array['id']);
 					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($state)) {
