@@ -1,0 +1,102 @@
+== Plugin Konfiguration
+
+Nach der Installation des Plugin, müssen Sie Ihre Netatmo Zugangsdaten eingeben : 
+
+image::../images/netatmoWelcome2.png[]
+
+* *Kunden ID* : Ihre Kunden-ID (siehe Konfigurationsabschnitt)
+* *Kunden Schlüssel* : Ihr Kunden Schlüssel (siehe Konfigurationsabschnitt)
+* *Benutzername* : Benutzername Ihres Netatmo Kontos 
+* *Passwort* : Passwort Ihres Netatmo Kontos
+* *Synchronisieren* : Jeedom synchronisiert sich mit Ihrem Netamo Konto, um Ihre  Netatmo Geräte automatisch zu erkennen. Was Sie nach dem Speichern der vorherigen Einstellungen tun müssen.
+
+== Verbindungsinformationen zurückgewinnen
+
+Um Ihre Welcome zu integrieren, benötigen sie eine Kunden_ID und einen Kunden_Schlüssel, der auf der Website http://dev.netatmo.com erzeugt wird.
+
+Klicken sie einmal auf Start : 
+
+image::../images/netatmoWelcome10.png[]
+
+Anschließend auf "create an app"
+
+image::../images/netatmoWelcome11.png[]
+
+Melden Sie sich mit Ihrer E-Mail und Passwort an
+
+image::../images/netatmoWelcome12.png[]
+
+Füllen Sie die Felder "Name" und "Description" aus (was Sie hineinschreiben spielt keine Rolle) : 
+
+image::../images/netatmoWelcome13.png[]
+
+Dann am Ende der Seite wählen Sie "I accept the terms of use" und klicken Sie auf "Create"
+
+image::../images/netatmoWelcome14.png[]
+
+Sie erhalten dann die Kunden_ID="Client-ID" und Kunden_Schlüssel="Secret Client" zurück. Kopieren Sie die diese dann im Konfigurations Teil des Jeedom Plugin hinein (siehe vorheriges Kapitel)
+
+image::../images/netatmoWelcome15.png[]
+
+== Geräte Konfiguration
+
+Die Netatmo Gerätekonfiguration ist im Menü Plugins erreichbar : 
+
+image::../images/netatmoWelcome3.png[]
+
+Das sieht wie die Netatmo Plugin-Seite aus(hier bereits mit 1 Gerät) : 
+
+image::../images/netatmoWelcome4.png[]
+
+[TIP]
+Wie an vielen Stellen in Jeedom kann mit dem Mauszeiger ganz links, ein Menü mit Schnellzugriff aufgerufen werden (Sie können in Ihrem Profil immer sichtbar einstellen).  
+
+[NOTE]
+Jeedom creer un équipement par "maison" à surveiller, si vous avez plusieurs Netatmo Welcome dans la même maison vous n'aurez qu'un seul équipement par contre les informations de toutes vos welcome seront utilisées
+
+Sobald Sie auf ein Gerät klicken, erhalten Sie : 
+
+image::../images/netatmoWelcome5.png[]
+
+Hier finden sie die ganze Konfiguration Ihrer Geräte: 
+
+* *Name des Netatmo Gerätes* : Name Ihrer Netatmo Welcome Geräte
+* *Eltern-Objekt* : giebt an welchem Eltern Objekt das Gerät angehört
+* *aktivieren* : erlaubt, Ihr Gerät aktiv zu machen
+* *Sichtbar* : macht es auf dem Armaturenbrett sichtbar
+
+Im unteren Bereich finden sie eine Liste der Befehle: 
+
+* Befehlsname
+* Chronik : erlaubt das Archivieren der Daten
+* Erweiterte Konfiguration (kleine Zahnräder) : zeigt die Erweiterten Konfigurationsbefehle an (Methode der Archivierung, Widget...  )
+* Test : erlaubt Befehle zu testen
+
+[NOTE]
+Au niveau des commandes Jeedom en creer 2 par personnes déclaré dans la camera netatmo, une pour la date ou la personne a été apercu pour la derniere fois et une pour la présence ou non de la personne. Il y a ensuite 3 commandes par camera pour voir leur statut. Enfin une derniere commande affiche les 5 derniers évènement.
+
+== Widget
+
+Hier ist das Widget auf dem Amaturenbrett mit dem Präsenz Teil 
+
+image::../images/netatmoWelcome6.png[]
+
+Der Statusteil :
+
+image::../images/netatmoWelcome8.png[]
+
+Der Ereignisteil : 
+
+image::../images/netatmoWelcome9.png[]
+
+Und das Mobile :
+
+image::../images/netatmoWelcome7.png[]
+
+Der Statusteil :
+
+image::../images/netatmoWelcome16.png[]
+
+Der Ereignisteil : 
+
+image::../images/netatmoWelcome17.png[]
