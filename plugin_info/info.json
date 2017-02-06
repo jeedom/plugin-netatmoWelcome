@@ -1,0 +1,9 @@
+{
+    "id": "netatmoWelcome",
+    "name" : "Netatmo Welcome",
+    "description" : "Plugin pour les caméras netatmo Welcome et Présence",
+    "licence" : "AGPL",
+    "author" : "Loïc",
+    "require" : "2.4",
+    "category" : "security"
+}

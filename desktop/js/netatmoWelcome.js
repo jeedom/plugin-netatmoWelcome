@@ -31,10 +31,10 @@ function addCmdToTable(_cmd) {
     tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="display : none;" />';
     tr += '<td>';
     if(isset(_cmd.type) &&  _cmd.type == 'info' ){
-        tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" /></span>';
+        tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span> ';
     }
     if(isset(_cmd.logicalId) && ((_cmd.logicalId.indexOf('state') >= 0 && _cmd.logicalId.indexOf('stateSd') < 0 && _cmd.logicalId.indexOf('stateAlim') < 0)  || _cmd.logicalId.indexOf('isHere') >= 0) ){
-        tr += '<span><input type="checkbox" class="cmdAttr bootstrapSwitch" data-l1key="isVisible" data-label-text="{{Afficher}}" data-size="mini" checked/></span>';
+        tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></span> ';
     }
     tr += '</td>';
     tr += '<td>';

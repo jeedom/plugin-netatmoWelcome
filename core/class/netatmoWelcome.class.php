@@ -45,14 +45,13 @@ class netatmoWelcome extends eqLogic {
 	}
 
 	public function createCamera() {
-		$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA, true);
+		$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
 		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
 		foreach ($homes as $home) {
 			$cameras = $home->getCameras();
 			foreach ($cameras as $camera) {
 				$camera_array = utils::o2a($camera);
-				$camera_array = $camera_array['object'];
 				$url = $camera->getVpnUrl();
 				if ($camera->isLocal()) {
 					try {
@@ -65,6 +64,9 @@ class netatmoWelcome extends eqLogic {
 				}
 				$url .= '/live/snapshot_720.jpg';
 				$url_parse = parse_url($url);
+				if ($url_parse['host'] == "") {
+					$url_parse = parse_url($camera->getVpnUrl() . '/live/snapshot_720.jpg');
+				}
 				$plugin = plugin::byId('camera');
 				$camera_jeedom = eqLogic::byLogicalId($camera_array['id'], 'camera');
 				if (!is_object($camera_jeedom)) {
@@ -77,7 +79,11 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom->setIsVisible(1);
 				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
 				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
-				$camera_jeedom->setConfiguration('device', 'welcome');
+				if ($camera_array['type'] == 'NOC') {
+					$camera_jeedom->setConfiguration('device', 'welcome');
+				} else {
+					$camera_jeedom->setConfiguration('device', 'presence');
+				}
 				$camera_jeedom->setEqType_name('camera');
 				$camera_jeedom->setConfiguration('protocole', $url_parse['scheme']);
 				if ($url_parse['scheme'] == 'https') {
@@ -90,28 +96,28 @@ class netatmoWelcome extends eqLogic {
 			}
 		}
 	}
-	
+
 	public function getFromThermostat() {
 		$client_id = config::byKey('client_id', 'netatmoThermostat');
 		$client_secret = config::byKey('client_secret', 'netatmoThermostat');
 		$username = config::byKey('username', 'netatmoThermostat');
 		$password = config::byKey('password', 'netatmoThermostat');
-		return (array($client_id,$client_secret,$username,$password));
+		return (array($client_id, $client_secret, $username, $password));
 	}
-	
+
 	public function getFromWeather() {
 		$client_id = config::byKey('client_id', 'netatmoWeather');
 		$client_secret = config::byKey('client_secret', 'netatmoWeather');
 		$username = config::byKey('username', 'netatmoWeather');
 		$password = config::byKey('password', 'netatmoWeather');
-		return (array($client_id,$client_secret,$username,$password));
+		return (array($client_id, $client_secret, $username, $password));
 	}
 
 	public function syncWithNetatmo() {
 		$client = self::getClient();
 		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
-		log::add('welcome','debug',print_r($homes,true));
+		log::add('welcome', 'debug', print_r($homes, true));
 		foreach ($homes as $home) {
 			$eqLogic = eqLogic::byLogicalId($home->getVar('id'), 'netatmoWelcome');
 			if (!is_object($eqLogic)) {
@@ -158,7 +164,6 @@ class netatmoWelcome extends eqLogic {
 			$cameras = $home->getCameras();
 			foreach ($cameras as $camera) {
 				$camera_array = utils::o2a($camera);
-				$camera_array = $camera_array['object'];
 				$list_camera[$camera_array['id']] = $camera_array['name'];
 				$cmd = $eqLogic->getCmd('info', 'state' . $camera_array['id']);
 				if (!is_object($cmd)) {
@@ -270,57 +275,49 @@ class netatmoWelcome extends eqLogic {
 				$persons = $home->getPersons();
 				foreach ($persons as $person) {
 					$person_array = utils::o2a($person);
-					$cmd = $eqLogic->getCmd('info', 'isHere' . $person_array['id']);
 					$here = ($person_array['out_of_sight'] == 1) ? 0 : 1;
-					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($here)) {
-						$cmd->event($here);
-					}
-					$cmd = $eqLogic->getCmd('info', 'lastSeen' . $person_array['id']);
-					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue(date('Y-m-d H:i:s', $person_array['last_seen']))) {
-						$cmd->event(date('Y-m-d H:i:s', $person_array['last_seen']));
-					}
+					$this->checkAndUpdateCmd('isHere' . $person_array['id'], $here);
+					$this->checkAndUpdateCmd('lastSeen' . $person_array['id'], date('Y-m-d H:i:s', $person_array['last_seen']));
 				}
 				$cameras = $home->getCameras();
 				foreach ($cameras as $camera) {
 					$camera_array = utils::o2a($camera);
 					$state = ($camera_array['status'] == 'on') ? 1 : 0;
-					$cmd = $eqLogic->getCmd('info', 'state' . $camera_array['id']);
-					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($state)) {
-						$cmd->event($state);
-					}
+					$this->checkAndUpdateCmd('state' . $camera_array['id'], $state);
 					$state = ($camera_array['sd_status'] == 'on') ? 1 : 0;
-					$cmd = $eqLogic->getCmd('info', 'stateSd' . $camera_array['id']);
-					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($state)) {
-						$cmd->event($state);
-					}
+					$this->checkAndUpdateCmd('stateSd' . $camera_array['id'], $state);
 					$state = ($camera_array['alim_status'] == 'on') ? 1 : 0;
-					$cmd = $eqLogic->getCmd('info', 'stateAlim' . $camera_array['id']);
-					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($state)) {
-						$cmd->event($state);
-					}
+					$this->checkAndUpdateCmd('stateAlim' . $camera_array['id'], $state);
 				}
+
 				$events = $home->getEvents();
-
-				if ($events[0]->getTime() > (strtotime('now') - 60) && $events[0]->getEventType() == 'movement') {
-					$cmd = $eqLogic->getCmd('info', 'movement' . $events[0]->getCameraId());
-					if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue(1)) {
-						$cmd->event(1);
+				$eventList = $events[0]->getVar('event_list');
+				if ($eventList != null) {
+					foreach ($eventList as $event) {
+						if ($event['time'] > (strtotime('now') - 60) && ($event['type'] == 'movement' || $event['type'] == 'animal' || $event['type'] == 'humain' || $event['type'] == 'vehicle')) {
+							$this->checkAndUpdateCmd('movement' . $events[0]->getCameraId(), 1);
+						}
+						$message = date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message'];
+						$this->checkAndUpdateCmd('lastOneEvent', $message);
 					}
-				}
-
-				$message = date('Y-m-d H:i:s', $events[0]->getTime()) . ' - ' . $events[0]->getMessage();
-				$cmd = $eqLogic->getCmd('info', 'lastOneEvent');
-				if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($message)) {
-					$cmd->event($message);
+				} else {
+					if ($events[0]->getTime() > (strtotime('now') - 60) && $events[0]->getEventType() == 'movement') {
+						$this->checkAndUpdateCmd('movement' . $events[0]->getCameraId(), 1);
+					}
+					$message = date('Y-m-d H:i:s', $events[0]->getTime()) . ' - ' . $events[0]->getMessage();
+					$this->checkAndUpdateCmd('lastOneEvent', $message);
 				}
 				$message = '';
 				foreach ($events as $event) {
-					$message .= date('Y-m-d H:i:s', $event->getTime()) . ' - ' . $event->getMessage() . '<br/>';
+					if ($event->getVar('event_list') != null) {
+						foreach ($eventList as $event) {
+							$message .= date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message'] . '<br/>';
+						}
+					} else {
+						$message .= date('Y-m-d H:i:s', $event->getTime()) . ' - ' . $event->getMessage() . '<br/>';
+					}
 				}
-				$cmd = $eqLogic->getCmd('info', 'lastEvent');
-				if (is_object($cmd) && $cmd->execCmd() !== $cmd->formatValue($message)) {
-					$cmd->event($message);
-				}
+				$this->checkAndUpdateCmd('lastEvent', $message);
 				$eqLogic->refreshWidget();
 			}
 		} catch (Exception $e) {
