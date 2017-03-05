@@ -109,7 +109,6 @@ foreach (object::all() as $object) {
     </center>
   </div>
 </div>
-</div>
 <div role="tabpanel" class="tab-pane" id="commandtab">
   <table id="table_cmd" class="table table-bordered table-condensed">
     <thead>
@@ -122,9 +121,9 @@ foreach (object::all() as $object) {
   </table>
 </div>
 </div>
+</div>
+</div>
 
-</div>
-</div>
 
 <?php include_file('desktop', 'netatmoWelcome', 'js', 'netatmoWelcome');?>
 <?php include_file('core', 'plugin.template', 'js');?>
