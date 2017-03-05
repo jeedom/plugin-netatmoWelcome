@@ -276,18 +276,18 @@ class netatmoWelcome extends eqLogic {
 				foreach ($persons as $person) {
 					$person_array = utils::o2a($person);
 					$here = ($person_array['out_of_sight'] == 1) ? 0 : 1;
-					$this->checkAndUpdateCmd('isHere' . $person_array['id'], $here);
-					$this->checkAndUpdateCmd('lastSeen' . $person_array['id'], date('Y-m-d H:i:s', $person_array['last_seen']));
+					$eqLogic->checkAndUpdateCmd('isHere' . $person_array['id'], $here);
+					$eqLogic->checkAndUpdateCmd('lastSeen' . $person_array['id'], date('Y-m-d H:i:s', $person_array['last_seen']));
 				}
 				$cameras = $home->getCameras();
 				foreach ($cameras as $camera) {
 					$camera_array = utils::o2a($camera);
 					$state = ($camera_array['status'] == 'on') ? 1 : 0;
-					$this->checkAndUpdateCmd('state' . $camera_array['id'], $state);
+					$eqLogic->checkAndUpdateCmd('state' . $camera_array['id'], $state);
 					$state = ($camera_array['sd_status'] == 'on') ? 1 : 0;
-					$this->checkAndUpdateCmd('stateSd' . $camera_array['id'], $state);
+					$eqLogic->checkAndUpdateCmd('stateSd' . $camera_array['id'], $state);
 					$state = ($camera_array['alim_status'] == 'on') ? 1 : 0;
-					$this->checkAndUpdateCmd('stateAlim' . $camera_array['id'], $state);
+					$eqLogic->checkAndUpdateCmd('stateAlim' . $camera_array['id'], $state);
 				}
 
 				$events = $home->getEvents();
@@ -295,17 +295,17 @@ class netatmoWelcome extends eqLogic {
 				if ($eventList != null) {
 					foreach ($eventList as $event) {
 						if ($event['time'] > (strtotime('now') - 60) && ($event['type'] == 'movement' || $event['type'] == 'animal' || $event['type'] == 'humain' || $event['type'] == 'vehicle')) {
-							$this->checkAndUpdateCmd('movement' . $events[0]->getCameraId(), 1);
+							$eqLogic->checkAndUpdateCmd('movement' . $events[0]->getCameraId(), 1);
 						}
 						$message = date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message'];
-						$this->checkAndUpdateCmd('lastOneEvent', $message);
+						$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
 					}
 				} else {
 					if ($events[0]->getTime() > (strtotime('now') - 60) && $events[0]->getEventType() == 'movement') {
-						$this->checkAndUpdateCmd('movement' . $events[0]->getCameraId(), 1);
+						$eqLogic->checkAndUpdateCmd('movement' . $events[0]->getCameraId(), 1);
 					}
 					$message = date('Y-m-d H:i:s', $events[0]->getTime()) . ' - ' . $events[0]->getMessage();
-					$this->checkAndUpdateCmd('lastOneEvent', $message);
+					$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
 				}
 				$message = '';
 				foreach ($events as $event) {
@@ -317,7 +317,7 @@ class netatmoWelcome extends eqLogic {
 						$message .= date('Y-m-d H:i:s', $event->getTime()) . ' - ' . $event->getMessage() . '<br/>';
 					}
 				}
-				$this->checkAndUpdateCmd('lastEvent', $message);
+				$eqLogic->checkAndUpdateCmd('lastEvent', $message);
 				$eqLogic->refreshWidget();
 			}
 		} catch (Exception $e) {
