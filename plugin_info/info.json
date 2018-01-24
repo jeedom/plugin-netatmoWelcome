@@ -5,5 +5,7 @@
     "licence" : "AGPL",
     "author" : "Loïc",
     "require" : "2.4",
-    "category" : "security"
+        "category" : "security",
+        "changelog" : "https://jeedom.github.io/plugin-netatmoWelcome/#language#/changelog",
+        "documentation" : "https://jeedom.github.io/plugin-netatmoWelcome/#language#/"
 }

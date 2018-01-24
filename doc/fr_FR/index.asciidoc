@@ -1,6 +1,0 @@
-= Netatmo
-
-Plugin permettant de récupérer les informations des caméras Netatmo Welcome (attention il n'y a pas le flux vidéo)
-
-include::configuration.asciidoc[]
-

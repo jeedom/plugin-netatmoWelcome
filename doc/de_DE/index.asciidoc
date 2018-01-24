@@ -1,5 +1,0 @@
-= Netatmo
-
-Plugin, das es erlaubt, Informationen der Netatmo Welcome-Kamera zu bekommen (Achtung gibt es keinen Videostream)
-
-include::configuration.asciidoc[]
