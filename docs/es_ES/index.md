@@ -85,19 +85,19 @@ Une fois que vous cliquez sur un équipement vous obtenez :
 
 ![netatmoWelcome5](../images/netatmoWelcome5.png)
 
-Vous retrouvez ici toute la configuration de votre équipement :
+Aquí encontrará toda la configuración de su dispositivo:
 
 -   **Nom de l’équipement Netatmo** : nom de votre équipement Netatmo
     Welcome
 
--   **Objet parent** : indique l’objet parent auquel appartient
+-   **Objeto padre** : especifica el objeto padre al que pertenece
     l’équipement
 
 -   **Activer** : permet de rendre votre équipement actif
 
 -   **Visible** : le rend visible sur le dashboard
 
-En dessous vous retrouvez la liste des commandes :
+A continuación encontrará la lista de ordenes :
 
 -   le nom de la commande
 

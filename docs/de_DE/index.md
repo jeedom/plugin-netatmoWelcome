@@ -27,15 +27,15 @@ Recupération des informations de connexion
 Pour intégrer votre Welcome, vous devez posséder un client\_id et un
 client\_secret généré sur le site <http://dev.netatmo.com>.
 
-Une fois dessus cliquez sur start :
+Klicken sie einmal auf Start :
 
 ![netatmoWelcome10](../images/netatmoWelcome10.png)
 
-Puis sur "create an app"
+Anschließend auf "create an app"
 
 ![netatmoWelcome11](../images/netatmoWelcome11.png)
 
-Identifiez vous, avec votre mail et mot de passe
+Melden Sie sich mit Ihrer E-Mail und Passwort an
 
 ![netatmoWelcome12](../images/netatmoWelcome12.png)
 
@@ -81,11 +81,11 @@ Voilà à quoi ressemble la page du plugin Netatmo (ici avec déjà 1
 > équipement par contre les informations de toutes vos welcome seront
 > utilisées
 
-Une fois que vous cliquez sur un équipement vous obtenez :
+Sobald Sie auf ein Gerät klicken, erhalten Sie :
 
 ![netatmoWelcome5](../images/netatmoWelcome5.png)
 
-Vous retrouvez ici toute la configuration de votre équipement :
+Hier finden sie die ganze Konfiguration Ihrer Geräte:
 
 -   **Nom de l’équipement Netatmo** : nom de votre équipement Netatmo
     Welcome
@@ -97,7 +97,7 @@ Vous retrouvez ici toute la configuration de votre équipement :
 
 -   **Visible** : le rend visible sur le dashboard
 
-En dessous vous retrouvez la liste des commandes :
+Im unteren Bereich finden sie eine Liste der Befehle :
 
 -   le nom de la commande
 
@@ -120,26 +120,26 @@ En dessous vous retrouvez la liste des commandes :
 Widget 
 ======
 
-Voici le widget sur le dashboard, ici la partie présence :
+Hier ist das Widget auf dem Amaturenbrett mit dem Präsenz Teil
 
 ![netatmoWelcome6](../images/netatmoWelcome6.png)
 
-La partie statut :
+Der Statusteil :
 
 ![netatmoWelcome8](../images/netatmoWelcome8.png)
 
-La partie évènements :
+Der Ereignisteil : 
 
 ![netatmoWelcome9](../images/netatmoWelcome9.png)
 
-Et en mobile :
+Und das Mobile :
 
 ![netatmoWelcome7](../images/netatmoWelcome7.png)
 
-La partie statut :
+Der Statusteil :
 
 ![netatmoWelcome16](../images/netatmoWelcome16.png)
 
-La partie évènements :
+Der Ereignisteil : 
 
 ![netatmoWelcome17](../images/netatmoWelcome17.png)

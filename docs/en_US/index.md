@@ -1,8 +1,7 @@
 Plugin permettant de récupérer les informations des caméras Netatmo
 Welcome (attention il n’y a pas le flux vidéo)
 
-Configuration du plugin 
-=======================
+== Plugin configuration
 
 Une fois le plugin installé, il vous faut renseigner vos informations de
 connexion Netatmo :
@@ -85,12 +84,12 @@ Une fois que vous cliquez sur un équipement vous obtenez :
 
 ![netatmoWelcome5](../images/netatmoWelcome5.png)
 
-Vous retrouvez ici toute la configuration de votre équipement :
+You can find here the full configuration of your device :
 
 -   **Nom de l’équipement Netatmo** : nom de votre équipement Netatmo
     Welcome
 
--   **Objet parent** : indique l’objet parent auquel appartient
+-   **Parent Object** : means the parent object the equipment depend
     l’équipement
 
 -   **Activer** : permet de rendre votre équipement actif
