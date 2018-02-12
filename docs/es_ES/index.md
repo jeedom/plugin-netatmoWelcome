@@ -1,7 +1,7 @@
 Plugin permettant de récupérer les informations des caméras Netatmo
 Welcome (attention il n’y a pas le flux vidéo)
 
-Configuration du plugin 
+configuración del plugin
 =======================
 
 Une fois le plugin installé, il vous faut renseigner vos informations de
