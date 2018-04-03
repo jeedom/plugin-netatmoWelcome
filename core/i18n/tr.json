@@ -1,0 +1,6 @@
+{
+    "plugins/netatmoWelcome/plugin_info/info.xml": {
+        "Plugin pour les caméras netatmo Welcome": "Netatmo Welcome kameralar için eklenti",
+        "Aucune": "Hiçbir"
+    }
+}
