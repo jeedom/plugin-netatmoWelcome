@@ -80,9 +80,9 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
 				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
 				if ($camera_array['type'] == 'NOC') {
-					$camera_jeedom->setConfiguration('device', 'welcome');
-				} else {
 					$camera_jeedom->setConfiguration('device', 'presence');
+				} else {
+					$camera_jeedom->setConfiguration('device', 'welcome');
 				}
 				$camera_jeedom->setEqType_name('camera');
 				$camera_jeedom->setConfiguration('protocole', $url_parse['scheme']);
@@ -93,6 +93,52 @@ class netatmoWelcome extends eqLogic {
 				}
 				$camera_jeedom->setLogicalId($camera_array['id']);
 				$camera_jeedom->save();
+				if ($camera_array['type'] == 'NOC') {
+					$cmd = $camera_jeedom->getCmd('action', 'lighton');
+					if (!is_object($cmd)) {
+						$cmd = new CameraCmd();
+						$cmd->setEqLogic_id($camera_jeedom->getId());
+						$cmd->setLogicalId('lighton');
+						$cmd->setType('action');
+						$cmd->setSubType('other');
+						$cmd->setName(__('Lumière ON', __FILE__));
+						$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"100"}\'');
+						$cmd->save();
+					}
+					$cmd = $camera_jeedom->getCmd('action', 'lightoff');
+					if (!is_object($cmd)) {
+						$cmd = new CameraCmd();
+						$cmd->setEqLogic_id($camera_jeedom->getId());
+						$cmd->setLogicalId('lightoff');
+						$cmd->setType('action');
+						$cmd->setSubType('other');
+						$cmd->setName(__('Lumière OFF', __FILE__));
+						$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"off","intensity":"0"}\'');
+						$cmd->save();
+					}
+					$cmd = $camera_jeedom->getCmd('action', 'lightauto');
+					if (!is_object($cmd)) {
+						$cmd = new CameraCmd();
+						$cmd->setEqLogic_id($camera_jeedom->getId());
+						$cmd->setLogicalId('lightauto');
+						$cmd->setType('action');
+						$cmd->setSubType('other');
+						$cmd->setName(__('Lumière AUTO', __FILE__));
+						$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"auto"}\'');
+						$cmd->save();
+					}
+					$cmd = $camera_jeedom->getCmd('action', 'lightintensity');
+					if (!is_object($cmd)) {
+						$cmd = new CameraCmd();
+						$cmd->setEqLogic_id($camera_jeedom->getId());
+						$cmd->setLogicalId('lightintensity');
+						$cmd->setType('action');
+						$cmd->setSubType('slider');
+						$cmd->setName(__('Lumière Variation', __FILE__));
+						$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"#slider#"}\'');
+						$cmd->save();
+					}
+				}
 			}
 		}
 	}
@@ -114,7 +160,7 @@ class netatmoWelcome extends eqLogic {
 	}
 
 	public function syncWithNetatmo() {
-		$client = self::getClient();
+		$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
 		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
 		log::add('welcome', 'debug', print_r($homes, true));
