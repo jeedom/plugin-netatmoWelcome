@@ -163,7 +163,7 @@ class netatmoWelcome extends eqLogic {
 		$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
 		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
-		log::add('welcome', 'debug', print_r($homes, true));
+		log::add('netatmoWelcome', 'debug', print_r($homes, true));
 		foreach ($homes as $home) {
 			$eqLogic = eqLogic::byLogicalId($home->getVar('id'), 'netatmoWelcome');
 			if (!is_object($eqLogic)) {
