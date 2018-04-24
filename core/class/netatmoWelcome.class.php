@@ -101,10 +101,11 @@ class netatmoWelcome extends eqLogic {
 						$cmd->setLogicalId('lighton');
 						$cmd->setType('action');
 						$cmd->setSubType('other');
-						$cmd->setName(__('Lumière ON', __FILE__));
-						$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"100"}\'');
-						$cmd->save();
 					}
+					$cmd->setName(__('Lumière ON', __FILE__));
+					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"100"}\'');
+					$cmd->save();
+						
 					$cmd = $camera_jeedom->getCmd('action', 'lightoff');
 					if (!is_object($cmd)) {
 						$cmd = new CameraCmd();
