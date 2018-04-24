@@ -112,10 +112,11 @@ class netatmoWelcome extends eqLogic {
 						$cmd->setLogicalId('lightoff');
 						$cmd->setType('action');
 						$cmd->setSubType('other');
-						$cmd->setName(__('Lumière OFF', __FILE__));
-						$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"off","intensity":"0"}\'');
-						$cmd->save();
 					}
+					$cmd->setName(__('Lumière OFF', __FILE__));
+					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"off","intensity":"0"}\'');
+					$cmd->save();
+					
 					$cmd = $camera_jeedom->getCmd('action', 'lightauto');
 					if (!is_object($cmd)) {
 						$cmd = new CameraCmd();
@@ -123,10 +124,11 @@ class netatmoWelcome extends eqLogic {
 						$cmd->setLogicalId('lightauto');
 						$cmd->setType('action');
 						$cmd->setSubType('other');
-						$cmd->setName(__('Lumière AUTO', __FILE__));
-						$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"auto"}\'');
-						$cmd->save();
 					}
+					$cmd->setName(__('Lumière AUTO', __FILE__));
+					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"auto"}\'');
+					$cmd->save();
+						
 					$cmd = $camera_jeedom->getCmd('action', 'lightintensity');
 					if (!is_object($cmd)) {
 						$cmd = new CameraCmd();
@@ -134,10 +136,10 @@ class netatmoWelcome extends eqLogic {
 						$cmd->setLogicalId('lightintensity');
 						$cmd->setType('action');
 						$cmd->setSubType('slider');
-						$cmd->setName(__('Lumière Variation', __FILE__));
-						$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"#slider#"}\'');
-						$cmd->save();
 					}
+					$cmd->setName(__('Lumière Variation', __FILE__));
+					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"#slider#"}\'');
+					$cmd->save();
 				}
 			}
 		}
@@ -334,6 +336,9 @@ class netatmoWelcome extends eqLogic {
 					$eqLogic->checkAndUpdateCmd('stateSd' . $camera_array['id'], $state);
 					$state = ($camera_array['alim_status'] == 'on') ? 1 : 0;
 					$eqLogic->checkAndUpdateCmd('stateAlim' . $camera_array['id'], $state);
+					if ($camera_array['type'] == 'NOC') {
+						self::createCamera();
+					}
 				}
 
 				$events = $home->getEvents();
