@@ -4,54 +4,54 @@ Welcome (attention il n’y a pas le flux vidéo)
 Plugin-Konfiguration
 =======================
 
-Une fois le plugin installé, il vous faut renseigner vos informations de
-connexion Netatmo :
+Nach der Installation des Plugin, müssen Sie Ihre Netatmo Zugangsdaten
+eingeben :
 
 ![netatmoWelcome2](../images/netatmoWelcome2.png)
 
--   **Client ID** : votre client ID (voir partie configuration)
+-   **Kunden ID** : Ihre Kunden-ID (siehe Konfigurationsabschnitt)
 
--   **Client secret** : votre client secret (voir partie configuration)
+-   **Kunden Schlüssel** : Ihr Kunden Schlüssel (siehe Konfigurationsabschnitt)
 
--   **Nom d’utilisateur** : nom d’utilisateur de votre compte netatmo
+-   **Benutzername** : Benutzername Ihres Netatmo Kontos 
 
 -   **Mot de passe** : mot de passe de votre compte Netatmo
 
--   **Synchroniser** : permet de synchroniser Jeedom avec votre compte
-    Netamo pour découvrir automatiquement vos équipements Netamo. A
-    faire après avoir sauvegardé les paramètres précedent.
+-   **Synchronisieren** : ermöglicht das Synchronisieren von Jeedom mit Ihrem 
+    Netamo-Konto, um Ihre Netamo-Geräte automatisch zu erkennen.
+    Erst ausführen, nachdem Sie die vorherigen Einstellungen gespeichert haben.
 
-Recupération des informations de connexion 
+Verbindungsdaten abrufen
 ==========================================
 
 Pour intégrer votre Welcome, vous devez posséder un client\_id et un
 client\_secret généré sur le site <http://dev.netatmo.com>.
 
-Une fois dessus cliquez sur start :
+Klicken sie einmal auf Start :
 
 ![netatmoWelcome10](../images/netatmoWelcome10.png)
 
-Puis sur "create an app"
+Anschließend auf "create an app"
 
 ![netatmoWelcome11](../images/netatmoWelcome11.png)
 
-Identifiez vous, avec votre mail et mot de passe
+Melden Sie sich mit Ihrer E-Mail und Passwort an
 
 ![netatmoWelcome12](../images/netatmoWelcome12.png)
 
-Remplissez les champs "Name" et "Description" (peux importe ce que vous
-mettez ca n’a aucune importance) :
+Füllen Sie die Felder "Name" und "Description" aus (was Sie hineinschreiben
+spielt keine Rolle) :
 
 ![netatmoWelcome13](../images/netatmoWelcome13.png)
 
-Puis tout en bas de la page cochez la case "I accept the terms of use"
-puis cliquez sur "Create"
+Dann am Ende der Seite wählen Sie "I accept the terms of use" und
+klicken Sie auf "Create"
 
 ![netatmoWelcome14](../images/netatmoWelcome14.png)
 
-Recuperer les informations "CLient id" et "Client secret" et copier les
-dans la partie configuration du plugin dans Jeedom (voir chapitre
-précedent)
+Sie erhalten dann die Kunden_ID="Client-ID" und Kunden_Schlüssel="Secret
+Client" zurück. Kopieren Sie die diese dann im Konfigurations Teil des
+Jeedom Plugin hinein (siehe vorheriges Kapitel)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
@@ -87,7 +87,7 @@ Une fois que vous cliquez sur un équipement vous obtenez :
 
 Sie werden hier alle die Konfiguration Ihrer Geräte finden:
 
--   **Nom de l’équipement Netatmo** : nom de votre équipement Netatmo
+-   **Name des Netatmo Gerätes** : Name Ihrer Netatmo Geräte 
     Welcome
 
 -   **Übergeordnete Objekt** zeigt das übergeordnete Objekt gehört
@@ -97,15 +97,15 @@ Sie werden hier alle die Konfiguration Ihrer Geräte finden:
 
 -   Visible ** **: macht es sichtbar auf dem Armaturenbrett
 
-En dessous vous retrouvez la liste des commandes :
+Im unteren Bereich finden sie eine Liste der Befehle :
 
 -   le nom de la commande
 
--   historiser : permet d’historiser la donnée
+-   Chronik : erlaubt das Archivieren der Daten
 
--   configuration avancée (petites roues crantées) : permet d’afficher
-    la configuration avancée de la commande (méthode
-    d’historisation, widget…​)
+-   Erweiterte Konfiguration (kleine Zahnräder) : Erlaubt die erweiterte
+    Konfiguration des Befehls anzuzeigen (Methode der
+    Archivierung, Widget ...)
 
 -   Test: prüft den Befehl
 
