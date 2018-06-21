@@ -69,17 +69,24 @@ class NAResponseHandler
     */
     public function buildHomeCollectionFromResponse()
     {
-        $this->validateCastToHomeCollection();
+       $this->validateCastToHomeCollection();
 
         $homeCollection = array();
 
         foreach($this->decodedBody['homes'] as $homeArray)
         {
-            $this->validateCastToHome($homeArray);
+            try{
+                $this->validateCastToHome($homeArray);
+            } catch (NASDKException $e) {
+               $exeption = $e;
+               continue;
+            }
             $home = new NAHome($homeArray);
             $homeCollection[] = $home;
         }
-
+		if(count($homeCollection) == 0 && isset($exeption)){
+          throw $exeption;
+        }
         $this->dataCollection = $homeCollection;
     }
 
