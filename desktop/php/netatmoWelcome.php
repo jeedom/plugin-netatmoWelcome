@@ -8,7 +8,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 ?>
 
 <div class="row row-overflow">
-  <div class="col-sm-2">
+ <div class="col-lg-2 col-md-3 col-sm-4">
     <div class="bs-sidebar">
       <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
         <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
@@ -53,8 +53,9 @@ foreach ($eqLogics as $eqLogic) {
   </div>
   <?php }
 ?>
+	 </div>
 </div>
-<div class="col-sm-10 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+<div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
   <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}<i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i></legend>
 
   <a class="btn btn-success eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
