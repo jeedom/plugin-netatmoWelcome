@@ -6,7 +6,7 @@ use Netatmo\Objects\NAHome;
 use Netatmo\Objects\NACamera;
 use Netatmo\Objects\NAPerson;
 use Netatmo\Objects\NAEvent;
-use Netatmo\Exceptions\NASDKExceptions;
+use Netatmo\Exceptions\NASDKException;
 use Netatmo\Common\NASDKErrorCode;
 
 
