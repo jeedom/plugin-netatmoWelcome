@@ -53,7 +53,6 @@ foreach ($eqLogics as $eqLogic) {
   </div>
   <?php }
 ?>
-	 </div>
 </div>
 <div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
   <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}<i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i></legend>
@@ -68,8 +67,9 @@ foreach ($eqLogics as $eqLogic) {
   </ul>
 
   <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
+    
     <div role="tabpanel" class="tab-pane active" id="eqlogictab">
-
+		<br/>
       <div class="row">
         <div class="col-sm-6">
           <form class="form-horizontal">
@@ -101,15 +101,15 @@ foreach (object::all() as $object) {
               <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
             </div>
           </div>
-        </div>
       </fieldset>
     </form>
   </div>
   <div class="col-sm-6">
     <center>
-      <img src="' . $plugin->getPathImgIcon() . '" style="height : 300px;" />
+      <img src="<?php echo $plugin->getPathImgIcon(); ?>" style="height : 300px;" />
     </center>
   </div>
+</div>
 </div>
 <div role="tabpanel" class="tab-pane" id="commandtab">
   <table id="table_cmd" class="table table-bordered table-condensed">
