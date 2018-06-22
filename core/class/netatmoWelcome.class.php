@@ -302,7 +302,11 @@ class netatmoWelcome extends eqLogic {
 	public static function refresh_info() {
 		try {
 			try {
-				$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
+				if(isset(Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE) && isset(Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE)){
+					$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
+				}else{
+					$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA, true);
+				}
 				if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 0) {
 					config::save('numberFailed', 0, 'netatmoWelcome');
 				}
