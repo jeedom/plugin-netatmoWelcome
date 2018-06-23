@@ -163,7 +163,7 @@ class netatmoWelcome extends eqLogic {
 	}
 
 	public function syncWithNetatmo() {
-		$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
+		$client = self::getClient('read_camera read_presence access_camera access_presence', true);
 		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
 		log::add('netatmoWelcome', 'debug', print_r($homes, true));
@@ -302,11 +302,7 @@ class netatmoWelcome extends eqLogic {
 	public static function refresh_info() {
 		try {
 			try {
-				if(isset(Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE) && isset(Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE)){
-					$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
-				}else{
-					$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA, true);
-				}
+				$client = self::getClient('read_camera read_presence access_camera access_presence', true);
 				if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 0) {
 					config::save('numberFailed', 0, 'netatmoWelcome');
 				}
