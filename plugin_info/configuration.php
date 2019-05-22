@@ -45,7 +45,7 @@ if (!isConnect()) {
 		<div class="form-group">
 			<label class="col-sm-2 control-label">{{Mot de passe}}</label>
 			<div class="col-sm-3">
-				<input type="password" class="configKey form-control" data-l1key="password" placeholder="Mot de passe"/>
+				<input type="password" class="configKey form-control" data-l1key="password" placeholder="Mot de passe" autocomplete="new-password"/>
 			</div>
 		</div>
 		<?php
