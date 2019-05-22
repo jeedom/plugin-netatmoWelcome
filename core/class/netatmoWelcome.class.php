@@ -54,6 +54,9 @@ class netatmoWelcome extends eqLogic {
 	}
 	
 	public static function createCamera() {
+		if(!class_exists('camera')){
+			return;
+		}
 		$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
 		$response = $client->getData(NULL, 1);
 		$homes = $response->getData();
