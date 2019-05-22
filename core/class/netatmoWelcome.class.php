@@ -405,8 +405,8 @@ class netatmoWelcome extends eqLogic {
 				$message = '';
 				foreach ($events as $event) {
 					if ($event->getVar('event_list') != null) {
-						foreach ($eventList as $event) {
-							$message .= date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message'] . '<br/>';
+						foreach ($event->getVar('event_list') as $eventList) {
+							$message .= date('Y-m-d H:i:s', $eventList['time']) . ' - ' . $eventList['message'] . '<br/>';
 						}
 					} else {
 						$message .= date('Y-m-d H:i:s', $event->getTime()) . ' - ' . $event->getMessage() . '<br/>';
