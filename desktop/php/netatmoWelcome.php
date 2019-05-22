@@ -17,8 +17,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<span>{{Configuration}}</span>
 			</div>
 		</div>
-		<legend><i class="fas fa-video"></i>  {{Mes caméras}}
-		</legend>
+		<legend><i class="fas fa-video"></i>  {{Mes caméras}}</legend>
+		<input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 		<?php
 		if (count($eqLogics) == 0) {
 			echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de caméra Welcome, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer}}</span></center>";
