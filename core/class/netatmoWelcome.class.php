@@ -1,20 +1,20 @@
 <?php
 
 /* This file is part of Jeedom.
- *
- * Jeedom is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jeedom is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
- */
+*
+* Jeedom is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Jeedom is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
@@ -24,12 +24,12 @@ if (!class_exists('NAWelcomeApiClient')) {
 
 class netatmoWelcome extends eqLogic {
 	/*     * *************************Attributs****************************** */
-
+	
 	private static $_client = null;
 	public static $_widgetPossibility = array('custom' => true);
-
+	
 	/*     * ***********************Methode static*************************** */
-
+	
 	public function getClient($_scope = Netatmo\Common\NAScopes::SCOPE_READ_CAMERA, $_force = false) {
 		if (self::$_client == null || $_force) {
 			self::$_client = new NAWelcomeApiClient(array(
@@ -43,7 +43,7 @@ class netatmoWelcome extends eqLogic {
 		}
 		return self::$_client;
 	}
-
+	
 	public function createCamera() {
 		$client = self::getClient(Netatmo\Common\NAScopes::SCOPE_READ_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_READ_PRESENCE . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_CAMERA . ' ' . Netatmo\Common\NAScopes::SCOPE_ACCESS_PRESENCE, true);
 		$response = $client->getData(NULL, 1);
@@ -52,14 +52,15 @@ class netatmoWelcome extends eqLogic {
 			$cameras = $home->getCameras();
 			foreach ($cameras as $camera) {
 				$camera_array = utils::o2a($camera);
+				log::add('netatmoWelcome','debug',json_encode($camera_array));
 				$url = $camera->getVpnUrl();
 				if ($camera->isLocal()) {
 					try {
 						$request_http = new com_http($url . '/command/ping');
-						$result = json_decode(trim($request_http->exec(1, 2)), true);
+						$result = json_decode(trim($request_http->exec(5, 1)), true);
 						$url = $result['local_url'];
 					} catch (Exception $e) {
-
+						log::add('netatmoWelcome','debug','Local error : '.$e->getMessage());
 					}
 				}
 				$url .= '/live/snapshot_720.jpg';
@@ -105,7 +106,7 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setName(__('Lumière ON', __FILE__));
 					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"100"}\'');
 					$cmd->save();
-						
+					
 					$cmd = $camera_jeedom->getCmd('action', 'lightoff');
 					if (!is_object($cmd)) {
 						$cmd = new CameraCmd();
@@ -129,7 +130,7 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setName(__('Lumière AUTO', __FILE__));
 					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"auto"}\'');
 					$cmd->save();
-						
+					
 					$cmd = $camera_jeedom->getCmd('action', 'lightintensity');
 					if (!is_object($cmd)) {
 						$cmd = new CameraCmd();
@@ -145,7 +146,7 @@ class netatmoWelcome extends eqLogic {
 			}
 		}
 	}
-
+	
 	public function getFromThermostat() {
 		$client_id = config::byKey('client_id', 'netatmoThermostat');
 		$client_secret = config::byKey('client_secret', 'netatmoThermostat');
@@ -153,7 +154,7 @@ class netatmoWelcome extends eqLogic {
 		$password = config::byKey('password', 'netatmoThermostat');
 		return (array($client_id, $client_secret, $username, $password));
 	}
-
+	
 	public function getFromWeather() {
 		$client_id = config::byKey('client_id', 'netatmoWeather');
 		$client_secret = config::byKey('client_secret', 'netatmoWeather');
@@ -161,7 +162,7 @@ class netatmoWelcome extends eqLogic {
 		$password = config::byKey('password', 'netatmoWeather');
 		return (array($client_id, $client_secret, $username, $password));
 	}
-
+	
 	public function syncWithNetatmo() {
 		$client = self::getClient('read_camera read_presence access_camera access_presence', true);
 		$response = $client->getData(NULL, 1);
@@ -269,7 +270,7 @@ class netatmoWelcome extends eqLogic {
 				$cmd->setName(__('Derniers évènements', __FILE__));
 				$cmd->save();
 			}
-
+			
 			$cmd = $eqLogic->getCmd('info', 'lastOneEvent');
 			if (!is_object($cmd)) {
 				$cmd = new netatmoWelcomeCmd();
@@ -284,21 +285,21 @@ class netatmoWelcome extends eqLogic {
 		try {
 			$client->dropWebhook();
 		} catch (Exception $e) {
-
+			
 		}
 		$client->subscribeToWebhook(network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . config::byKey('api'));
 		self::refresh_info();
 		try {
 			self::createCamera();
 		} catch (Exception $e) {
-
+			
 		}
 	}
-
+	
 	public static function cron15() {
 		self::refresh_info();
 	}
-
+	
 	public static function refresh_info() {
 		try {
 			try {
@@ -341,7 +342,7 @@ class netatmoWelcome extends eqLogic {
 						self::createCamera();
 					}
 				}
-
+				
 				$events = $home->getEvents();
 				if($events[0] == null){
 					$eventList == null;
@@ -379,12 +380,12 @@ class netatmoWelcome extends eqLogic {
 				$eqLogic->refreshWidget();
 			}
 		} catch (Exception $e) {
-
+			
 		}
 	}
-
+	
 	/*     * *********************Methode d'instance************************* */
-
+	
 	public function postSave() {
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
@@ -398,7 +399,7 @@ class netatmoWelcome extends eqLogic {
 		$refresh->save();
 		$this->refreshWidget();
 	}
-
+	
 	public function toHtml($_version = 'dashboard') {
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
@@ -469,24 +470,24 @@ class netatmoWelcome extends eqLogic {
 		cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
 		return $html;
 	}
-
+	
 }
 
 class netatmoWelcomeCmd extends cmd {
 	/*     * *************************Attributs****************************** */
-
+	
 	public static $_widgetPossibility = array('custom' => false);
-
+	
 	/*     * ***********************Methode static*************************** */
-
+	
 	/*     * *********************Methode d'instance************************* */
-
+	
 	public function execute($_options = array()) {
 		if ($this->getLogicalId() == 'refresh') {
 			netatmoWelcome::refresh_info();
 		}
 	}
-
+	
 	/*     * **********************Getteur Setteur*************************** */
 }
 
