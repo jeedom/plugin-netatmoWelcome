@@ -12,7 +12,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
 			<div class="cursor eqLogicAction logoPrimary" data-action="gotoPluginConf">
-				
 				<i class="fa fa-wrench"></i>
 				<br/>
 				<span>{{Configuration}}</span>
