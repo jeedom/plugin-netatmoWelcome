@@ -17,9 +17,9 @@
 */
 
 /* * ***************************Includes********************************* */
-require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+require_once __DIR__ . '/../../../../core/php/core.inc.php';
 if (!class_exists('NAWelcomeApiClient')) {
-	require_once dirname(__FILE__) . '/../../3rdparty/Netatmo-API-PHP/Clients/NAWelcomeApiClient.php';
+	require_once __DIR__ . '/../../3rdparty/Netatmo-API-PHP/Clients/NAWelcomeApiClient.php';
 }
 
 class netatmoWelcome extends eqLogic {
