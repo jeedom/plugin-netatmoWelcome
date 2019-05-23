@@ -30,6 +30,10 @@ class netatmoWelcome extends eqLogic {
 	
 	/*     * ***********************Methode static*************************** */
 	
+	public static function cronDaily(){
+		shell_exec('cd '__DIR__.'/../../data;  ls -1tr *.jpg | head -n -10 | xargs -d '\n' rm -f --');
+	}
+	
 	public static function getClient($_scope = Netatmo\Common\NAScopes::SCOPE_READ_CAMERA, $_force = false) {
 		if (self::$_client == null || $_force) {
 			self::$_client = new NAWelcomeApiClient(array(
@@ -84,8 +88,6 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom = eqLogic::byLogicalId($camera_array['id'], 'camera');
 				if (!is_object($camera_jeedom)) {
 					$camera_jeedom = new camera();
-					$camera_jeedom->setDisplay('height', '240px');
-					$camera_jeedom->setDisplay('width', '320px');
 				}
 				$camera_jeedom->setConfiguration('home_id',$home->getVar('id'));
 				$camera_jeedom->setName($camera->getName());
@@ -107,74 +109,27 @@ class netatmoWelcome extends eqLogic {
 				}
 				$camera_jeedom->setLogicalId($camera_array['id']);
 				$camera_jeedom->save();
-				if ($camera_array['type'] == 'NOC') {
-					$cmd = $camera_jeedom->getCmd('action', 'lighton');
-					if (!is_object($cmd)) {
-						$cmd = new CameraCmd();
-						$cmd->setEqLogic_id($camera_jeedom->getId());
-						$cmd->setLogicalId('lighton');
-						$cmd->setType('action');
-						$cmd->setSubType('other');
-						$cmd->setName(__('Lumière ON', __FILE__));
-					}
-					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"100"}\'');
-					$cmd->save();
-					
-					$cmd = $camera_jeedom->getCmd('action', 'lightoff');
-					if (!is_object($cmd)) {
-						$cmd = new CameraCmd();
-						$cmd->setEqLogic_id($camera_jeedom->getId());
-						$cmd->setLogicalId('lightoff');
-						$cmd->setType('action');
-						$cmd->setSubType('other');
-						$cmd->setName(__('Lumière OFF', __FILE__));
-					}
-					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"off","intensity":"0"}\'');
-					$cmd->save();
-					
-					$cmd = $camera_jeedom->getCmd('action', 'lightauto');
-					if (!is_object($cmd)) {
-						$cmd = new CameraCmd();
-						$cmd->setEqLogic_id($camera_jeedom->getId());
-						$cmd->setLogicalId('lightauto');
-						$cmd->setType('action');
-						$cmd->setSubType('other');
-						$cmd->setName(__('Lumière AUTO', __FILE__));
-					}
-					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"auto"}\'');
-					$cmd->save();
-					
-					$cmd = $camera_jeedom->getCmd('action', 'lightintensity');
-					if (!is_object($cmd)) {
-						$cmd = new CameraCmd();
-						$cmd->setEqLogic_id($camera_jeedom->getId());
-						$cmd->setLogicalId('lightintensity');
-						$cmd->setType('action');
-						$cmd->setSubType('slider');
-						$cmd->setName(__('Lumière Variation', __FILE__));
-					}
-					$cmd->setConfiguration('request','curl -i -G "' . $camera->getVpnUrl() . '/command/floodlight_set_config" --data-urlencode \'config={"mode":"on","intensity":"#slider#"}\'');
-					$cmd->save();
-					
-					$eqLogic = eqLogic::byLogicalId($home->getVar('id'), 'netatmoWelcome');
-					if(is_object($eqLogic)){
-						foreach ($eqLogic->getCmd('info') as $cmdEqLogic) {
-							$cmd = $camera_jeedom->getCmd('info', $cmdEqLogic->getLogicalId());
-							if (!is_object($cmd)) {
-								$cmd = new CameraCmd();
-								$cmd->setEqLogic_id($camera_jeedom->getId());
-								$cmd->setLogicalId($cmdEqLogic->getLogicalId());
-								$cmd->setType('info');
-								$cmd->setSubType($cmdEqLogic->getSubType());
-								$cmd->setName($cmdEqLogic->getName());
-							}
-							$cmd->save();
+				
+				$eqLogic = eqLogic::byLogicalId($home->getVar('id'), 'netatmoWelcome');
+				if(is_object($eqLogic)){
+					foreach ($eqLogic->getCmd('info') as $cmdEqLogic) {
+						$cmd = $camera_jeedom->getCmd('info', $cmdEqLogic->getLogicalId());
+						if (!is_object($cmd)) {
+							$cmd = new CameraCmd();
+							$cmd->setEqLogic_id($camera_jeedom->getId());
+							$cmd->setLogicalId($cmdEqLogic->getLogicalId());
+							$cmd->setType('info');
+							$cmd->setSubType($cmdEqLogic->getSubType());
+							$cmd->setName($cmdEqLogic->getName());
+							$cmd->setIsVisible(0);
 						}
+						$cmd->save();
 					}
 				}
 			}
 		}
 	}
+	
 	
 	public static function getFromThermostat() {
 		$client_id = config::byKey('client_id', 'netatmoThermostat');
@@ -272,18 +227,6 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setType('info');
 					$cmd->setSubType('binary');
 					$cmd->setName(__('Status alim', __FILE__) . ' ' . $camera_array['name']);
-					$cmd->save();
-				}
-				$cmd = $eqLogic->getCmd('info', 'movement' . $camera_array['id']);
-				if (!is_object($cmd)) {
-					$cmd = new netatmoWelcomeCmd();
-					$cmd->setEqLogic_id($eqLogic->getId());
-					$cmd->setLogicalId('movement' . $camera_array['id']);
-					$cmd->setType('info');
-					$cmd->setSubType('binary');
-					$cmd->setName(__('Mouvement', __FILE__) . ' ' . $camera_array['name']);
-					$cmd->setConfiguration('returnStateTime', 1);
-					$cmd->setConfiguration('returnStateValue', 0);
 					$cmd->save();
 				}
 			}
@@ -385,19 +328,14 @@ class netatmoWelcome extends eqLogic {
 				}
 				if ($eventList != null) {
 					foreach ($eventList as $event) {
-						if ($event['time'] > (strtotime('now') - 60) && ($event['type'] == 'movement' || $event['type'] == 'animal' || $event['type'] == 'humain' || $event['type'] == 'vehicle')) {
-							$eqLogic->checkAndUpdateCmd('movement' . $events[0]->getCameraId(), 1);
-						}
-						$message = date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message'];
+						
+						$message = '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($event['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message']. '</span>';
 						$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
 						self::updateCameraInfo($cameras_jeedom,'lastOneEvent', $message);
 					}
 				} else {
 					if ($events[0] != null){
-						if ($events[0]->getTime() > (strtotime('now') - 60) && $events[0]->getEventType() == 'movement') {
-							$eqLogic->checkAndUpdateCmd('movement' . $events[0]->getCameraId(), 1);
-						}
-						$message = date('Y-m-d H:i:s', $events[0]->getTime()) . ' - ' . $events[0]->getMessage();
+						$message = '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($event[0]->getSnapshot()).'\'/>">'.date('Y-m-d H:i:s', $events[0]->getTime()) . ' - ' . $events[0]->getMessage(). '</span>';
 						$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
 						self::updateCameraInfo($cameras_jeedom,'lastOneEvent', $message);
 					}
@@ -406,10 +344,13 @@ class netatmoWelcome extends eqLogic {
 				foreach ($events as $event) {
 					if ($event->getVar('event_list') != null) {
 						foreach ($event->getVar('event_list') as $eventList) {
-							$message .= date('Y-m-d H:i:s', $eventList['time']) . ' - ' . $eventList['message'] . '<br/>';
+							if(!isset($eventList['snapshot']['url'])){
+								$eventList['snapshot']['url'] = '';
+							}
+							$message .= '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($eventList['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $eventList['time']) . ' - ' . $eventList['message'] . '</span><br/>';
 						}
 					} else {
-						$message .= date('Y-m-d H:i:s', $event->getTime()) . ' - ' . $event->getMessage() . '<br/>';
+						$message .= '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($event->getSnapshot()).'\'/>">'.date('Y-m-d H:i:s', $event->getTime()) . ' - ' . $event->getMessage() . '</span><br/>';
 					}
 				}
 				$eqLogic->checkAndUpdateCmd('lastEvent', $message);
@@ -419,6 +360,25 @@ class netatmoWelcome extends eqLogic {
 		} catch (Exception $e) {
 			
 		}
+	}
+	
+	public static function downloadSnapshot($_snapshot){
+		if($_snapshot == ''){
+			return 'core/img/no_image.gif';
+		}
+		if(!file_exists(__DIR__.'/../../data')){
+			mkdir(__DIR__.'/../../data');
+		}
+		$parts  = parse_url($_snapshot);
+		$filename = basename($parts['path']).'.jpg';
+		if($filename == 'getcamerapicture'){
+			return 'core/img/no_image.gif';
+		}
+		if(file_exists(__DIR__.'/../../data/'.$filename)){
+			return 'plugins/netatmoWelcome/data/'.$filename;
+		}
+		file_put_contents(__DIR__.'/../../data/'.$filename,file_get_contents($_snapshot));
+		return 'plugins/netatmoWelcome/data/'.$filename;
 	}
 	
 	/*     * *********************Methode d'instance************************* */
