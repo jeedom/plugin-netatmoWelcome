@@ -298,59 +298,42 @@ class netatmoWelcome extends eqLogic {
 				$persons = $home->getPersons();
 				foreach ($persons as $person) {
 					$person_array = utils::o2a($person);
-					$here = ($person_array['out_of_sight'] == 1) ? 0 : 1;
-					$eqLogic->checkAndUpdateCmd('isHere' . $person_array['id'], $here);
-					self::updateCameraInfo($cameras_jeedom,'isHere' . $person_array['id'], $here);
+					$eqLogic->checkAndUpdateCmd('isHere' . $person_array['id'], ($person_array['out_of_sight'] != 1));
+					self::updateCameraInfo($cameras_jeedom,'isHere' . $person_array['id'], ($person_array['out_of_sight'] != 1));
 					$eqLogic->checkAndUpdateCmd('lastSeen' . $person_array['id'], date('Y-m-d H:i:s', $person_array['last_seen']));
 					self::updateCameraInfo($cameras_jeedom,'lastSeen' . $person_array['id'], $person_array['last_seen']);
 				}
 				$cameras = $home->getCameras();
 				foreach ($cameras as $camera) {
 					$camera_array = utils::o2a($camera);
-					$state = ($camera_array['status'] == 'on') ? 1 : 0;
-					$eqLogic->checkAndUpdateCmd('state' . $camera_array['id'], $state);
-					self::updateCameraInfo($cameras_jeedom,'state' . $camera_array['id'], $state);
-					$state = ($camera_array['sd_status'] == 'on') ? 1 : 0;
-					$eqLogic->checkAndUpdateCmd('stateSd' . $camera_array['id'], $state);
-					self::updateCameraInfo($cameras_jeedom,'stateSd' . $camera_array['id'], $state);
-					$state = ($camera_array['alim_status'] == 'on') ? 1 : 0;
-					$eqLogic->checkAndUpdateCmd('stateAlim' . $camera_array['id'], $state);
-					self::updateCameraInfo($cameras_jeedom,'stateAlim' . $camera_array['id'], $state);
+					$eqLogic->checkAndUpdateCmd('state' . $camera_array['id'], ($camera_array['status'] == 'on'));
+					self::updateCameraInfo($cameras_jeedom,'state' . $camera_array['id'], ($camera_array['status'] == 'on'));
+					$eqLogic->checkAndUpdateCmd('stateSd' . $camera_array['id'], ($camera_array['sd_status'] == 'on'));
+					self::updateCameraInfo($cameras_jeedom,'stateSd' . $camera_array['id'], ($camera_array['sd_status'] == 'on'));
+					$eqLogic->checkAndUpdateCmd('stateAlim' . $camera_array['id'], ($camera_array['alim_status'] == 'on'));
+					self::updateCameraInfo($cameras_jeedom,'stateAlim' . $camera_array['id'], ($camera_array['alim_status'] == 'on'));
 					if ($camera_array['type'] == 'NOC') {
 						self::createCamera();
 					}
 				}
 				$events = $home->getEvents();
-				if($events[0] == null){
-					$eventList == null;
-				}else{
-					$eventList = $events[0]->getVar('event_list');
-				}
-				if ($eventList != null) {
-					foreach ($eventList as $event) {
-						
+				if ($events[0] != null) {
+					foreach ($events[0]->getVar('event_list') as $event) {
 						$message = '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($event['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message']. '</span>';
-						$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
-						self::updateCameraInfo($cameras_jeedom,'lastOneEvent', $message);
-					}
-				} else {
-					if ($events[0] != null){
-						$message = '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($event[0]->getSnapshot()).'\'/>">'.date('Y-m-d H:i:s', $events[0]->getTime()) . ' - ' . $events[0]->getMessage(). '</span>';
 						$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
 						self::updateCameraInfo($cameras_jeedom,'lastOneEvent', $message);
 					}
 				}
 				$message = '';
 				foreach ($events as $event) {
-					if ($event->getVar('event_list') != null) {
-						foreach ($event->getVar('event_list') as $eventList) {
-							if(!isset($eventList['snapshot']['url'])){
-								$eventList['snapshot']['url'] = '';
-							}
-							$message .= '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($eventList['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $eventList['time']) . ' - ' . $eventList['message'] . '</span><br/>';
+					if ($event->getVar('event_list') == null) {
+						continue;
+					}
+					foreach ($event->getVar('event_list') as $eventList) {
+						if(!isset($eventList['snapshot']['url'])){
+							$eventList['snapshot']['url'] = '';
 						}
-					} else {
-						$message .= '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($event->getSnapshot()).'\'/>">'.date('Y-m-d H:i:s', $event->getTime()) . ' - ' . $event->getMessage() . '</span><br/>';
+						$message .= '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($eventList['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $eventList['time']) . ' - ' . $eventList['message'] . '</span><br/>';
 					}
 				}
 				$eqLogic->checkAndUpdateCmd('lastEvent', $message);
