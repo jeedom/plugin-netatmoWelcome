@@ -319,7 +319,7 @@ class netatmoWelcome extends eqLogic {
 				$events = $home->getEvents();
 				if ($events[0] != null) {
 					foreach ($events[0]->getVar('event_list') as $event) {
-						$message = '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($event['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message']. '</span>';
+						$message = '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.self::downloadSnapshot($event['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $event['time']) . ' - ' . $event['message']. '</span>';
 						$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
 						self::updateCameraInfo($cameras_jeedom,'lastOneEvent', $message);
 					}
@@ -333,7 +333,7 @@ class netatmoWelcome extends eqLogic {
 						if(!isset($eventList['snapshot']['url'])){
 							$eventList['snapshot']['url'] = '';
 						}
-						$message .= '<span title="" data-tooltip-content="<img height=\'250\' class=\'img-responsive\' src=\''.self::downloadSnapshot($eventList['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $eventList['time']) . ' - ' . $eventList['message'] . '</span><br/>';
+						$message .= '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.self::downloadSnapshot($eventList['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $eventList['time']) . ' - ' . $eventList['message'] . '</span><br/>';
 					}
 				}
 				$eqLogic->checkAndUpdateCmd('lastEvent', $message);
