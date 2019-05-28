@@ -88,11 +88,11 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom = eqLogic::byLogicalId($camera_array['id'], 'camera');
 				if (!is_object($camera_jeedom)) {
 					$camera_jeedom = new camera();
+					$camera_jeedom->setIsEnable(1);
+					$camera_jeedom->setIsVisible(1);
+					$camera_jeedom->setName($camera->getName());
 				}
 				$camera_jeedom->setConfiguration('home_id',$home->getVar('id'));
-				$camera_jeedom->setName($camera->getName());
-				$camera_jeedom->setIsEnable(1);
-				$camera_jeedom->setIsVisible(1);
 				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
 				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
 				if ($camera_array['type'] == 'NOC') {
