@@ -86,81 +86,81 @@ if (!isConnect()) {
 
 <script>
 $('#bt_syncWithNetatmoWelcome').on('click', function () {
-	$.ajax({// fonction permettant de faire de l'ajax
-	type: "POST", // methode de transmission des données au fichier php
-	url: "plugins/netatmoWelcome/core/ajax/netatmoWelcome.ajax.php", // url du fichier php
-	data: {
-		action: "syncWithNetatmo",
-	},
-	dataType: 'json',
-	error: function (request, status, error) {
-		handleAjaxError(request, status, error);
-	},
-	success: function (data) { // si l'appel a bien fonctionné
-	if (data.state != 'ok') {
-		$('#div_alert').showAlert({message: data.result, level: 'danger'});
-		return;
-	}
-	$('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
-}
-});
+	$.ajax({
+		type: "POST",
+		url: "plugins/netatmoWelcome/core/ajax/netatmoWelcome.ajax.php",
+		data: {
+			action: "syncWithNetatmo",
+		},
+		dataType: 'json',
+		error: function (request, status, error) {
+			handleAjaxError(request, status, error);
+		},
+		success: function (data) {
+			if (data.state != 'ok') {
+				$('#div_alert').showAlert({message: data.result, level: 'danger'});
+				return;
+			}
+			$('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
+		}
+	});
 });
 $('#bt_getFromThermostat').on('click', function () {
 	bootbox.confirm('{{Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? }}', function (result) {
 		if (result) {
-			$.ajax({// fonction permettant de faire de l'ajax
-			type: "POST", // methode de transmission des données au fichier php
-			url: "plugins/netatmoWelcome/core/ajax/netatmoWelcome.ajax.php", // url du fichier php
-			data: {
-				action: "getFromThermostat",
-			},
-			dataType: 'json',
-			error: function (request, status, error) {
-				handleAjaxError(request, status, error);
-			},
-			success: function (data) { // si l'appel a bien fonctionné
-			if (data.state != 'ok') {
-				$('#div_alert').showAlert({message: data.result, level: 'danger'});
-				return;
-			}
-			console.log(data.result[0]);
-			$('.configKey[data-l1key=client_id]').empty().val(data.result[0]);
-			$('.configKey[data-l1key=client_secret]').empty().val(data.result[1]);
-			$('.configKey[data-l1key=username]').empty().val(data.result[2]);
-			$('.configKey[data-l1key=password]').empty().val(data.result[3]);
-			$('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
-		}
+			$.ajax({
+				type: "POST",
+				url: "plugins/netatmoWelcome/core/ajax/netatmoWelcome.ajax.php",
+				data: {
+					action: "getFromThermostat",
+				},
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function (data) {
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+					console.log(data.result[0]);
+					$('.configKey[data-l1key=client_id]').empty().val(data.result[0]);
+					$('.configKey[data-l1key=client_secret]').empty().val(data.result[1]);
+					$('.configKey[data-l1key=username]').empty().val(data.result[2]);
+					$('.configKey[data-l1key=password]').empty().val(data.result[3]);
+					$('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
+				}
+			});
+		};
 	});
-};
-});
 });
 $('#bt_getFromWeather').on('click', function () {
 	bootbox.confirm('{{Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? }}', function (result) {
 		if (result) {
-			$.ajax({// fonction permettant de faire de l'ajax
-			type: "POST", // methode de transmission des données au fichier php
-			url: "plugins/netatmoWelcome/core/ajax/netatmoWelcome.ajax.php", // url du fichier php
-			data: {
-				action: "getFromWeather",
-			},
-			dataType: 'json',
-			error: function (request, status, error) {
-				handleAjaxError(request, status, error);
-			},
-			success: function (data) { // si l'appel a bien fonctionné
-			if (data.state != 'ok') {
-				$('#div_alert').showAlert({message: data.result, level: 'danger'});
-				return;
-			}
-			console.log(data.result[0]);
-			$('.configKey[data-l1key=client_id]').empty().val(data.result[0]);
-			$('.configKey[data-l1key=client_secret]').empty().val(data.result[1]);
-			$('.configKey[data-l1key=username]').empty().val(data.result[2]);
-			$('.configKey[data-l1key=password]').empty().val(data.result[3]);
-			$('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
-		}
+			$.ajax({
+				type: "POST",
+				url: "plugins/netatmoWelcome/core/ajax/netatmoWelcome.ajax.php",
+				data: {
+					action: "getFromWeather",
+				},
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function (data) {
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+					console.log(data.result[0]);
+					$('.configKey[data-l1key=client_id]').empty().val(data.result[0]);
+					$('.configKey[data-l1key=client_secret]').empty().val(data.result[1]);
+					$('.configKey[data-l1key=username]').empty().val(data.result[2]);
+					$('.configKey[data-l1key=password]').empty().val(data.result[3]);
+					$('#div_alert').showAlert({message: '{{Synchronisation réussie}}', level: 'success'});
+				}
+			});
+		};
 	});
-};
-});
 });
 </script>
