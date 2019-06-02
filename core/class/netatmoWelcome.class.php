@@ -329,6 +329,9 @@ class netatmoWelcome extends eqLogic {
 					if ($event->getVar('event_list') == null || !isset($event->getVar('event_list')[0])) {
 						continue;
 					}
+					if(!isset($details['snapshot']['url'])){
+						$details['snapshot']['url'] = '';
+					}
 					$details = $event->getVar('event_list')[0];
 					$message .= '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.self::downloadSnapshot($details['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'] . '</span><br/>';
 				}
