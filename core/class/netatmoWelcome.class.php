@@ -70,17 +70,19 @@ class netatmoWelcome extends eqLogic {
 				$camera_array = utils::o2a($camera);
 				log::add('netatmoWelcome','debug',json_encode($camera_array));
 				$url = $camera->getVpnUrl();
-				if ($camera->isLocal()) {
-					try {
-						$request_http = new com_http($url . '/command/ping');
-						$result = json_decode(trim($request_http->exec(5, 1)), true);
-						$url = $result['local_url'];
-					} catch (Exception $e) {
-						log::add('netatmoWelcome','debug','Local error : '.$e->getMessage());
-					}
+				log::add('netatmoWelcome','debug','Local : '.$camera->isLocal());
+				try {
+					$request_http = new com_http($url . '/command/ping');
+					$result = json_decode(trim($request_http->exec(5, 1)), true);
+					log::add('netatmoWelcome','debug',print_r($result,true));
+					$url = $result['local_url'];
+				} catch (Exception $e) {
+					log::add('netatmoWelcome','debug','Local error : '.$e->getMessage());
 				}
+				
 				$url .= '/live/snapshot_720.jpg';
 				$url_parse = parse_url($url);
+				log::add('netatmoWelcome','debug',print_r($url_parse,true));
 				if ($url_parse['host'] == "") {
 					$url_parse = parse_url($camera->getVpnUrl() . '/live/snapshot_720.jpg');
 				}
