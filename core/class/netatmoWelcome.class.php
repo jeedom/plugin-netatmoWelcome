@@ -368,8 +368,6 @@ class netatmoWelcome extends eqLogic {
 		$refresh->save();
 		$this->refreshWidget();
 	}
-	
-	
 }
 
 class netatmoWelcomeCmd extends cmd {
