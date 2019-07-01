@@ -18,9 +18,6 @@
 
 /* * ***************************Includes********************************* */
 require_once __DIR__ . '/../../../../core/php/core.inc.php';
-if (!class_exists('NAWelcomeApiClient')) {
-	require_once __DIR__ . '/../../3rdparty/Netatmo-API-PHP/Clients/NAWelcomeApiClient.php';
-}
 if (!class_exists('netatmoApi')) {
 	require_once __DIR__ . '/netatmoApi.class.php';
 }
