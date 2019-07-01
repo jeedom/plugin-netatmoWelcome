@@ -33,8 +33,8 @@ class netatmoWelcome extends eqLogic {
 		shell_exec("cd '__DIR__.'/../../data;  ls -1tr *.jpg | head -n -10 | xargs -d '\n' rm -f --");
 	}
 	
-	public static function getClient($_scope = Netatmo\Common\NAScopes::SCOPE_READ_CAMERA, $_force = false) {
-		if (self::$_client == null || $_force) {
+	public static function getClient() {
+		if (self::$_client == null) {
 			self::$_client = new netatmoApi(array(
 				'client_id' => config::byKey('client_id', 'netatmoWelcome'),
 				'client_secret' => config::byKey('client_secret', 'netatmoWelcome'),
@@ -195,7 +195,7 @@ class netatmoWelcome extends eqLogic {
 			$eqLogic->setConfiguration('user_list', $list_person);
 			$list_camera = array();
 			foreach ($home['cameras'] as $camera) {
-				$list_camera[$camera_array['id']] = $camera['name'];
+				$list_camera[$camera['id']] = $camera['name'];
 				$cmd = $eqLogic->getCmd('info', 'state' . $camera['id']);
 				if (!is_object($cmd)) {
 					$cmd = new netatmoWelcomeCmd();
@@ -257,6 +257,8 @@ class netatmoWelcome extends eqLogic {
 		} catch (Exception $e) {
 			
 		}
+		self::getClient()->api('dropwebhook','POST',array('app_types' => 'jeedom'));
+		self::getClient()->api('addwebhook','POST',array('url' => network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . jeedom::getApiKey('netatmoWelcome')));
 	}
 	
 	public static function cron15() {
