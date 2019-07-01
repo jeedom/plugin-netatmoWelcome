@@ -64,12 +64,12 @@ if (!isConnect()) {
 			<label class="col-sm-2 control-label">{{Récupérer les infos du plugin}}</label>';
 			if (($hasthermostat && $hasthermostat->isActive())){
 				echo '<div class="col-lg-2">
-				<a class="btn btn-success" id="bt_getFromThermostat"><i class="fa fa-random"></i> {{Netatmo Thermostat}}</a>
+				<a class="btn btn-success" id="bt_getFromThermostat"><i class="fas fa-random"></i> {{Netatmo Thermostat}}</a>
 				</div>';
 			}
 			if (($hasweather && $hasweather->isActive())){
 				echo '<div class="col-lg-1">
-				<a class="btn btn-success" id="bt_getFromWeather"><i class="fa fa-random"></i> {{Netatmo Station}}</a>
+				<a class="btn btn-success" id="bt_getFromWeather"><i class="fas fa-random"></i> {{Netatmo Station}}</a>
 				</div>';
 			}
 			echo '</div>';
@@ -123,7 +123,6 @@ $('#bt_getFromThermostat').on('click', function () {
 						$('#div_alert').showAlert({message: data.result, level: 'danger'});
 						return;
 					}
-					console.log(data.result[0]);
 					$('.configKey[data-l1key=client_id]').empty().val(data.result[0]);
 					$('.configKey[data-l1key=client_secret]').empty().val(data.result[1]);
 					$('.configKey[data-l1key=username]').empty().val(data.result[2]);
@@ -152,7 +151,6 @@ $('#bt_getFromWeather').on('click', function () {
 						$('#div_alert').showAlert({message: data.result, level: 'danger'});
 						return;
 					}
-					console.log(data.result[0]);
 					$('.configKey[data-l1key=client_id]').empty().val(data.result[0]);
 					$('.configKey[data-l1key=client_secret]').empty().val(data.result[1]);
 					$('.configKey[data-l1key=username]').empty().val(data.result[2]);
