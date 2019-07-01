@@ -4,18 +4,35 @@
 */
 class NASDKException extends Exception
 {
-    public function __construct($code, $message)
-    {
-        parent::__construct($message, $code);
-    }
+  public function __construct($code, $message)
+  {
+    parent::__construct($message, $code);
+  }
 }
 
 
 class NASDKError
 {
-    const UNABLE_TO_CAST = 601;
-    const NOT_FOUND = 602;
-    const INVALID_FIELD = 603;
-    const FORBIDDEN_OPERATION = 604;
+  const UNABLE_TO_CAST = 601;
+  const NOT_FOUND = 602;
+  const INVALID_FIELD = 603;
+  const FORBIDDEN_OPERATION = 604;
 }
+
+class NASDKErrorException extends Exception
+{
+  public function __construct($code, $message)
+  {
+    parent::__construct($message, $code);
+  }
+}
+
+class NASDKErrorCode
+{
+  const UNABLE_TO_CAST = 601;
+  const NOT_FOUND = 602;
+  const INVALID_FIELD = 603;
+  const FORBIDDEN_OPERATION = 604;
+}
+
 ?>
