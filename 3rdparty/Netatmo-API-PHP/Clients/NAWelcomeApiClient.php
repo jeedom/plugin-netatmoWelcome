@@ -8,7 +8,12 @@ if (!class_exists('NAResponseHandler')) {
 if (!class_exists('NASDKErrorException')) {
 	require_once dirname(__FILE__) . "/../Exceptions/NASDKException.php";
 }
-
+if (!class_exists('NAScopes')) {
+	require_once (dirname(__FILE__).'/../Netatmo/Common/NAScopes.php');
+}
+if (!class_exists('NARestErrorCode')) {
+	require_once (dirname(__FILE__).'/../Constants/AppliCommonPublic.php');
+}
 /**
 * NETATMO Welcome API PHP CLIENT
 *
