@@ -93,7 +93,7 @@ class netatmoWelcome extends eqLogic {
 					$camera_jeedom->setIsVisible(1);
 					$camera_jeedom->setName($camera['name']);
 				}
-				$camera_jeedom->setConfiguration('home_id',$camera['id']);
+				$camera_jeedom->setConfiguration('home_id',$home['id']);
 				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
 				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
 				if ($camera['type'] == 'NOC') {
@@ -111,7 +111,7 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom->setLogicalId($camera['id']);
 				$camera_jeedom->save();
 				
-				$eqLogic = eqLogic::byLogicalId($camera['id'], 'netatmoWelcome');
+				$eqLogic = eqLogic::byLogicalId($home['id'], 'netatmoWelcome');
 				if(is_object($eqLogic)){
 					foreach ($eqLogic->getCmd('info') as $cmdEqLogic) {
 						$cmd = $camera_jeedom->getCmd('info', $cmdEqLogic->getLogicalId());
@@ -293,7 +293,6 @@ class netatmoWelcome extends eqLogic {
 					$eqLogic->checkAndUpdateCmd('lastSeen' . $person['id'], date('Y-m-d H:i:s', $person['last_seen']));
 					self::updateCameraInfo($cameras_jeedom,'lastSeen' . $person['id'], $person['last_seen']);
 				}
-				$cameras_jeedom = eqLogic::searchConfiguration('"home_id":"'.$home['id'].'"', 'camera');
 				foreach ($home['cameras'] as $camera) {
 					$eqLogic->checkAndUpdateCmd('state' . $camera['id'], ($camera['status'] == 'on'));
 					self::updateCameraInfo($cameras_jeedom,'state' . $camera['id'], ($camera['status'] == 'on'));
@@ -305,6 +304,7 @@ class netatmoWelcome extends eqLogic {
 						self::createCamera($_datas);
 					}
 				}
+				$cameras_jeedom = eqLogic::searchConfiguration('"home_id":"'.$home['id'].'"', 'camera');
 				$events = $home['events'];
 				if ($events[0] != null) {
 					$details = $events[0]['event_list'][0];
