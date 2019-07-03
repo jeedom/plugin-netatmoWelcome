@@ -306,7 +306,7 @@ class netatmoWelcome extends eqLogic {
 					}
 				}
 				$events = $home['events'];
-				if ($events[0] != null) {
+				if ($events[0] != null && isset$events[0]['event_list'])) {
 					$details = $events[0]['event_list'][0];
 					$message = date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'];
 					$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
