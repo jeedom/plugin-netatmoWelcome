@@ -287,6 +287,7 @@ class netatmoWelcome extends eqLogic {
 				if (!is_object($eqLogic)) {
 					continue;
 				}
+				$cameras_jeedom = eqLogic::searchConfiguration('"home_id":"'.$home['id'].'"', 'camera');
 				foreach ($home['persons'] as $person) {
 					$eqLogic->checkAndUpdateCmd('isHere' . $person['id'], ($person['out_of_sight'] != 1));
 					self::updateCameraInfo($cameras_jeedom,'isHere' . $person['id'], ($person['out_of_sight'] != 1));
@@ -304,7 +305,6 @@ class netatmoWelcome extends eqLogic {
 						self::createCamera($_datas);
 					}
 				}
-				$cameras_jeedom = eqLogic::searchConfiguration('"home_id":"'.$home['id'].'"', 'camera');
 				$events = $home['events'];
 				if ($events[0] != null) {
 					$details = $events[0]['event_list'][0];
