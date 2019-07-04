@@ -136,9 +136,9 @@ class netatmoApi {
       }
       $decode = json_decode($body, TRUE);
       if(!$decode){
-        throw new Exception($matches[1].' | '. $matches[2]);
+        throw new Exception($body);
       }
-      throw new Exception($matches[1].' | '.$matches[2].' | '. $decode);
+      throw new Exception($body);
     }
   }
   
