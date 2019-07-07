@@ -268,7 +268,7 @@ class netatmoWelcome extends eqLogic {
 					if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 0) {
 						config::save('numberFailed', 0, 'netatmoWelcome');
 					}
-				} catch (NAClientException $e) {
+				} catch (Exception $e) {
 					if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 3) {
 						log::add('netatmoWelcome', 'error', __('Erreur sur synchro netatmo welcome ', __FILE__) . ' (' . config::byKey('numberFailed', 'netatmoWelcome', 0) . ') ' . $e->getMessage());
 						return;
@@ -276,6 +276,11 @@ class netatmoWelcome extends eqLogic {
 					config::save('numberFailed', config::byKey('numberFailed', 'netatmoWelcome', 0) + 1, 'netatmoWelcome');
 					return;
 				}
+			}
+			try {
+				self::createCamera($_datas);
+			} catch (\Exception $e) {
+				
 			}
 			foreach ($_datas['homes'] as $home) {
 				$eqLogic = eqLogic::byLogicalId($home['id'], 'netatmoWelcome');
@@ -296,9 +301,6 @@ class netatmoWelcome extends eqLogic {
 					self::updateCameraInfo($cameras_jeedom,'stateSd' . $camera['id'], ($camera['sd_status'] == 'on'));
 					$eqLogic->checkAndUpdateCmd('stateAlim' . $camera['id'], ($camera['alim_status'] == 'on'));
 					self::updateCameraInfo($cameras_jeedom,'stateAlim' . $camera['id'], ($camera['alim_status'] == 'on'));
-					if ($camera['type'] == 'NOC') {
-						self::createCamera($_datas);
-					}
 				}
 				$events = $home['events'];
 				if ($events[0] != null && isset($events[0]['event_list'])) {
