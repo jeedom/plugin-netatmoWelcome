@@ -27,7 +27,7 @@ function addCmdToTable(_cmd) {
   tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
   tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
   tr += '<input class="cmdAttr form-control input-sm" data-l1key="subType" style="display : none;">';
-  tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}"></td>';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 200px;" placeholder="{{Nom}}"></td>';
   tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="display : none;" />';
   tr += '<td>';
   if(isset(_cmd.type) &&  _cmd.type == 'info' ){
