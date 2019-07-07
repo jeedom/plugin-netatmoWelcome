@@ -252,11 +252,6 @@ class netatmoWelcome extends eqLogic {
 			}
 		}
 		self::refresh_info($_datas);
-		try {
-			self::createCamera($_datas);
-		} catch (Exception $e) {
-			
-		}
 		self::getClient()->api('dropwebhook','POST',array('app_types' => 'jeedom'));
 		self::getClient()->api('addwebhook','POST',array('url' => network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . jeedom::getApiKey('netatmoWelcome')));
 	}
