@@ -21,6 +21,11 @@ require_once __DIR__ . '/../../../../core/php/core.inc.php';
 if (!class_exists('netatmoApi')) {
 	require_once __DIR__ . '/netatmoApi.class.php';
 }
+
+if (!class_exists('NetatmoCameraAPI')) {
+	require_once __DIR__ . '/netatmoCameraApi.php';
+}
+
 class netatmoWelcome extends eqLogic {
 	/*     * *************************Attributs****************************** */
 	
@@ -63,28 +68,15 @@ class netatmoWelcome extends eqLogic {
 			$_datas =	self::getClient()->api('gethomedata');
 		}
 		foreach ($_datas['homes'] as $home) {
+			$eqLogic = eqLogic::byLogicalId($home['id'], 'netatmoWelcome');
 			foreach ($home['cameras'] as $camera) {
 				log::add('netatmoWelcome','debug',json_encode($camera));
-				if(!isset($camera['vpn_url']) || $camera['vpn_url'] == ''){
+				$url_parse = parse_url($eqLogic->getCache('vpnUrl'.$camera['id']). '/live/snapshot_720.jpg');
+				log::add('netatmoWelcome','debug','VPN URL : '.json_encode($url_parse));
+				if ($url_parse['host'] == '') {
 					continue;
 				}
-				$url = $camera['vpn_url'];
 				log::add('netatmoWelcome','debug','Local : '.$camera['is_local']);
-				log::add('netatmoWelcome','debug','VPN URL : '.$url);
-				try {
-					$request_http = new com_http($url . '/command/ping');
-					$result = json_decode(trim($request_http->exec(5, 1)), true);
-					log::add('netatmoWelcome','debug',json_encode($result));
-					$url = $result['local_url'];
-				} catch (Exception $e) {
-					log::add('netatmoWelcome','debug','Local error : '.$e->getMessage());
-				}
-				$url .= '/live/snapshot_720.jpg';
-				$url_parse = parse_url($url);
-				log::add('netatmoWelcome','debug',print_r($url_parse,true));
-				if ($url_parse['host'] == "") {
-					$url_parse = parse_url(str_replace(',,','',$camera['vpn_url']) . '/live/snapshot_720.jpg');
-				}
 				$plugin = plugin::byId('camera');
 				$camera_jeedom = eqLogic::byLogicalId($camera['id'], 'camera');
 				if (!is_object($camera_jeedom)) {
@@ -226,7 +218,133 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setName(__('Status alim', __FILE__) . ' ' . $camera['name']);
 					$cmd->save();
 				}
+				
+				$cmd = $eqLogic->getCmd('action', 'monitoringOn' . $camera['id']);
+				if (!is_object($cmd)) {
+					$cmd = new netatmoWelcomeCmd();
+					$cmd->setEqLogic_id($eqLogic->getId());
+					$cmd->setLogicalId('monitoringOn' . $camera['id']);
+					$cmd->setConfiguration('cameraId',$camera['id']);
+					$cmd->setType('action');
+					$cmd->setSubType('other');
+					$cmd->setIsVisible(0);
+					$cmd->setName(__('Activer surveillance', __FILE__) . ' ' . $camera['name']);
+					$cmd->save();
+				}
+				
+				$cmd = $eqLogic->getCmd('action', 'monitoringOff' . $camera['id']);
+				if (!is_object($cmd)) {
+					$cmd = new netatmoWelcomeCmd();
+					$cmd->setEqLogic_id($eqLogic->getId());
+					$cmd->setLogicalId('monitoringOff' . $camera['id']);
+					$cmd->setConfiguration('cameraId',$camera['id']);
+					$cmd->setType('action');
+					$cmd->setSubType('other');
+					$cmd->setIsVisible(0);
+					$cmd->setName(__('Désactiver surveillance', __FILE__) . ' ' . $camera['name']);
+					$cmd->save();
+				}
 			}
+			$cmd = $eqLogic->getCmd('action', 'humanOutAlert');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('humanOutAlert');
+				$cmd->setType('action');
+				$cmd->setSubType('select');
+				$cmd->setIsVisible(0);
+				$cmd->setConfiguration('listValue','ignore|Ignorer;record|Enregistrement;record_and_notify|Enregistrement et notification');
+				$cmd->setName(__('Alerte humain', __FILE__));
+				$cmd->save();
+			}
+			
+			$cmd = $eqLogic->getCmd('action', 'humanOutAlertInfo');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('humanOutAlertInfo');
+				$cmd->setType('info');
+				$cmd->setSubType('string');
+				$cmd->setIsVisible(0);
+				$cmd->setName(__('Alerte humain status', __FILE__));
+				$cmd->save();
+			}
+			
+			$cmd = $eqLogic->getCmd('action', 'animalOutAlert');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('animalOutAlert');
+				$cmd->setType('action');
+				$cmd->setSubType('select');
+				$cmd->setIsVisible(0);
+				$cmd->setConfiguration('listValue','0|Ignorer;1|Enregistrement;2|Enregistrement et notification');
+				$cmd->setName(__('Alerte animal', __FILE__));
+				$cmd->save();
+			}
+			
+			$cmd = $eqLogic->getCmd('action', 'animalOutAlertInfo');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('animalOutAlertInfo');
+				$cmd->setType('info');
+				$cmd->setSubType('string');
+				$cmd->setIsVisible(0);
+				$cmd->setName(__('Alerte animal status', __FILE__));
+				$cmd->save();
+			}
+			
+			$cmd = $eqLogic->getCmd('action', 'vehicleOutAlert');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('vehicleOutAlert');
+				$cmd->setType('action');
+				$cmd->setSubType('select');
+				$cmd->setIsVisible(0);
+				$cmd->setConfiguration('listValue','0|Ignorer;1|Enregistrement;2|Enregistrement et notification');
+				$cmd->setName(__('Alerte véhicule', __FILE__));
+				$cmd->save();
+			}
+			
+			$cmd = $eqLogic->getCmd('action', 'vehicleOutAlertInfo');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('vehicleOutAlertInfo');
+				$cmd->setType('info');
+				$cmd->setSubType('string');
+				$cmd->setIsVisible(0);
+				$cmd->setName(__('Alerte véhicule status', __FILE__));
+				$cmd->save();
+			}
+			
+			$cmd = $eqLogic->getCmd('action', 'otherOutAlert');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('otherOutAlert');
+				$cmd->setType('action');
+				$cmd->setSubType('select');
+				$cmd->setIsVisible(0);
+				$cmd->setConfiguration('listValue','0|Ignorer;1|Enregistrement;2|Enregistrement et notification');
+				$cmd->setName(__('Alerte autre', __FILE__));
+				$cmd->save();
+			}
+			
+			$cmd = $eqLogic->getCmd('action', 'otherOutAlertInfo');
+			if (!is_object($cmd)) {
+				$cmd = new netatmoWelcomeCmd();
+				$cmd->setEqLogic_id($eqLogic->getId());
+				$cmd->setLogicalId('otherOutAlertInfo');
+				$cmd->setType('info');
+				$cmd->setSubType('string');
+				$cmd->setIsVisible(0);
+				$cmd->setName(__('Alerte autre status', __FILE__));
+				$cmd->save();
+			}
+			
 			$eqLogic->setConfiguration('camera_list', $list_camera);
 			$eqLogic->save();
 			$cmd = $eqLogic->getCmd('info', 'lastEvent');
@@ -252,6 +370,11 @@ class netatmoWelcome extends eqLogic {
 			}
 		}
 		self::refresh_info($_datas);
+		try {
+			self::createCamera($_datas);
+		} catch (Exception $e) {
+			
+		}
 		self::getClient()->api('dropwebhook','POST',array('app_types' => 'jeedom'));
 		self::getClient()->api('addwebhook','POST',array('url' => network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . jeedom::getApiKey('netatmoWelcome')));
 	}
@@ -268,7 +391,7 @@ class netatmoWelcome extends eqLogic {
 					if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 0) {
 						config::save('numberFailed', 0, 'netatmoWelcome');
 					}
-				} catch (Exception $e) {
+				} catch (NAClientException $e) {
 					if (config::byKey('numberFailed', 'netatmoWelcome', 0) > 3) {
 						log::add('netatmoWelcome', 'error', __('Erreur sur synchro netatmo welcome ', __FILE__) . ' (' . config::byKey('numberFailed', 'netatmoWelcome', 0) . ') ' . $e->getMessage());
 						return;
@@ -277,15 +400,33 @@ class netatmoWelcome extends eqLogic {
 					return;
 				}
 			}
-			try {
-				self::createCamera($_datas);
-			} catch (\Exception $e) {
-				
-			}
 			foreach ($_datas['homes'] as $home) {
 				$eqLogic = eqLogic::byLogicalId($home['id'], 'netatmoWelcome');
 				if (!is_object($eqLogic)) {
 					continue;
+				}
+				$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$home['name']);
+				if (!isset($NAcams->error)){
+					$eqLogic->checkAndUpdateCmd('humanOutAlertInfo', $NAcams->_home['presence_record_humans']);
+					$eqLogic->checkAndUpdateCmd('animalOutAlertInfo', $NAcams->_home['presence_record_vehicles']);
+					$eqLogic->checkAndUpdateCmd('vehicleOutAlertInfo', $NAcams->_home['presence_record_animals']);
+					$eqLogic->checkAndUpdateCmd('otherOutAlertInfo', $NAcams->_home['presence_record_movements']);
+				}
+				foreach ($home['cameras'] as &$camera) {
+					if(!isset($camera['vpn_url']) || $camera['vpn_url'] == ''){
+						continue;
+					}
+					$url = $camera['vpn_url'];
+					try {
+						$request_http = new com_http($url . '/command/ping');
+						$result = json_decode(trim($request_http->exec(5, 1)), true);
+						log::add('netatmoWelcome','debug',json_encode($result));
+						$url = $result['local_url'];
+					} catch (Exception $e) {
+						log::add('netatmoWelcome','debug','Local error : '.$e->getMessage());
+					}
+					$url = str_replace(',,','',$url);
+					$eqLogic->setCache('vpnUrl'.$camera['id'],$url);
 				}
 				$cameras_jeedom = eqLogic::searchConfiguration('"home_id":"'.$home['id'].'"', 'camera');
 				foreach ($home['persons'] as $person) {
@@ -301,6 +442,9 @@ class netatmoWelcome extends eqLogic {
 					self::updateCameraInfo($cameras_jeedom,'stateSd' . $camera['id'], ($camera['sd_status'] == 'on'));
 					$eqLogic->checkAndUpdateCmd('stateAlim' . $camera['id'], ($camera['alim_status'] == 'on'));
 					self::updateCameraInfo($cameras_jeedom,'stateAlim' . $camera['id'], ($camera['alim_status'] == 'on'));
+					if ($camera['type'] == 'NOC') {
+						self::createCamera($_datas);
+					}
 				}
 				$events = $home['events'];
 				if ($events[0] != null && isset($events[0]['event_list'])) {
@@ -364,6 +508,14 @@ class netatmoWelcome extends eqLogic {
 		$refresh->save();
 		$this->refreshWidget();
 	}
+	
+	public function setMonitoring($_id,$_mode='on'){
+		$url = $this->getCache('vpnUrl'.$_id).'/command/changestatus?status='.$_mode;
+		$request_http = new com_http($url);
+		$result = json_decode(trim($request_http->exec(5, 1)), true);
+		log::add('netatmoWelcome','debug','Set monitoring mode : '.json_encode($result));
+	}
+	
 }
 
 class netatmoWelcomeCmd extends cmd {
@@ -376,9 +528,49 @@ class netatmoWelcomeCmd extends cmd {
 	/*     * *********************Methode d'instance************************* */
 	
 	public function execute($_options = array()) {
-		if ($this->getLogicalId() == 'refresh') {
-			netatmoWelcome::refresh_info();
+		$eqLogic = $this->getEqLogic();
+		if(strpos($this->getLogicalId(),'monitoringOff') !== false){
+			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'off');
+		}else if(strpos($this->getLogicalId(),'monitoringOn') !== false){
+			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'on');
+		}else if($this->getLogicalId() == 'humanOutAlert'){
+			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'));
+			if (isset($NAcams->error)){
+				throw new \Exception($NAcams->error);
+			}
+			$result = $NAcams->setHumanOutAlert($_options['select']);
+			if(!isset($result['result']) || !isset($result['result']['status']) || $result['result']['status'] != 'ok'){
+				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
+			}
+		}else if($this->getLogicalId() == 'animalOutAlert'){
+			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'));
+			if (isset($NAcams->error)){
+				throw new \Exception($NAcams->error);
+			}
+			$result = $NAcams->setAnimalOutAlert($_options['select']);
+			if(!isset($result['result']) || !isset($result['result']['status']) || $result['result']['status'] != 'ok'){
+				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
+			}
+		}else if($this->getLogicalId() == 'vehicleOutAlert'){
+			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'));
+			if (isset($NAcams->error)){
+				throw new \Exception($NAcams->error);
+			}
+			$result = $NAcams->setVehicleOutAlert($_options['select']);
+			if(!isset($result['result']) || !isset($result['result']['status']) || $result['result']['status'] != 'ok'){
+				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
+			}
+		}else if($this->getLogicalId() == 'otherOutAlert'){
+			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'));
+			if (isset($NAcams->error)){
+				throw new \Exception($NAcams->error);
+			}
+			$result = $NAcams->setOtherOutAlert($_options['select']);
+			if(!isset($result['result']) || !isset($result['result']['status']) || $result['result']['status'] != 'ok'){
+				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
+			}
 		}
+		netatmoWelcome::refresh_info();
 	}
 	
 	/*     * **********************Getteur Setteur*************************** */
