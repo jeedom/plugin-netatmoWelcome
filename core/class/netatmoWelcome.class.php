@@ -535,7 +535,7 @@ class netatmoWelcomeCmd extends cmd {
 		}else if(strpos($this->getLogicalId(),'monitoringOn') !== false){
 			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'on');
 		}else if($this->getLogicalId() == 'humanOutAlert'){
-			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'));
+			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$eqLogic->getConfiguration('homeName'));
 			if (isset($NAcams->error)){
 				throw new \Exception($NAcams->error);
 			}
@@ -544,7 +544,7 @@ class netatmoWelcomeCmd extends cmd {
 				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
 			}
 		}else if($this->getLogicalId() == 'animalOutAlert'){
-			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'));
+			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$eqLogic->getConfiguration('homeName'));
 			if (isset($NAcams->error)){
 				throw new \Exception($NAcams->error);
 			}
@@ -553,7 +553,7 @@ class netatmoWelcomeCmd extends cmd {
 				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
 			}
 		}else if($this->getLogicalId() == 'vehicleOutAlert'){
-			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'));
+			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$eqLogic->getConfiguration('homeName'));
 			if (isset($NAcams->error)){
 				throw new \Exception($NAcams->error);
 			}
@@ -562,7 +562,7 @@ class netatmoWelcomeCmd extends cmd {
 				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
 			}
 		}else if($this->getLogicalId() == 'otherOutAlert'){
-			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'));
+			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$eqLogic->getConfiguration('homeName'));
 			if (isset($NAcams->error)){
 				throw new \Exception($NAcams->error);
 			}

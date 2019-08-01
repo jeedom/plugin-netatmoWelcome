@@ -800,27 +800,27 @@ class NetatmoCameraAPI {
       
       $homedata = $this->_fullDatas['body']['homes'][$this->_homeID];
       $data = array(
-      'id' => $homedata['id'],
-      'name' => $homedata['name'],
-      'share_info' => $homedata['share_info'],
-      'gone_after' => $homedata['gone_after'],
-      'smart_notifs' => $homedata['smart_notifs'],
-      'presence_record_humans' => $homedata['presence_record_humans'], //Presence
-      'presence_record_vehicles' => $homedata['presence_record_vehicles'], //Presence
-      'presence_record_animals' => $homedata['presence_record_animals'], //Presence
-      'presence_record_alarms' => $homedata['presence_record_alarms'], //Presence
-      'presence_record_movements' => $homedata['presence_record_movements'], //Presence
-      'presence_notify_from' => gmdate('H:i', $homedata['presence_notify_from']), //Presence
-      'presence_notify_to' => gmdate('H:i', $homedata['presence_notify_to']), //Presence
-      'presence_enable_notify_from_to' => $homedata['presence_enable_notify_from_to'], //Presence
-      'notify_movements' => $homedata['notify_movements'], //welcome
-      'record_movements' => $homedata['record_movements'], //welcome
-      'notify_unknowns' => $homedata['notify_unknowns'], //welcome
-      'record_alarms' => $homedata['record_alarms'], //welcome
-      'record_animals' => $homedata['record_animals'], //welcome
-      'notify_animals' => $homedata['notify_animals'], //welcome
-      'events_ttl' => $homedata['events_ttl'], //welcome
-      'place' => $homedata['place']
+        'id' => $homedata['id'],
+        'name' => $homedata['name'],
+        'share_info' => $homedata['share_info'],
+        'gone_after' => $homedata['gone_after'],
+        'smart_notifs' => $homedata['smart_notifs'],
+        'presence_record_humans' => $homedata['presence_record_humans'], //Presence
+        'presence_record_vehicles' => $homedata['presence_record_vehicles'], //Presence
+        'presence_record_animals' => $homedata['presence_record_animals'], //Presence
+        'presence_record_alarms' => $homedata['presence_record_alarms'], //Presence
+        'presence_record_movements' => $homedata['presence_record_movements'], //Presence
+        'presence_notify_from' => gmdate('H:i', $homedata['presence_notify_from']), //Presence
+        'presence_notify_to' => gmdate('H:i', $homedata['presence_notify_to']), //Presence
+        'presence_enable_notify_from_to' => $homedata['presence_enable_notify_from_to'], //Presence
+        'notify_movements' => $homedata['notify_movements'], //welcome
+        'record_movements' => $homedata['record_movements'], //welcome
+        'notify_unknowns' => $homedata['notify_unknowns'], //welcome
+        'record_alarms' => $homedata['record_alarms'], //welcome
+        'record_animals' => $homedata['record_animals'], //welcome
+        'notify_animals' => $homedata['notify_animals'], //welcome
+        'events_ttl' => $homedata['events_ttl'], //welcome
+        'place' => $homedata['place']
       );
       $this->_home = $data;
       $this->_homeName = $homedata['name'];
@@ -937,11 +937,11 @@ class NetatmoCameraAPI {
           'is_local' => $isLocal,
           'timelapse_available' => $thisCamera['timelapse_available'],
           'type' => 'Presence'
-          );
-          
-          array_push($allCameras, $camera);
-        }
-        elseif ($thisCamera['type'] == 'NACamera') //Welcome:
+        );
+        
+        array_push($allCameras, $camera);
+      }
+      elseif ($thisCamera['type'] == 'NACamera') //Welcome:
         {
           $camera = array('name' => $thisCamera['name'],
           'id' => $thisCamera['id'],
@@ -953,257 +953,256 @@ class NetatmoCameraAPI {
           'alim_status' => $thisCamera['alim_status'],
           'is_local' => $isLocal,
           'type' => 'Welcome'
-          );
-          
-          array_push($allCameras, $camera);
-        }
+        );
+        
+        array_push($allCameras, $camera);
       }
-      $this->_cameras = $allCameras;
-      
-      //sort events:
-      $outdoorCams = array();
-      $indoorCams = array();
-      foreach ($this->_cameras as $cam)
-      {
-        if ($cam['type'] == 'Presence') array_push($outdoorCams, $cam['id']);
-        if ($cam['type'] == 'Welcome') array_push($indoorCams, $cam['id']);
-      }
-      $cameraEvents = $this->_fullDatas['body']['homes'][$this->_homeID]['events'];
-      foreach ($cameraEvents as $event)
-      {
-        if (in_array($event['camera_id'], $outdoorCams)) array_push($this->_outdoorEvents, $event);
-        if (in_array($event['camera_id'], $indoorCams)) array_push($this->_indoorEvents, $event);
-      }
-      
-      return $allCameras;
+    }
+    $this->_cameras = $allCameras;
+    
+    //sort events:
+    $outdoorCams = array();
+    $indoorCams = array();
+    foreach ($this->_cameras as $cam)
+    {
+      if ($cam['type'] == 'Presence') array_push($outdoorCams, $cam['id']);
+      if ($cam['type'] == 'Welcome') array_push($indoorCams, $cam['id']);
+    }
+    $cameraEvents = $this->_fullDatas['body']['homes'][$this->_homeID]['events'];
+    foreach ($cameraEvents as $event)
+    {
+      if (in_array($event['camera_id'], $outdoorCams)) array_push($this->_outdoorEvents, $event);
+      if (in_array($event['camera_id'], $indoorCams)) array_push($this->_indoorEvents, $event);
     }
     
-    protected function getCameraConfig($camera) //Presence - Welcome
+    return $allCameras;
+  }
+  
+  protected function getCameraConfig($camera) //Presence - Welcome
+  {
+    if ( is_string($camera) ) $camera = $this->getCamByName($camera);
+    if ( isset($camera['error']) ) return $camera;
+    
+    //get camera conf:
+    $vpn = $camera['vpn'];
+    $command = '/command/getsetting';
+    $url = $vpn.$command;
+    
+    $answer = $this->_request('GET', $url);
+    $answer = json_decode($answer, true);
+    
+    if ($camera['type'] == 'Presence')
     {
-      if ( is_string($camera) ) $camera = $this->getCamByName($camera);
-      if ( isset($camera['error']) ) return $camera;
+      $camera['error_status'] = $answer['error']['code'].' '.$answer['error']['message'];
+      $camera['image_orientation'] = $answer['conf']['image_orientation'];
+      $camera['audio'] = $answer['conf']['audio'];
       
-      //get camera conf:
-      $vpn = $camera['vpn'];
-      $command = '/command/getsetting';
-      $url = $vpn.$command;
-      
-      $answer = $this->_request('GET', $url);
-      $answer = json_decode($answer, true);
-      
-      if ($camera['type'] == 'Presence')
+      //get camera light settings:
+      if ($camera['error_status'] == '200 OK')
       {
-        $camera['error_status'] = $answer['error']['code'].' '.$answer['error']['message'];
-        $camera['image_orientation'] = $answer['conf']['image_orientation'];
-        $camera['audio'] = $answer['conf']['audio'];
+        $command = '/command/floodlight_get_config';
+        $url = $vpn.$command;
         
-        //get camera light settings:
-        if ($camera['error_status'] == '200 OK')
-        {
-          $command = '/command/floodlight_get_config';
-          $url = $vpn.$command;
-          
-          $answer = $this->_request('GET', $url);
-          $answer = json_decode($answer, true);
-          
-          $camera['light'] = $answer;
-        }
+        $answer = $this->_request('GET', $url);
+        $answer = json_decode($answer, true);
+        
+        $camera['light'] = $answer;
       }
-      elseif ($camera['type'] == 'Welcome')
-      {
-        $camera['error_status'] = $answer['error']['code'].' '.$answer['error']['message'];
-        $camera['mirror'] = $answer['conf']['mirror'];
-        $camera['audio'] = $answer['conf']['audio'];
-        $camera['irmode'] = $answer['conf']['irmode'];
-        $camera['led_on_live'] = $answer['conf']['led_on_live'];
-      }
-      
-      return $camera;
+    }
+    elseif ($camera['type'] == 'Welcome')
+    {
+      $camera['error_status'] = $answer['error']['code'].' '.$answer['error']['message'];
+      $camera['mirror'] = $answer['conf']['mirror'];
+      $camera['audio'] = $answer['conf']['audio'];
+      $camera['irmode'] = $answer['conf']['irmode'];
+      $camera['led_on_live'] = $answer['conf']['led_on_live'];
     }
     
-    //calling functions===================================================
-    protected function _request($method, $url, $post=null)
+    return $camera;
+  }
+  
+  //calling functions===================================================
+  protected function _request($method, $url, $post=null)
+  {
+    if (!isset($this->_curlHdl))
     {
-      if (!isset($this->_curlHdl))
-      {
-        $this->_curlHdl = curl_init();
-        
-        curl_setopt($this->_curlHdl, CURLOPT_COOKIEJAR, '');
-        curl_setopt($this->_curlHdl, CURLOPT_COOKIEFILE, '');
-        
-        curl_setopt($this->_curlHdl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->_curlHdl, CURLOPT_HEADER, true);
-        curl_setopt($this->_curlHdl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($this->_curlHdl, CURLOPT_REFERER, 'http://www.google.com/');
-        curl_setopt($this->_curlHdl, CURLOPT_USERAGENT, 'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:51.0) Gecko/20100101 Firefox/51.0');
-        curl_setopt($this->_curlHdl, CURLOPT_ENCODING , '');
-      }
+      $this->_curlHdl = curl_init();
       
-      curl_setopt($this->_curlHdl, CURLOPT_URL, $url);
+      curl_setopt($this->_curlHdl, CURLOPT_COOKIEJAR, '');
+      curl_setopt($this->_curlHdl, CURLOPT_COOKIEFILE, '');
       
-      if ($method == 'POST')
+      curl_setopt($this->_curlHdl, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($this->_curlHdl, CURLOPT_HEADER, true);
+      curl_setopt($this->_curlHdl, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($this->_curlHdl, CURLOPT_REFERER, 'http://www.google.com/');
+      curl_setopt($this->_curlHdl, CURLOPT_USERAGENT, 'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:51.0) Gecko/20100101 Firefox/51.0');
+      curl_setopt($this->_curlHdl, CURLOPT_ENCODING , '');
+    }
+    
+    curl_setopt($this->_curlHdl, CURLOPT_URL, $url);
+    
+    if ($method == 'POST')
+    {
+      curl_setopt($this->_curlHdl, CURLOPT_POST, true);
+      
+      //add csrf to post data:
+      if ( isset($post)) $post .= '&'.$this->_csrfName.'='.$this->_csrf;
+      curl_setopt($this->_curlHdl, CURLOPT_POSTFIELDS, $post);
+      
+      //should have token after login:
+      if (isset($this->_token))
       {
-        curl_setopt($this->_curlHdl, CURLOPT_POST, true);
-        
-        //add csrf to post data:
-        if ( isset($post)) $post .= '&'.$this->_csrfName.'='.$this->_csrf;
-        curl_setopt($this->_curlHdl, CURLOPT_POSTFIELDS, $post);
-        
-        //should have token after login:
-        if (isset($this->_token))
-        {
-          curl_setopt($this->_curlHdl, CURLOPT_HEADER, false);
-          curl_setopt($this->_curlHdl, CURLOPT_HTTPHEADER, array(
+        curl_setopt($this->_curlHdl, CURLOPT_HEADER, false);
+        curl_setopt($this->_curlHdl, CURLOPT_HTTPHEADER, array(
           'Connection: keep-alive',
           'Content-Type: application/x-www-form-urlencoded',
           'Authorization: Bearer '.$this->_token
-          )
-          );
-        }
-      }
-      else
-      {
-        curl_setopt($this->_curlHdl, CURLOPT_HTTPGET, true);
-      }
-      
-      $response = curl_exec($this->_curlHdl);
-      
-      //$info   = curl_getinfo($this->_curlHdl);
-      //echo "<pre>cURL info".json_encode($info, JSON_PRETTY_PRINT)."</pre><br>";
-      
-      if ($response === false)
-      {
-        echo 'cURL error: ' . curl_error($this->_curlHdl);
-      }
-      else
-      {
-        return $response;
-      }
+        )
+      );
     }
-    
-    //functions authorization=============================================
-    public $error = null;
-    public $_csrf = null;
-    public $_csrfName = null;
-    public $_token = null;
-    public $_homeID = 0;
-    public $_homeName = null;
-    public $_timeZone = null;
-    public $_home = null;
-    public $_cameras = array();
-    public $_persons = array();
-    
-    protected $_fullDatas;
-    protected $_indoorEvents = array();
-    protected $_outdoorEvents = array();
-    
-    protected $_Netatmo_user;
-    protected $_Netatmo_pass;
-    protected $_urlStart = 'https://my.netatmo.com';
-    protected $_urlHost = 'https://app.netatmo.net';
-    protected $_urlAuth = 'https://auth.netatmo.com';
-    protected $_curlHdl = null;
-    
-    protected function getCSRF($answerString)
-    {
-      preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $answerString, $matches);
-      $cookies = array();
-      foreach($matches[1] as $item)
-      {
-        parse_str($item, $cookie);
-        $cookies = array_merge($cookies, $cookie);
-      }
-      $cookie = null;
-      $cookiename = null;
-      foreach ($cookies as $name => $value)
-      {
-        if (strpos($name, 'csrf') !== false)
-        {
-          $cookiename = str_replace('netatmocom', '', $name);
-          $cookiename = str_replace('_cookie_na', '_netatmo', $cookiename);
-          return array($cookiename, $value);
-        }
-      }
-      return false;
-    }
-    
-    protected function connect()
-    {
-      //get csrf, required for login and all post requests:
-      $url = $this->_urlStart;
-      $answer = $this->_request('GET', $url);
-      
-      $var = $this->getCSRF($answer);
-      if ($var != false)
-      {
-        $this->_csrfName = $var[0];
-        $this->_csrf = $var[1];
-      }
-      else
-      {
-        $this->error = "Couldn't find Netatmo CSRF.";
-        return false;
-      }
-      
-      // fetch login page and parse for hidden _token
-      $url = $this->_urlAuth.'/en-us/access/login?message=__NOT_LOGGED';
-      $answer = $this->_request('GET', $url);
-      $loginTokenStart = strpos($answer, '"_token" value="') + 16;
-      $loginTokenEnd = strpos($answer, '">', $loginTokenStart);
-      $loginTokenLength = ($loginTokenEnd - $loginTokenStart);
-      if ($loginTokenLength <= 0) {
-        $this->error = "Couldn't find Netatmo _token on login page.";
-        return false;
-      }
-      
-      $loginToken = substr($answer, $loginTokenStart, ($loginTokenLength));
-      
-      //echo '<html><body><textarea>';
-      //echo $loginToken;
-      //echo $answer;
-      //echo '</textarea></body></html';
-      
-      //get token, required for all post requests as bearer auth:
-      $url = $this->_urlAuth.'/access/postlogin';
-      $post = "email=".$this->_Netatmo_user."&password=".$this->_Netatmo_pass."&_token=".$loginToken;
-      $answer = $this->_request('POST', $url, $post);
-      
-      $cookies = explode('Set-Cookie: ', $answer);
-      foreach($cookies as $var)
-      {
-        if (strpos($var, 'netatmocomaccess_token') === 0)
-        {
-          $cookieValue = explode(';', $var)[0];
-          $cookieValue = str_replace('netatmocomaccess_token=', '', $cookieValue);
-          $token = urldecode($cookieValue);
-          if ($token != 'deleted')
-          {
-            $this->_token = $token;
-            return true;
-          }
-        }
-        
-      }
-      //unfound valid token:
-      $this->error = "Couldn't find Netatmo token.";
-      return false;
-    }
-    
-    function __construct($Netatmo_user, $Netatmo_pass, $homeName=0)
-    {
-      $this->_Netatmo_user = urlencode($Netatmo_user);
-      $this->_Netatmo_pass = urlencode($Netatmo_pass);
-      if ($homeName !== 0)
-      {
-        $this->_homeName = $homeName;
-        $this->_homeID = -1;
-      }
-      
-      if ($this->connect() == true)
-      {
-        if ($this->getDatas() == true) $this->getCamerasDatas();
-      }
-    }
-  } //NetatmoCameraAPI end
-  ?>
+  }
+  else
+  {
+    curl_setopt($this->_curlHdl, CURLOPT_HTTPGET, true);
+  }
   
+  $response = curl_exec($this->_curlHdl);
+  
+  //$info   = curl_getinfo($this->_curlHdl);
+  //echo "<pre>cURL info".json_encode($info, JSON_PRETTY_PRINT)."</pre><br>";
+  
+  if ($response === false)
+  {
+    echo 'cURL error: ' . curl_error($this->_curlHdl);
+  }
+  else
+  {
+    return $response;
+  }
+}
+
+//functions authorization=============================================
+public $error = null;
+public $_csrf = null;
+public $_csrfName = null;
+public $_token = null;
+public $_homeID = 0;
+public $_homeName = null;
+public $_timeZone = null;
+public $_home = null;
+public $_cameras = array();
+public $_persons = array();
+
+protected $_fullDatas;
+protected $_indoorEvents = array();
+protected $_outdoorEvents = array();
+
+protected $_Netatmo_user;
+protected $_Netatmo_pass;
+protected $_urlStart = 'https://my.netatmo.com';
+protected $_urlHost = 'https://app.netatmo.net';
+protected $_urlAuth = 'https://auth.netatmo.com';
+protected $_curlHdl = null;
+
+protected function getCSRF($answerString)
+{
+  preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $answerString, $matches);
+  $cookies = array();
+  foreach($matches[1] as $item)
+  {
+    parse_str($item, $cookie);
+    $cookies = array_merge($cookies, $cookie);
+  }
+  $cookie = null;
+  $cookiename = null;
+  foreach ($cookies as $name => $value)
+  {
+    if (strpos($name, 'csrf') !== false)
+    {
+      $cookiename = str_replace('netatmocom', '', $name);
+      $cookiename = str_replace('_cookie_na', '_netatmo', $cookiename);
+      return array($cookiename, $value);
+    }
+  }
+  return false;
+}
+
+protected function connect()
+{
+  //get csrf, required for login and all post requests:
+  $url = $this->_urlStart;
+  $answer = $this->_request('GET', $url);
+  
+  $var = $this->getCSRF($answer);
+  if ($var != false)
+  {
+    $this->_csrfName = $var[0];
+    $this->_csrf = $var[1];
+  }
+  else
+  {
+    $this->error = "Couldn't find Netatmo CSRF.";
+    return false;
+  }
+  
+  // fetch login page and parse for hidden _token
+  $url = $this->_urlAuth.'/en-us/access/login?message=__NOT_LOGGED';
+  $answer = $this->_request('GET', $url);
+  $loginTokenStart = strpos($answer, '"_token" value="') + 16;
+  $loginTokenEnd = strpos($answer, '">', $loginTokenStart);
+  $loginTokenLength = ($loginTokenEnd - $loginTokenStart);
+  if ($loginTokenLength <= 0) {
+    $this->error = "Couldn't find Netatmo _token on login page.";
+    return false;
+  }
+  
+  $loginToken = substr($answer, $loginTokenStart, ($loginTokenLength));
+  
+  //echo '<html><body><textarea>';
+  //echo $loginToken;
+  //echo $answer;
+  //echo '</textarea></body></html';
+  
+  //get token, required for all post requests as bearer auth:
+  $url = $this->_urlAuth.'/access/postlogin';
+  $post = "email=".$this->_Netatmo_user."&password=".$this->_Netatmo_pass."&_token=".$loginToken;
+  $answer = $this->_request('POST', $url, $post);
+  
+  $cookies = explode('Set-Cookie: ', $answer);
+  foreach($cookies as $var)
+  {
+    if (strpos($var, 'netatmocomaccess_token') === 0)
+    {
+      $cookieValue = explode(';', $var)[0];
+      $cookieValue = str_replace('netatmocomaccess_token=', '', $cookieValue);
+      $token = urldecode($cookieValue);
+      if ($token != 'deleted')
+      {
+        $this->_token = $token;
+        return true;
+      }
+    }
+    
+  }
+  //unfound valid token:
+  $this->error = "Couldn't find Netatmo token.";
+  return false;
+}
+
+function __construct($Netatmo_user, $Netatmo_pass, $homeName=0)
+{
+  $this->_Netatmo_user = urlencode($Netatmo_user);
+  $this->_Netatmo_pass = urlencode($Netatmo_pass);
+  if ($homeName !== 0)
+  {
+    $this->_homeName = $homeName;
+    $this->_homeID = -1;
+  }
+  
+  if ($this->connect() == true)
+  {
+    if ($this->getDatas() == true) $this->getCamerasDatas();
+  }
+}
+} //NetatmoCameraAPI end
+?>
