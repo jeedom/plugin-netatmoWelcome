@@ -31,6 +31,7 @@ class netatmoWelcome extends eqLogic {
 	
 	private static $_client = null;
 	public static $_widgetPossibility = array('custom' => true);
+	private $_netatmoCameraApi = null;
 	
 	/*     * ***********************Methode static*************************** */
 	
@@ -406,13 +407,11 @@ class netatmoWelcome extends eqLogic {
 				if (!is_object($eqLogic)) {
 					continue;
 				}
-				$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$home['name']);
-				if (!isset($NAcams->error)){
-					$eqLogic->checkAndUpdateCmd('humanOutAlertInfo', $NAcams->_home['presence_record_humans']);
-					$eqLogic->checkAndUpdateCmd('animalOutAlertInfo', $NAcams->_home['presence_record_vehicles']);
-					$eqLogic->checkAndUpdateCmd('vehicleOutAlertInfo', $NAcams->_home['presence_record_animals']);
-					$eqLogic->checkAndUpdateCmd('otherOutAlertInfo', $NAcams->_home['presence_record_movements']);
-				}
+				$eqLogic->checkAndUpdateCmd('humanOutAlertInfo', $eqLogic->getNetatmoCameraAPI()->_home['presence_record_humans']);
+				$eqLogic->checkAndUpdateCmd('animalOutAlertInfo', $eqLogic->getNetatmoCameraAPI()->_home['presence_record_vehicles']);
+				$eqLogic->checkAndUpdateCmd('vehicleOutAlertInfo', $eqLogic->getNetatmoCameraAPI()->_home['presence_record_animals']);
+				$eqLogic->checkAndUpdateCmd('otherOutAlertInfo', $eqLogic->getNetatmoCameraAPI()->_home['presence_record_movements']);
+				
 				foreach ($home['cameras'] as &$camera) {
 					if(!isset($camera['vpn_url']) || $camera['vpn_url'] == ''){
 						continue;
@@ -517,6 +516,27 @@ class netatmoWelcome extends eqLogic {
 		log::add('netatmoWelcome','debug','Set monitoring mode : '.json_encode($result));
 	}
 	
+	public function getNetatmoCameraAPI(){
+		if($this->_netatmoCameraApi == null){
+			$this->_netatmoCameraApi = new NetatmoCameraAPI(
+				config::byKey('username', 'netatmoWelcome'),
+				config::byKey('password', 'netatmoWelcome'),
+				$this->getConfiguration('homeName'),
+				$this->getCache('csrf',null),
+				$this->getCache('csrfName',null),
+				$this->getCache('token',null)
+			);
+			if (isset($this->_netatmoCameraApi->error)){
+				throw new \Exception($this->_netatmoCameraApi->error);
+			}
+			$this->setCache('csrf',$this->_netatmoCameraApi->_csrf);
+			$this->setCache('csrfName',$this->_netatmoCameraApi->_csrfName);
+			$this->setCache('token',$this->_netatmoCameraApi->_token);
+		}
+		//	var_dump($this->_netatmoCameraApi);
+		return $this->_netatmoCameraApi;
+	}
+	
 }
 
 class netatmoWelcomeCmd extends cmd {
@@ -535,38 +555,22 @@ class netatmoWelcomeCmd extends cmd {
 		}else if(strpos($this->getLogicalId(),'monitoringOn') !== false){
 			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'on');
 		}else if($this->getLogicalId() == 'humanOutAlert'){
-			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$eqLogic->getConfiguration('homeName'));
-			if (isset($NAcams->error)){
-				throw new \Exception($NAcams->error);
-			}
-			$result = $NAcams->setHumanOutAlert($_options['select']);
+			$result = $eqLogic->getNetatmoCameraAPI()->setHumanOutAlert($_options['select']);
 			if(!isset($result['result']) || !isset($result['result']['status']) || $result['result']['status'] != 'ok'){
 				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
 			}
 		}else if($this->getLogicalId() == 'animalOutAlert'){
-			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$eqLogic->getConfiguration('homeName'));
-			if (isset($NAcams->error)){
-				throw new \Exception($NAcams->error);
-			}
-			$result = $NAcams->setAnimalOutAlert($_options['select']);
+			$result = $eqLogic->getNetatmoCameraAPI()->setAnimalOutAlert($_options['select']);
 			if(!isset($result['result']) || !isset($result['result']['status']) || $result['result']['status'] != 'ok'){
 				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
 			}
 		}else if($this->getLogicalId() == 'vehicleOutAlert'){
-			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$eqLogic->getConfiguration('homeName'));
-			if (isset($NAcams->error)){
-				throw new \Exception($NAcams->error);
-			}
-			$result = $NAcams->setVehicleOutAlert($_options['select']);
+			$result = $eqLogic->getNetatmoCameraAPI()->setVehicleOutAlert($_options['select']);
 			if(!isset($result['result']) || !isset($result['result']['status']) || $result['result']['status'] != 'ok'){
 				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
 			}
 		}else if($this->getLogicalId() == 'otherOutAlert'){
-			$NAcams = new NetatmoCameraAPI(config::byKey('username', 'netatmoWelcome'), config::byKey('password', 'netatmoWelcome'),$eqLogic->getConfiguration('homeName'));
-			if (isset($NAcams->error)){
-				throw new \Exception($NAcams->error);
-			}
-			$result = $NAcams->setOtherOutAlert($_options['select']);
+			$result = $eqLogic->getNetatmoCameraAPI()->setOtherOutAlert($_options['select']);
 			if(!isset($result['result']) || !isset($result['result']['status']) || $result['result']['status'] != 'ok'){
 				throw new \Exception('Erreur sur '.$this->getHumanName().' => '.json_encode($result));
 			}
