@@ -533,7 +533,6 @@ class netatmoWelcome extends eqLogic {
 			$this->setCache('csrfName',$this->_netatmoCameraApi->_csrfName);
 			$this->setCache('token',$this->_netatmoCameraApi->_token);
 		}
-		//	var_dump($this->_netatmoCameraApi);
 		return $this->_netatmoCameraApi;
 	}
 	
