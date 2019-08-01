@@ -156,6 +156,7 @@ class netatmoWelcome extends eqLogic {
 				$eqLogic->setIsVisible(1);
 			}
 			$eqLogic->setLogicalId($home['id']);
+			$eqLogic->setConfiguration('homeName',$home['name']);
 			$eqLogic->save();
 			$list_person = array();
 			foreach ($home['persons'] as $person) {
