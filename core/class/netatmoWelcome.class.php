@@ -254,12 +254,12 @@ class netatmoWelcome extends eqLogic {
 				$cmd->setType('action');
 				$cmd->setSubType('select');
 				$cmd->setIsVisible(0);
-				$cmd->setConfiguration('listValue','ignore|Ignorer;record|Enregistrement;record_and_notify|Enregistrement et notification');
+				$cmd->setConfiguration('listValue','0|Ignorer;1|Enregistrement;2|Enregistrement et notification');
 				$cmd->setName(__('Alerte humain', __FILE__));
 				$cmd->save();
 			}
 			
-			$cmd = $eqLogic->getCmd('action', 'humanOutAlertInfo');
+			$cmd = $eqLogic->getCmd('info', 'humanOutAlertInfo');
 			if (!is_object($cmd)) {
 				$cmd = new netatmoWelcomeCmd();
 				$cmd->setEqLogic_id($eqLogic->getId());
@@ -284,7 +284,7 @@ class netatmoWelcome extends eqLogic {
 				$cmd->save();
 			}
 			
-			$cmd = $eqLogic->getCmd('action', 'animalOutAlertInfo');
+			$cmd = $eqLogic->getCmd('info', 'animalOutAlertInfo');
 			if (!is_object($cmd)) {
 				$cmd = new netatmoWelcomeCmd();
 				$cmd->setEqLogic_id($eqLogic->getId());
@@ -309,7 +309,7 @@ class netatmoWelcome extends eqLogic {
 				$cmd->save();
 			}
 			
-			$cmd = $eqLogic->getCmd('action', 'vehicleOutAlertInfo');
+			$cmd = $eqLogic->getCmd('info', 'vehicleOutAlertInfo');
 			if (!is_object($cmd)) {
 				$cmd = new netatmoWelcomeCmd();
 				$cmd->setEqLogic_id($eqLogic->getId());
@@ -334,7 +334,7 @@ class netatmoWelcome extends eqLogic {
 				$cmd->save();
 			}
 			
-			$cmd = $eqLogic->getCmd('action', 'otherOutAlertInfo');
+			$cmd = $eqLogic->getCmd('info', 'otherOutAlertInfo');
 			if (!is_object($cmd)) {
 				$cmd = new netatmoWelcomeCmd();
 				$cmd->setEqLogic_id($eqLogic->getId());
