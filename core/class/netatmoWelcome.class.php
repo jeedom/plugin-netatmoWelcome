@@ -22,16 +22,11 @@ if (!class_exists('netatmoApi')) {
 	require_once __DIR__ . '/netatmoApi.class.php';
 }
 
-if (!class_exists('NetatmoCameraAPI')) {
-	require_once __DIR__ . '/netatmoCameraApi.php';
-}
-
 class netatmoWelcome extends eqLogic {
 	/*     * *************************Attributs****************************** */
 	
 	private static $_client = null;
 	public static $_widgetPossibility = array('custom' => true);
-	private $_netatmoCameraApi = null;
 	
 	/*     * ***********************Methode static*************************** */
 	
@@ -247,105 +242,6 @@ class netatmoWelcome extends eqLogic {
 					$cmd->save();
 				}
 			}
-			$cmd = $eqLogic->getCmd('action', 'humanOutAlert');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-			}
-			$cmd->setEqLogic_id($eqLogic->getId());
-			$cmd->setLogicalId('humanOutAlert');
-			$cmd->setType('action');
-			$cmd->setSubType('select');
-			$cmd->setIsVisible(0);
-			$cmd->setConfiguration('listValue','ignore|Ignorer;record|Enregistrement;record_and_notify|Enregistrement et notification');
-			$cmd->setName(__('Alerte humain', __FILE__));
-			$cmd->save();
-			
-			$cmd = $eqLogic->getCmd('info', 'humanOutAlertInfo');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-			}
-			$cmd->setEqLogic_id($eqLogic->getId());
-			$cmd->setLogicalId('humanOutAlertInfo');
-			$cmd->setType('info');
-			$cmd->setSubType('string');
-			$cmd->setIsVisible(0);
-			$cmd->setName(__('Alerte humain status', __FILE__));
-			$cmd->save();
-			
-			$cmd = $eqLogic->getCmd('action', 'animalOutAlert');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-			}
-			$cmd->setEqLogic_id($eqLogic->getId());
-			$cmd->setLogicalId('animalOutAlert');
-			$cmd->setType('action');
-			$cmd->setSubType('select');
-			$cmd->setIsVisible(0);
-			$cmd->setConfiguration('listValue','ignore|Ignorer;record|Enregistrement;record_and_notify|Enregistrement et notification');
-			$cmd->setName(__('Alerte animal', __FILE__));
-			$cmd->save();
-			
-			$cmd = $eqLogic->getCmd('info', 'animalOutAlertInfo');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-			}
-			$cmd->setEqLogic_id($eqLogic->getId());
-			$cmd->setLogicalId('animalOutAlertInfo');
-			$cmd->setType('info');
-			$cmd->setSubType('string');
-			$cmd->setIsVisible(0);
-			$cmd->setName(__('Alerte animal status', __FILE__));
-			$cmd->save();
-			
-			$cmd = $eqLogic->getCmd('action', 'vehicleOutAlert');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-			}
-			$cmd->setEqLogic_id($eqLogic->getId());
-			$cmd->setLogicalId('vehicleOutAlert');
-			$cmd->setType('action');
-			$cmd->setSubType('select');
-			$cmd->setIsVisible(0);
-			$cmd->setConfiguration('listValue','ignore|Ignorer;record|Enregistrement;record_and_notify|Enregistrement et notification');
-			$cmd->setName(__('Alerte véhicule', __FILE__));
-			$cmd->save();
-			
-			$cmd = $eqLogic->getCmd('info', 'vehicleOutAlertInfo');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-			}
-			$cmd->setEqLogic_id($eqLogic->getId());
-			$cmd->setLogicalId('vehicleOutAlertInfo');
-			$cmd->setType('info');
-			$cmd->setSubType('string');
-			$cmd->setIsVisible(0);
-			$cmd->setName(__('Alerte véhicule status', __FILE__));
-			$cmd->save();
-			
-			$cmd = $eqLogic->getCmd('action', 'otherOutAlert');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-			}
-			$cmd->setEqLogic_id($eqLogic->getId());
-			$cmd->setLogicalId('otherOutAlert');
-			$cmd->setType('action');
-			$cmd->setSubType('select');
-			$cmd->setIsVisible(0);
-			$cmd->setConfiguration('listValue','ignore|Ignorer;record|Enregistrement;record_and_notify|Enregistrement et notification');
-			$cmd->setName(__('Alerte autre', __FILE__));
-			$cmd->save();
-			
-			$cmd = $eqLogic->getCmd('info', 'otherOutAlertInfo');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('otherOutAlertInfo');
-				$cmd->setType('info');
-				$cmd->setSubType('string');
-				$cmd->setIsVisible(0);
-				$cmd->setName(__('Alerte autre status', __FILE__));
-				$cmd->save();
-			}
 			
 			$eqLogic->setConfiguration('camera_list', $list_camera);
 			$eqLogic->save();
@@ -407,11 +303,6 @@ class netatmoWelcome extends eqLogic {
 				if (!is_object($eqLogic)) {
 					continue;
 				}
-				$eqLogic->checkAndUpdateCmd('humanOutAlertInfo', $eqLogic->getNetatmoCameraAPI()->home['presence_record_humans']);
-				$eqLogic->checkAndUpdateCmd('animalOutAlertInfo', $eqLogic->getNetatmoCameraAPI()->home['presence_record_vehicles']);
-				$eqLogic->checkAndUpdateCmd('vehicleOutAlertInfo', $eqLogic->getNetatmoCameraAPI()->home['presence_record_animals']);
-				$eqLogic->checkAndUpdateCmd('otherOutAlertInfo', $eqLogic->getNetatmoCameraAPI()->home['presence_record_movements']);
-				
 				foreach ($home['cameras'] as &$camera) {
 					if(!isset($camera['vpn_url']) || $camera['vpn_url'] == ''){
 						continue;
@@ -516,23 +407,6 @@ class netatmoWelcome extends eqLogic {
 		log::add('netatmoWelcome','debug','Set monitoring mode : '.json_encode($result));
 	}
 	
-	public function getNetatmoCameraAPI(){
-		if($this->_netatmoCameraApi == null){
-			$this->_netatmoCameraApi = new NetatmoCameraAPI(
-				config::byKey('username', 'netatmoWelcome'),
-				config::byKey('password', 'netatmoWelcome'),
-				$this->getLogicalId(),
-				$this->getCache('csrf',null),
-				$this->getCache('csrfName',null),
-				$this->getCache('token',null)
-			);
-			$this->setCache('csrf',$this->_netatmoCameraApi->csrf);
-			$this->setCache('csrfName',$this->_netatmoCameraApi->csrfName);
-			$this->setCache('token',$this->_netatmoCameraApi->token);
-		}
-		return $this->_netatmoCameraApi;
-	}
-	
 }
 
 class netatmoWelcomeCmd extends cmd {
@@ -550,14 +424,6 @@ class netatmoWelcomeCmd extends cmd {
 			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'off');
 		}else if(strpos($this->getLogicalId(),'monitoringOn') !== false){
 			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'on');
-		}else if($this->getLogicalId() == 'humanOutAlert'){
-			$eqLogic->getNetatmoCameraAPI()->setOutAlert('presence_record_humans',$_options['select']);
-		}else if($this->getLogicalId() == 'animalOutAlert'){
-			$eqLogic->getNetatmoCameraAPI()->setOutAlert('presence_record_animals',$_options['select']);
-		}else if($this->getLogicalId() == 'vehicleOutAlert'){
-			$eqLogic->getNetatmoCameraAPI()->setOutAlert('presence_record_vehicles',$_options['select']);
-		}else if($this->getLogicalId() == 'otherOutAlert'){
-			$eqLogic->getNetatmoCameraAPI()->setOutAlert('presence_record_movements',$_options['select']);
 		}
 		netatmoWelcome::refresh_info();
 	}
