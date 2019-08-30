@@ -31,11 +31,11 @@ class netatmoWelcome extends eqLogic {
 	/*     * ***********************Methode static*************************** */
 	
 	public static function cronDaily(){
-		shell_exec("cd '__DIR__.'/../../data;  ls -1tr *.jpg | head -n -10 | xargs -d '\n' rm -f --");
+		shell_exec("cd ".__DIR__."/../../data;  ls -1tr *.jpg | head -n -10 | xargs -d '\n' rm -f --");
 	}
 	
 	public static function backup(){
-		shell_exec("cd '__DIR__.'/../../data;  ls -1tr *.jpg | head -n -10 | xargs -d '\n' rm -f --");
+		shell_exec("cd ".__DIR__."/../../data;  ls -1tr *.jpg | head -n -10 | xargs -d '\n' rm -f --");
 	}
 	
 	public static function getClient() {
