@@ -76,7 +76,6 @@ class netatmoWelcome extends eqLogic {
 				if ($url_parse['host'] == '') {
 					continue;
 				}
-				log::add('netatmoWelcome','debug','Local : '.$camera['is_local']);
 				$plugin = plugin::byId('camera');
 				$camera_jeedom = eqLogic::byLogicalId($camera['id'], 'camera');
 				if (!is_object($camera_jeedom)) {
