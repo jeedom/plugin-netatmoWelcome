@@ -69,7 +69,10 @@ class netatmoWelcome extends eqLogic {
 		}
 		foreach ($_datas['homes'] as $home) {
 			foreach ($home['cameras'] as $camera) {
-				$eqLogic = eqLogic::byLogicalId('camera'.$camera['id'], 'netatmoWelcome');
+				$eqLogic = eqLogic::byLogicalId($camera['id'], 'netatmoWelcome');
+				if(!is_object($eqLogic)){
+					continue;
+				}
 				log::add('netatmoWelcome','debug',json_encode($camera));
 				$url_parse = parse_url($eqLogic->getCache('vpnUrl'). '/live/snapshot_720.jpg');
 				log::add('netatmoWelcome','debug','VPN URL : '.json_encode($url_parse));
@@ -157,27 +160,6 @@ class netatmoWelcome extends eqLogic {
 			$eqLogic->setLogicalId($home['id']);
 			$eqLogic->setConfiguration('homeName',$home['name']);
 			$eqLogic->save();
-			$cmd = $eqLogic->getCmd('info', 'lastEvent');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('lastEvent');
-				$cmd->setType('info');
-				$cmd->setSubType('string');
-				$cmd->setName(__('Derniers évènements', __FILE__));
-				$cmd->save();
-			}
-			
-			$cmd = $eqLogic->getCmd('info', 'lastOneEvent');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('lastOneEvent');
-				$cmd->setType('info');
-				$cmd->setSubType('string');
-				$cmd->setName(__('Evènement', __FILE__));
-				$cmd->save();
-			}
 			foreach ($home['persons'] as $person) {
 				if (!isset($person['pseudo']) || $person['pseudo'] == '') {
 					continue;
@@ -204,7 +186,7 @@ class netatmoWelcome extends eqLogic {
 				}
 			}
 			foreach ($home['cameras'] as $camera) {
-				$eqLogic = eqLogic::byLogicalId('camera'.$camera['id'], 'netatmoWelcome');
+				$eqLogic = eqLogic::byLogicalId($camera['id'], 'netatmoWelcome');
 				if (!is_object($eqLogic)) {
 					$eqLogic = new netatmoWelcome();
 					$eqLogic->setEqType_name('netatmoWelcome');
@@ -214,7 +196,7 @@ class netatmoWelcome extends eqLogic {
 					$eqLogic->setIsVisible(1);
 				}
 				$eqLogic->setConfiguration('type', $camera['type']);
-				$eqLogic->setLogicalId('camera'.$camera['id']);
+				$eqLogic->setLogicalId($camera['id']);
 				$eqLogic->setConfiguration('homeId',$home['id']);
 				$eqLogic->setConfiguration('homeName',$home['name']);
 				$eqLogic->save();
@@ -272,7 +254,7 @@ class netatmoWelcome extends eqLogic {
 				}
 			}
 			foreach ($home['smokedetectors'] as $smokedetectors) {
-				$eqLogic = eqLogic::byLogicalId('smokedetectors'.$smokedetectors['id'], 'netatmoWelcome');
+				$eqLogic = eqLogic::byLogicalId($smokedetectors['id'], 'netatmoWelcome');
 				if (!is_object($eqLogic)) {
 					$eqLogic = new netatmoWelcome();
 					$eqLogic->setEqType_name('netatmoWelcome');
@@ -282,7 +264,7 @@ class netatmoWelcome extends eqLogic {
 					$eqLogic->setIsVisible(1);
 				}
 				$eqLogic->setConfiguration('type', $smokedetectors['type']);
-				$eqLogic->setLogicalId('smokedetectors'.$smokedetectors['id']);
+				$eqLogic->setLogicalId($smokedetectors['id']);
 				$eqLogic->setConfiguration('homeId',$home['id']);
 				$eqLogic->setConfiguration('homeName',$home['name']);
 				$eqLogic->save();
@@ -339,7 +321,9 @@ class netatmoWelcome extends eqLogic {
 					self::updateCameraInfo($cameras_jeedom,'lastOneEvent', $message);
 				}
 				$message = '';
+				$eventsByEqLogic = array();
 				foreach ($events as $event) {
+					$eventsByEqLogic[$event['device_id']][] = $event;
 					if (!isset($event['event_list']) || !isset($event['event_list'][0])) {
 						continue;
 					}
@@ -350,13 +334,45 @@ class netatmoWelcome extends eqLogic {
 					$message .= '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.self::downloadSnapshot($details['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'] . '</span><br/>';
 				}
 				$eqLogic->checkAndUpdateCmd('lastEvent', $message);
+				foreach ($eventsByEqLogic as $id => $events) {
+					$eqLogic = eqLogic::byLogicalId($id, 'netatmoWelcome');
+					if(!is_object($eqLogic)){
+						continue;
+					}
+					if(isset($events[0]['message'])){
+						$eqLogic->checkAndUpdateCmd('lastOneEvent',$events[0]['message']);
+					}else if ($events[0] != null && isset($events[0]['event_list'])) {
+						$details = $events[0]['event_list'][0];
+						$message = date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'];
+						$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
+					}
+					$message = '';
+					foreach ($events as $event) {
+						if(isset($events[0]['message'])){
+							$message .= $events[0]['message'];
+							continue;
+						}
+						if (!isset($event['event_list']) || !isset($event['event_list'][0])) {
+							continue;
+						}
+						$details = $event['event_list'][0];
+						if(!isset($details['snapshot']['url'])){
+							$details['snapshot']['url'] = '';
+						}
+						$message .= '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.self::downloadSnapshot($details['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'] . '</span><br/>';
+					}
+					if($message != ''){
+						$eqLogic->checkAndUpdateCmd('lastEvent',$message);
+					}
+				}
+				
 				self::updateCameraInfo($cameras_jeedom,'lastEvent', $message);
 				$eqLogic->refreshWidget();
 				foreach ($home['cameras'] as &$camera) {
 					if(!isset($camera['vpn_url']) || $camera['vpn_url'] == ''){
 						continue;
 					}
-					$eqLogic = eqLogic::byLogicalId('camera'.$camera['id'], 'netatmoWelcome');
+					$eqLogic = eqLogic::byLogicalId($camera['id'], 'netatmoWelcome');
 					if (!is_object($eqLogic)) {
 						continue;
 					}
@@ -402,6 +418,27 @@ class netatmoWelcome extends eqLogic {
 	/*     * *********************Methode d'instance************************* */
 	
 	public function postSave() {
+		$cmd = $this->getCmd('info', 'lastEvent');
+		if (!is_object($cmd)) {
+			$cmd = new netatmoWelcomeCmd();
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setLogicalId('lastEvent');
+			$cmd->setType('info');
+			$cmd->setSubType('string');
+			$cmd->setName(__('Derniers évènements', __FILE__));
+			$cmd->save();
+		}
+		
+		$cmd = $this->getCmd('info', 'lastOneEvent');
+		if (!is_object($cmd)) {
+			$cmd = new netatmoWelcomeCmd();
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setLogicalId('lastOneEvent');
+			$cmd->setType('info');
+			$cmd->setSubType('string');
+			$cmd->setName(__('Evènement', __FILE__));
+			$cmd->save();
+		}
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
 			$refresh = new netatmoWelcomeCmd();
