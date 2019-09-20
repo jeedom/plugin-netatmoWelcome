@@ -29,7 +29,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				foreach ($eqLogics as $eqLogic) {
 					$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
 					echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
-					echo '<img src="' . $plugin->getPathImgIcon() . '"/>';
+					if ($eqLogic->getConfiguration('type', '') != '') {
+						echo '<img src="' . $eqLogic->getImage() . '"/>';
+					} else {
+						echo '<img src="' . $plugin->getPathImgIcon() . '"/>';
+					}
 					echo '<br>';
 					echo '<span>' . $eqLogic->getHumanName(true, true) . '</span>';
 					echo '</div>';
@@ -85,12 +89,23 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">{{Type}}</label>
+									<div class="col-sm-6">
+										<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="type" disabled>
+											<option value="">{{Aucun}}</option>
+											<option value="NOC">{{Présence}}</option>
+											<option value="NSC">{{Welcome}}</option>
+											<option value="NSD">{{Smokedetector}}</option>
+										</select>
+									</div>
+								</div>
 							</fieldset>
 						</form>
 					</div>
 					<div class="col-sm-6">
 						<center>
-							<img src="<?php echo $plugin->getPathImgIcon(); ?>" style="height : 300px;" />
+							<img id="img_netatmoWelcomeType" src="<?php echo $plugin->getPathImgIcon(); ?>" style="height : 300px;" />
 						</center>
 					</div>
 				</div>

@@ -15,6 +15,14 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=type]').on('change',function(){
+  if($(this).value() == null || $(this).value() == ''){
+    $('#img_netatmoWelcomeType').attr('src','plugins/netatmoWelcome/plugin_info/netatmoWelcome_icon.png');
+    return;
+  }
+  $('#img_netatmoWelcomeType').attr('src','plugins/netatmoWelcome/core/img/'+$(this).value()+'.jpg');
+});
+
 function addCmdToTable(_cmd) {
   if (!isset(_cmd)) {
     var _cmd = {configuration: {}};
