@@ -51,15 +51,6 @@ class netatmoWelcome extends eqLogic {
 		return self::$_client;
 	}
 	
-	public static function updateCameraInfo($_cameras,$_cmd_logicalId,$_value){
-		if(count($_cameras) == 0){
-			return;
-		}
-		foreach ($_cameras as $camera) {
-			$camera->checkAndUpdateCmd($_cmd_logicalId, $_value);
-		}
-	}
-	
 	public static function createCamera($_datas = null) {
 		if(!class_exists('camera')){
 			return;
@@ -306,19 +297,15 @@ class netatmoWelcome extends eqLogic {
 				if (!is_object($eqLogic)) {
 					continue;
 				}
-				$cameras_jeedom = eqLogic::searchConfiguration('"home_id":"'.$home['id'].'"', 'camera');
 				foreach ($home['persons'] as $person) {
 					$eqLogic->checkAndUpdateCmd('isHere' . $person['id'], ($person['out_of_sight'] != 1));
-					self::updateCameraInfo($cameras_jeedom,'isHere' . $person['id'], ($person['out_of_sight'] != 1));
 					$eqLogic->checkAndUpdateCmd('lastSeen' . $person['id'], date('Y-m-d H:i:s', $person['last_seen']));
-					self::updateCameraInfo($cameras_jeedom,'lastSeen' . $person['id'], $person['last_seen']);
 				}
 				$events = $home['events'];
 				if ($events[0] != null && isset($events[0]['event_list'])) {
 					$details = $events[0]['event_list'][0];
 					$message = date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'];
 					$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
-					self::updateCameraInfo($cameras_jeedom,'lastOneEvent', $message);
 				}
 				$message = '';
 				$eventsByEqLogic = array();
@@ -334,22 +321,27 @@ class netatmoWelcome extends eqLogic {
 					$message .= '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.self::downloadSnapshot($details['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'] . '</span><br/>';
 				}
 				$eqLogic->checkAndUpdateCmd('lastEvent', $message);
+				
 				foreach ($eventsByEqLogic as $id => $events) {
 					$eqLogic = eqLogic::byLogicalId($id, 'netatmoWelcome');
 					if(!is_object($eqLogic)){
 						continue;
 					}
+					$camera_jeedom = eqLogic::byLogicalId($id, 'camera');
 					if(isset($events[0]['message'])){
 						$eqLogic->checkAndUpdateCmd('lastOneEvent',$events[0]['message']);
 					}else if ($events[0] != null && isset($events[0]['event_list'])) {
 						$details = $events[0]['event_list'][0];
 						$message = date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'];
 						$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
+						if(is_object($camera_jeedom)){
+							$camera_jeedom->checkAndUpdateCmd('lastOneEvent', $message);
+						}
 					}
 					$message = '';
 					foreach ($events as $event) {
-						if(isset($events[0]['message'])){
-							$message .= $events[0]['message'];
+						if(isset($event['message'])){
+							$message .= $event['message'].'<br/>';
 							continue;
 						}
 						if (!isset($event['event_list']) || !isset($event['event_list'][0])) {
@@ -363,10 +355,13 @@ class netatmoWelcome extends eqLogic {
 					}
 					if($message != ''){
 						$eqLogic->checkAndUpdateCmd('lastEvent',$message);
+						if(is_object($camera_jeedom)){
+							$camera_jeedom->checkAndUpdateCmd('lastEvent', $message);
+						}
 					}
 				}
 				
-				self::updateCameraInfo($cameras_jeedom,'lastEvent', $message);
+				
 				$eqLogic->refreshWidget();
 				foreach ($home['cameras'] as &$camera) {
 					if(!isset($camera['vpn_url']) || $camera['vpn_url'] == ''){
@@ -408,10 +403,9 @@ class netatmoWelcome extends eqLogic {
 		if($filename == 'getcamerapicture'){
 			return 'core/img/no_image.gif';
 		}
-		if(file_exists(__DIR__.'/../../data/'.$filename)){
-			return 'plugins/netatmoWelcome/data/'.$filename;
+		if(!file_exists(__DIR__.'/../../data/'.$filename)){
+			file_put_contents(__DIR__.'/../../data/'.$filename,file_get_contents($_snapshot));
 		}
-		file_put_contents(__DIR__.'/../../data/'.$filename,file_get_contents($_snapshot));
 		return 'plugins/netatmoWelcome/data/'.$filename;
 	}
 	
