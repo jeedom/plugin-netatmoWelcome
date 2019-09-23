@@ -95,7 +95,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="type" disabled>
 											<option value="">{{Aucun}}</option>
 											<option value="NOC">{{Présence}}</option>
-											<option value="NSC">{{Welcome}}</option>
+											<option value="NACamera">{{Welcome}}</option>
 											<option value="NSD">{{Smokedetector}}</option>
 										</select>
 									</div>

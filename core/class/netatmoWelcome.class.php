@@ -262,8 +262,16 @@ class netatmoWelcome extends eqLogic {
 			}
 		}
 		self::refresh_info($_datas);
-		self::getClient()->api('dropwebhook','POST',array('app_types' => 'jeedom'));
-		self::getClient()->api('addwebhook','POST',array('url' => network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . jeedom::getApiKey('netatmoWelcome')));
+		try {
+			self::getClient()->api('dropwebhook','POST',array('app_types' => 'jeedom'));
+		} catch (\Exception $e) {
+			
+		}
+		try {
+			self::getClient()->api('addwebhook','POST',array('url' => network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . jeedom::getApiKey('netatmoWelcome')));
+		} catch (\Exception $e) {
+			
+		}
 	}
 	
 	public static function cron15() {
