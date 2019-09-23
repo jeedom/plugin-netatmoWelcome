@@ -383,7 +383,11 @@ class netatmoWelcome extends eqLogic {
 				$message = '';
 				$eventsByEqLogic = array();
 				foreach ($events as $event) {
-					$eventsByEqLogic[$event['device_id']][] = $event;
+					if(isset($event['module_id'])){
+						$eventsByEqLogic[$event['module_id']][] = $event;
+					}else{
+						$eventsByEqLogic[$event['device_id']][] = $event;
+					}
 					if (!isset($event['event_list']) || !isset($event['event_list'][0])) {
 						continue;
 					}
@@ -433,8 +437,6 @@ class netatmoWelcome extends eqLogic {
 						}
 					}
 				}
-				
-				
 				$eqLogic->refreshWidget();
 				foreach ($home['cameras'] as &$camera) {
 					if(!isset($camera['vpn_url']) || $camera['vpn_url'] == ''){
