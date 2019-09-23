@@ -243,6 +243,71 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setName(__('Désactiver surveillance', __FILE__));
 					$cmd->save();
 				}
+				if(isset($camera['modules'])){
+					foreach ($camera['modules'] as $module) {
+						$eqLogic = eqLogic::byLogicalId($module['id'], 'netatmoWelcome');
+						if (!is_object($eqLogic)) {
+							$eqLogic = new netatmoWelcome();
+							$eqLogic->setEqType_name('netatmoWelcome');
+							$eqLogic->setIsEnable(1);
+							$eqLogic->setName($module['name']);
+							$eqLogic->setCategory('security', 1);
+							$eqLogic->setIsVisible(1);
+						}
+						$eqLogic->setConfiguration('type', $module['type']);
+						$eqLogic->setLogicalId($module['id']);
+						$eqLogic->setConfiguration('homeId',$home['id']);
+						$eqLogic->setConfiguration('homeName',$home['name']);
+						$eqLogic->save();
+						if($module['type'] == 'NACamDoorTag'){
+							$cmd = $eqLogic->getCmd('info', 'state');
+							if (!is_object($cmd)) {
+								$cmd = new netatmoWelcomeCmd();
+								$cmd->setEqLogic_id($eqLogic->getId());
+								$cmd->setLogicalId('state');
+								$cmd->setType('info');
+								$cmd->setSubType('binary');
+								$cmd->setIsVisible(0);
+								$cmd->setName(__('Etat', __FILE__));
+								$cmd->save();
+							}
+						}else if($module['type'] == 'NIS'){
+							$cmd = $eqLogic->getCmd('info', 'state');
+							if (!is_object($cmd)) {
+								$cmd = new netatmoWelcomeCmd();
+								$cmd->setEqLogic_id($eqLogic->getId());
+								$cmd->setLogicalId('state');
+								$cmd->setType('info');
+								$cmd->setSubType('other');
+								$cmd->setIsVisible(0);
+								$cmd->setName(__('Etat', __FILE__));
+								$cmd->save();
+							}
+							$cmd = $eqLogic->getCmd('info', 'monitoring');
+							if (!is_object($cmd)) {
+								$cmd = new netatmoWelcomeCmd();
+								$cmd->setEqLogic_id($eqLogic->getId());
+								$cmd->setLogicalId('monitoring');
+								$cmd->setType('info');
+								$cmd->setSubType('other');
+								$cmd->setIsVisible(0);
+								$cmd->setName(__('Surveillance', __FILE__));
+								$cmd->save();
+							}
+							$cmd = $eqLogic->getCmd('info', 'alim');
+							if (!is_object($cmd)) {
+								$cmd = new netatmoWelcomeCmd();
+								$cmd->setEqLogic_id($eqLogic->getId());
+								$cmd->setLogicalId('alim');
+								$cmd->setType('info');
+								$cmd->setSubType('other');
+								$cmd->setIsVisible(0);
+								$cmd->setName(__('Alimentation', __FILE__));
+								$cmd->save();
+							}
+						}
+					}
+				}
 			}
 			foreach ($home['smokedetectors'] as $smokedetectors) {
 				$eqLogic = eqLogic::byLogicalId($smokedetectors['id'], 'netatmoWelcome');
@@ -392,6 +457,26 @@ class netatmoWelcome extends eqLogic {
 					$eqLogic->checkAndUpdateCmd('state', ($camera['status'] == 'on'));
 					$eqLogic->checkAndUpdateCmd('stateSd', ($camera['sd_status'] == 'on'));
 					$eqLogic->checkAndUpdateCmd('stateAlim', ($camera['alim_status'] == 'on'));
+				}
+				foreach ($home['cameras'] as &$camera) {
+					if(isset($camera['modules'])){
+						foreach ($camera['modules'] as $module) {
+							$eqLogic = eqLogic::byLogicalId($module['id'], 'netatmoWelcome');
+							if (!is_object($eqLogic)) {
+								continue;
+							}
+							if($module['type'] == 'NACamDoorTag'){
+								$eqLogic->checkAndUpdateCmd('state', ($module['status'] == 'open'));
+							}else if($module['type'] == 'NIS'){
+								$eqLogic->checkAndUpdateCmd('state', $module['status']);
+								$eqLogic->checkAndUpdateCmd('alim', $module['alim_source']);
+								$eqLogic->checkAndUpdateCmd('monitoring', $module['monitoring']);
+							}
+							if(isset($module['battery_percent'])){
+								$eqLogic->batteryStatus($module['battery_percent']);
+							}
+						}
+					}
 				}
 			}
 		} catch (Exception $e) {

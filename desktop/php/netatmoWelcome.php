@@ -97,6 +97,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="NOC">{{Présence}}</option>
 											<option value="NACamera">{{Welcome}}</option>
 											<option value="NSD">{{Smokedetector}}</option>
+											<option value="NACamDoorTag">{{Detecteur d'ouverture}}</option>
+											<option value="NIS">{{Sirène}}</option>
 										</select>
 									</div>
 								</div>
