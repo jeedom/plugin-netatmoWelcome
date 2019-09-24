@@ -27,9 +27,11 @@ if($data == false){
 	netatmoWelcome::refresh_info();
 	die();
 }
+
 if(in_array($data['push_type'],array('webhook_activation','topology_changed'))){
 	die();
 }
+
 if(in_array($data['push_type'],array('NOC-human','NOC-vehicle'))){
 	$eqLogic = eqLogic::byLogicalId($data['device_id'], 'netatmoWelcome');
 	if (!is_object($eqLogic)) {
