@@ -21,5 +21,27 @@ if (!jeedom::apiAccess(init('apikey'), 'netatmoWelcome')) {
 	echo __('Vous n\'etes pas autorisé à effectuer cette action', __FILE__);
 	die();
 }
-
+$data = is_json(file_get_contents("php://input"),false);
+log::add('netatmoWelcome','debug','Push call data : '.json_encode($data));
+if($data == false){
+	netatmoWelcome::refresh_info();
+	die();
+}
+if(in_array($data['push_type'],array('webhook_activation','topology_changed'))){
+	die();
+}
+if(in_array($data['push_type'],array('NOC-human','NOC-vehicle'))){
+	$eqLogic = eqLogic::byLogicalId($data['device_id'], 'netatmoWelcome');
+	if (!is_object($eqLogic)) {
+		die();
+	}
+	$eqLogic->checkAndUpdateCmd('lastOneEvent',date('Y-m-d H:i:s').' - '.$data['message']);
+	$cmd = $eqLogic->getCmd('info','lastEvent');
+	if(is_object($cmd)){
+		$message = '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.self::downloadSnapshot($data['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s') . ' - ' . $data['message'] . '</span><br/>';
+		$message .= $cmd->execCmd();
+		$eqLogic->checkAndUpdateCmd('lastEvent',date('Y-m-d H:i:s').' - '.$message);
+	}
+	die();
+}
 netatmoWelcome::refresh_info();
