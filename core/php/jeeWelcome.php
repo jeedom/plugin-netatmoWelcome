@@ -40,7 +40,7 @@ if(in_array($data['push_type'],array('NOC-human','NOC-vehicle','NACamera-movemen
 	$eqLogic->checkAndUpdateCmd('lastOneEvent',date('Y-m-d H:i:s').' - '.$data['message']);
 	$cmd = $eqLogic->getCmd('info','lastEvent');
 	if(is_object($cmd)){
-		$message = '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.self::downloadSnapshot($data['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s') . ' - ' . $data['message'] . '</span><br/>';
+		$message = '<span title="" data-tooltip-content="<img height=\'500\' class=\'img-responsive\' src=\''.netatmoWelcome::downloadSnapshot($data['snapshot']['url']).'\'/>">'.date('Y-m-d H:i:s') . ' - ' . $data['message'] . '</span><br/>';
 		$message .= $cmd->execCmd();
 		$eqLogic->checkAndUpdateCmd('lastEvent',date('Y-m-d H:i:s').' - '.$message);
 	}
