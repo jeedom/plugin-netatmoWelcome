@@ -1,3 +1,5 @@
+- Possibilité de modifier l'état de surveillance
+
 # 21/06/2018
 
 - Correction du framework Netatmo (nouvelle données renvoyé par Netatmo non pris en compte dans leur code)

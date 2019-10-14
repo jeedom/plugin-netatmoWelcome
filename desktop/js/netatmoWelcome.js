@@ -15,40 +15,44 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-function addCmdToTable(_cmd) {
-    if (!isset(_cmd)) {
-        var _cmd = {configuration: {}};
-    }
-    if (!isset(_cmd.configuration)) {
-        _cmd.configuration = {};
-    }
-    var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
-    tr += '<td>';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="subType" style="display : none;">';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}"></td>';
-    tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="display : none;" />';
-    tr += '<td>';
-    if(isset(_cmd.type) &&  _cmd.type == 'info' ){
-        tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span> ';
-    }
-    if(isset(_cmd.logicalId) && ((_cmd.logicalId.indexOf('state') >= 0 && _cmd.logicalId.indexOf('stateSd') < 0 && _cmd.logicalId.indexOf('stateAlim') < 0)  || _cmd.logicalId.indexOf('isHere') >= 0) ){
-        tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></span> ';
-    }
-    tr += '</td>';
-    tr += '<td>';
-    if (is_numeric(_cmd.id)) {
-        tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
-        tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
-    }
-    tr += '<i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i></td>';
-    tr += '</tr>';
-    $('#table_cmd tbody').append(tr);
-    $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
-    if (isset(_cmd.type)) {
-        $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type));
-    }
-    jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
-}
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=type]').on('change',function(){
+  if($(this).value() == null || $(this).value() == ''){
+    $('#img_netatmoWelcomeType').attr('src','plugins/netatmoWelcome/plugin_info/netatmoWelcome_icon.png');
+    return;
+  }
+  $('#img_netatmoWelcomeType').attr('src','plugins/netatmoWelcome/core/img/'+$(this).value()+'.jpg');
+});
 
+function addCmdToTable(_cmd) {
+  if (!isset(_cmd)) {
+    var _cmd = {configuration: {}};
+  }
+  if (!isset(_cmd.configuration)) {
+    _cmd.configuration = {};
+  }
+  var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
+  tr += '<td>';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="subType" style="display : none;">';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 200px;" placeholder="{{Nom}}"></td>';
+  tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="display : none;" />';
+  tr += '<td>';
+  tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></span> ';
+  tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span> ';
+  tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="display" data-l2key="invertBinary"/>{{Inverser}}</label></span> ';
+  tr += '</td>';
+  tr += '<td>';
+  if (is_numeric(_cmd.id)) {
+    tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
+    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
+  }
+  tr += '<i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i></td>';
+  tr += '</tr>';
+  $('#table_cmd tbody').append(tr);
+  $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
+  if (isset(_cmd.type)) {
+    $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type));
+  }
+  jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
+}
