@@ -15,6 +15,8 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+$("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+
 $('.eqLogicAttr[data-l1key=configuration][data-l2key=type]').on('change',function(){
   if($(this).value() == null || $(this).value() == ''){
     $('#img_netatmoWelcomeType').attr('src','plugins/netatmoWelcome/plugin_info/netatmoWelcome_icon.png');
