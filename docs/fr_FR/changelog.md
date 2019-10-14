@@ -6,6 +6,7 @@
 - Support de la sirene (juste retour d'état)
 - Refonte complete du moteur de communication avec Netatmo
 - Support du detecteur d'incendie
+- Renommage en netatmo security
 
 
 IMPORTANT : cette version est une reecriture complete du plugin, il y a donc un impact sur les widgets (qui est maintenant standard au core, changement majeur de l'affichage de celui-ci). Il est vivement conseillé de supprimer les équipement crées et de refaire une synchronisation
