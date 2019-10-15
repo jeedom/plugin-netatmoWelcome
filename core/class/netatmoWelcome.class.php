@@ -138,8 +138,11 @@ class netatmoWelcome extends eqLogic {
 			$_datas =	self::getClient()->api('gethomedata');
 		}
 		log::add('netatmoWelcome', 'debug', json_encode($_datas));
-		foreach ($_datas['homes'] as $home) {
+		foreach ($_datas['homes'] as &$home) {
 			$eqLogic = eqLogic::byLogicalId($home['id'], 'netatmoWelcome');
+			if(!isset($home['name']) || trim($home['name']) == ''){
+				$home['name'] = $home['id'];
+			}
 			if (!is_object($eqLogic)) {
 				$eqLogic = new netatmoWelcome();
 				$eqLogic->setEqType_name('netatmoWelcome');
@@ -176,8 +179,11 @@ class netatmoWelcome extends eqLogic {
 					$cmd->save();
 				}
 			}
-			foreach ($home['cameras'] as $camera) {
+			foreach ($home['cameras'] as &$camera) {
 				$eqLogic = eqLogic::byLogicalId($camera['id'], 'netatmoWelcome');
+				if(!isset($camera['name']) || trim($camera['name']) == ''){
+					$camera['name'] = $camera['id'];
+				}
 				if (!is_object($eqLogic)) {
 					$eqLogic = new netatmoWelcome();
 					$eqLogic->setEqType_name('netatmoWelcome');
@@ -244,8 +250,11 @@ class netatmoWelcome extends eqLogic {
 					$cmd->save();
 				}
 				if(isset($camera['modules'])){
-					foreach ($camera['modules'] as $module) {
+					foreach ($camera['modules'] as &$module) {
 						$eqLogic = eqLogic::byLogicalId($module['id'], 'netatmoWelcome');
+						if(!isset($module['name']) || trim($module['name']) == ''){
+							$module['name'] = $module['id'];
+						}
 						if (!is_object($eqLogic)) {
 							$eqLogic = new netatmoWelcome();
 							$eqLogic->setEqType_name('netatmoWelcome');
@@ -309,8 +318,11 @@ class netatmoWelcome extends eqLogic {
 					}
 				}
 			}
-			foreach ($home['smokedetectors'] as $smokedetectors) {
+			foreach ($home['smokedetectors'] as &$smokedetectors) {
 				$eqLogic = eqLogic::byLogicalId($smokedetectors['id'], 'netatmoWelcome');
+				if(!isset($smokedetectors['name']) || trim($smokedetectors['name']) == ''){
+					$smokedetectors['name'] = $smokedetectors['id'];
+				}
 				if (!is_object($eqLogic)) {
 					$eqLogic = new netatmoWelcome();
 					$eqLogic->setEqType_name('netatmoWelcome');
