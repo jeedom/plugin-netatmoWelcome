@@ -437,7 +437,6 @@ class netatmoWelcome extends eqLogic {
 						}
 					}
 				}
-				$eqLogic->refreshWidget();
 				foreach ($home['cameras'] as &$camera) {
 					if(!isset($camera['vpn_url']) || $camera['vpn_url'] == ''){
 						continue;
