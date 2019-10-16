@@ -1,13 +1,10 @@
-Plugin permettant de récupérer les informations des caméras Netatmo
-Welcome (attention il n’y a pas le flux vidéo)
+Plugin permettant de récupérer les informations des équipements Netatmo Security
 
-Configuration du plugin 
+Configuration du plugin
 =======================
 
 Une fois le plugin installé, il vous faut renseigner vos informations de
 connexion Netatmo :
-
-![netatmoWelcome2](../images/netatmoWelcome2.png)
 
 -   **Client ID** : votre client ID (voir partie configuration)
 
@@ -21,7 +18,7 @@ connexion Netatmo :
     Netamo pour découvrir automatiquement vos équipements Netamo. A
     faire après avoir sauvegardé les paramètres précedent.
 
-Recupération des informations de connexion 
+Recupération des informations de connexion
 ==========================================
 
 Pour intégrer votre Welcome, vous devez posséder un client\_id et un
@@ -55,31 +52,12 @@ précedent)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
-Configuration des équipements 
+Configuration des équipements
 =============================
 
 La configuration des équipements Netatmo est accessible à partir du menu
-plugin :
+plugin -> Securité -> Netatmo Security
 
-![netatmoWelcome3](../images/netatmoWelcome3.png)
-
-Voilà à quoi ressemble la page du plugin Netatmo (ici avec déjà 1
-équipement) :
-
-![netatmoWelcome4](../images/netatmoWelcome4.png)
-
-> **Tip**
->
-> Comme à beaucoup d’endroits sur Jeedom, placer la souris tout à gauche
-> permet de faire apparaître un menu d’accès rapide (vous pouvez à
-> partir de votre profil le laisser toujours visible).
-
-> **Note**
->
-> Jeedom creer un équipement par "maison" à surveiller, si vous avez
-> plusieurs Netatmo Welcome dans la même maison vous n’aurez qu’un seul
-> équipement par contre les informations de toutes vos welcome seront
-> utilisées
 
 Une fois que vous cliquez sur un équipement vous obtenez :
 
@@ -88,58 +66,20 @@ Une fois que vous cliquez sur un équipement vous obtenez :
 Vous retrouvez ici toute la configuration de votre équipement :
 
 -   **Nom de l’équipement Netatmo** : nom de votre équipement Netatmo
-    Welcome
-
--   **Objet parent** : indique l’objet parent auquel appartient
-    l’équipement
-
+-   **Objet parent** : indique l’objet parent auquel appartient l’équipement
 -   **Activer** : permet de rendre votre équipement actif
-
 -   **Visible** : le rend visible sur le dashboard
 
 En dessous vous retrouvez la liste des commandes :
 
 -   le nom de la commande
-
 -   historiser : permet d’historiser la donnée
-
 -   configuration avancée (petites roues crantées) : permet d’afficher
-    la configuration avancée de la commande (méthode
-    d’historisation, widget…​)
-
+    la configuration avancée de la commande (méthode d’historisation, widget…​)
 -   Tester : permet de tester la commande
 
-> **Note**
+# FAQ
+
+>**Je n'ai pas les évenements en temps réel mais au bout de 15min**
 >
-> Au niveau des commandes Jeedom en creer 2 par personnes déclaré dans
-> la camera netatmo, une pour la date ou la personne a été apercu pour
-> la derniere fois et une pour la présence ou non de la personne. Il y a
-> ensuite 3 commandes par camera pour voir leur statut. Enfin une
-> derniere commande affiche les 5 derniers évènement.
-
-Widget 
-======
-
-Voici le widget sur le dashboard, ici la partie présence :
-
-![netatmoWelcome6](../images/netatmoWelcome6.png)
-
-La partie statut :
-
-![netatmoWelcome8](../images/netatmoWelcome8.png)
-
-La partie évènements :
-
-![netatmoWelcome9](../images/netatmoWelcome9.png)
-
-Et en mobile :
-
-![netatmoWelcome7](../images/netatmoWelcome7.png)
-
-La partie statut :
-
-![netatmoWelcome16](../images/netatmoWelcome16.png)
-
-La partie évènements :
-
-![netatmoWelcome17](../images/netatmoWelcome17.png)
+>Pour avoir un retour en temps réel des évenements (déclenchement alarme incendie, personne qui passe devant la camera..) il faut ABSOLUMENT que votre jeedom ait une URL externe en https avec un certificat valide sur le port 443 (et uniquement ce port la). C'est une obligation imposé par netatmo
