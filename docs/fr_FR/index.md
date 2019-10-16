@@ -1,7 +1,6 @@
 Plugin permettant de récupérer les informations des équipements Netatmo Security
 
-Configuration du plugin
-=======================
+# Configuration du plugin
 
 Une fois le plugin installé, il vous faut renseigner vos informations de
 connexion Netatmo :
@@ -18,8 +17,7 @@ connexion Netatmo :
     Netamo pour découvrir automatiquement vos équipements Netamo. A
     faire après avoir sauvegardé les paramètres précedent.
 
-Recupération des informations de connexion
-==========================================
+# Recupération des informations de connexion
 
 Pour intégrer votre Welcome, vous devez posséder un client\_id et un
 client\_secret généré sur le site <http://dev.netatmo.com>.
@@ -52,18 +50,12 @@ précedent)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
-Configuration des équipements
-=============================
+# Configuration des équipements
 
 La configuration des équipements Netatmo est accessible à partir du menu
 plugin -> Securité -> Netatmo Security
 
-
-Une fois que vous cliquez sur un équipement vous obtenez :
-
-![netatmoWelcome5](../images/netatmoWelcome5.png)
-
-Vous retrouvez ici toute la configuration de votre équipement :
+Une fois que vous cliquez sur un équipement vous retrouvez ici toute la configuration de votre équipement :
 
 -   **Nom de l’équipement Netatmo** : nom de votre équipement Netatmo
 -   **Objet parent** : indique l’objet parent auquel appartient l’équipement
