@@ -26,7 +26,6 @@ class netatmoWelcome extends eqLogic {
 	/*     * *************************Attributs****************************** */
 	
 	private static $_client = null;
-	public static $_widgetPossibility = array('custom' => true);
 	
 	/*     * ***********************Methode static*************************** */
 	
@@ -287,7 +286,7 @@ class netatmoWelcome extends eqLogic {
 								$cmd->setEqLogic_id($eqLogic->getId());
 								$cmd->setLogicalId('state');
 								$cmd->setType('info');
-								$cmd->setSubType('other');
+								$cmd->setSubType('string');
 								$cmd->setIsVisible(0);
 								$cmd->setName(__('Etat', __FILE__));
 								$cmd->save();
@@ -298,7 +297,7 @@ class netatmoWelcome extends eqLogic {
 								$cmd->setEqLogic_id($eqLogic->getId());
 								$cmd->setLogicalId('monitoring');
 								$cmd->setType('info');
-								$cmd->setSubType('other');
+								$cmd->setSubType('string');
 								$cmd->setIsVisible(0);
 								$cmd->setName(__('Surveillance', __FILE__));
 								$cmd->save();
@@ -309,7 +308,7 @@ class netatmoWelcome extends eqLogic {
 								$cmd->setEqLogic_id($eqLogic->getId());
 								$cmd->setLogicalId('alim');
 								$cmd->setType('info');
-								$cmd->setSubType('other');
+								$cmd->setSubType('string');
 								$cmd->setIsVisible(0);
 								$cmd->setName(__('Alimentation', __FILE__));
 								$cmd->save();
@@ -567,8 +566,6 @@ class netatmoWelcome extends eqLogic {
 
 class netatmoWelcomeCmd extends cmd {
 	/*     * *************************Attributs****************************** */
-	
-	public static $_widgetPossibility = array('custom' => false);
 	
 	/*     * ***********************Methode static*************************** */
 	
