@@ -164,7 +164,7 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setLogicalId('isHere' . $person['id']);
 					$cmd->setType('info');
 					$cmd->setSubType('binary');
-					$cmd->setName(__('Présence', __FILE__) . ' ' . $person['pseudo'].' - '.$person['id']);
+					$cmd->setName(substr(__('Présence', __FILE__) . ' ' . $person['pseudo'].' - '.$person['id'],0,44));
 					$cmd->save();
 				}
 				$cmd = $eqLogic->getCmd('info', 'lastSeen' . $person['id']);
@@ -174,7 +174,7 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setLogicalId('lastSeen' . $person['id']);
 					$cmd->setType('info');
 					$cmd->setSubType('string');
-					$cmd->setName(__('Derniere fois', __FILE__) . ' ' . $person['pseudo'].' - '.$person['id']);
+					$cmd->setName(substr(__('Derniere fois', __FILE__) . ' ' . $person['pseudo'].' - '.$person['id'],0,44));
 					$cmd->save();
 				}
 			}
