@@ -75,3 +75,7 @@ En dessous vous retrouvez la liste des commandes :
 >**Je n'ai pas les évenements en temps réel mais au bout de 15min**
 >
 >Pour avoir un retour en temps réel des évenements (déclenchement alarme incendie, personne qui passe devant la camera..) il faut ABSOLUMENT que votre jeedom ait une URL externe en https avec un certificat valide sur le port 443 (et uniquement ce port la). C'est une obligation imposé par netatmo
+
+>**Je n'arrive pas a desactiver/activer la surveillance**
+>
+>Attention si vous avez mis un code cette fonction n'est pas possible par le plugin jeedom
