@@ -1,6 +1,75 @@
 {
-    "plugins/netatmoWelcome/plugin_info/info.xml": {
-        "Plugin pour les caméras netatmo Welcome": "Plugin para câmeras Netatmo Bem-vindo",
-        "Aucune": "Nenhum"
+    "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
+        "Client ID": "",
+        "Client secret": "",
+        "Nom d'utilisateur": "Nome de Usuário",
+        "Mot de passe": "Senha",
+        "Récupérer les infos du plugin": "",
+        "Netatmo Thermostat": "",
+        "Netatmo Station": "",
+        "Synchroniser": "",
+        "Synchroniser mes équipements": "",
+        "Synchronisation réussie": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+    },
+    "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Gestion": "Gestão",
+        "Configuration": "Configuração",
+        "Mes caméras": "",
+        "Rechercher": "Pesquisa",
+        "Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Configuration avancée": "Configuração avançada",
+        "Dupliquer": "Duplicar",
+        "Sauvegarder": "Salvar",
+        "Supprimer": "Remover",
+        "Equipement": "Equipamento",
+        "Commandes": "Comandos",
+        "Nom de l'équipement Welcome Netatmo": "",
+        "Nom de l'équipement météo Netatmo": "",
+        "Objet parent": "Objeto pai",
+        "Aucun": "Nemhum",
+        "Activer": "Ativar",
+        "Visible": "Visivél",
+        "Type": "Tipo",
+        "Présence": "",
+        "Welcome": "",
+        "Smokedetector": "",
+        "Detecteur d'ouverture": "",
+        "Sirène": "",
+        "Nom": "Nome",
+        "Option": "",
+        "Action": "Ação"
+    },
+    "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
+        "Nom": "Nome",
+        "Afficher": "Display",
+        "Historiser": "Historicizar",
+        "Inverser": "Inverter",
+        "Tester": "Teste"
+    },
+    "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": ""
+    },
+    "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+    },
+    "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
+        "Présence": "",
+        "Derniere fois": "",
+        "Status": "Estado",
+        "Status SD": "",
+        "Status alim": "",
+        "Activer surveillance": "",
+        "Désactiver surveillance": "",
+        "Etat": "Estado",
+        "Surveillance": "",
+        "Alimentation": "",
+        "Erreur sur synchro netatmo welcome ": "",
+        "Derniers évènements": "",
+        "Evènement": "Evento",
+        "Rafraichir": "Legal"
     }
 }
