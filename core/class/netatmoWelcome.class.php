@@ -226,29 +226,27 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setName(__('Status alim', __FILE__));
 					$cmd->save();
 				}
-				if($camera['type'] == 'NOC'){
-					$cmd = $eqLogic->getCmd('action', 'monitoringOn');
-					if (!is_object($cmd)) {
-						$cmd = new netatmoWelcomeCmd();
-						$cmd->setEqLogic_id($eqLogic->getId());
-						$cmd->setLogicalId('monitoringOn');
-						$cmd->setType('action');
-						$cmd->setSubType('other');
-						$cmd->setIsVisible(0);
-						$cmd->setName(__('Activer surveillance', __FILE__));
-						$cmd->save();
-					}
-					$cmd = $eqLogic->getCmd('action', 'monitoringOff');
-					if (!is_object($cmd)) {
-						$cmd = new netatmoWelcomeCmd();
-						$cmd->setEqLogic_id($eqLogic->getId());
-						$cmd->setLogicalId('monitoringOff');
-						$cmd->setType('action');
-						$cmd->setSubType('other');
-						$cmd->setIsVisible(0);
-						$cmd->setName(__('Désactiver surveillance', __FILE__));
-						$cmd->save();
-					}
+				$cmd = $eqLogic->getCmd('action', 'monitoringOn');
+				if (!is_object($cmd)) {
+					$cmd = new netatmoWelcomeCmd();
+					$cmd->setEqLogic_id($eqLogic->getId());
+					$cmd->setLogicalId('monitoringOn');
+					$cmd->setType('action');
+					$cmd->setSubType('other');
+					$cmd->setIsVisible(0);
+					$cmd->setName(__('Activer surveillance', __FILE__));
+					$cmd->save();
+				}
+				$cmd = $eqLogic->getCmd('action', 'monitoringOff');
+				if (!is_object($cmd)) {
+					$cmd = new netatmoWelcomeCmd();
+					$cmd->setEqLogic_id($eqLogic->getId());
+					$cmd->setLogicalId('monitoringOff');
+					$cmd->setType('action');
+					$cmd->setSubType('other');
+					$cmd->setIsVisible(0);
+					$cmd->setName(__('Désactiver surveillance', __FILE__));
+					$cmd->save();
 				}
 				if(isset($camera['modules'])){
 					foreach ($camera['modules'] as &$module) {
