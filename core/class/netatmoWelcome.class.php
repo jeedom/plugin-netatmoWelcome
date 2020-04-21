@@ -21,16 +21,11 @@ require_once __DIR__ . '/../../../../core/php/core.inc.php';
 if (!class_exists('netatmoApi')) {
 	require_once __DIR__ . '/netatmoApi.class.php';
 }
-if (!class_exists('netatmoWebAPI')) {
-	require_once __DIR__ . '/netatmoWebAPI.class.php';
-}
 
 class netatmoWelcome extends eqLogic {
 	/*     * *************************Attributs****************************** */
 	
 	private static $_client = null;
-	private static $_webclient = null;
-	private static $_webData = null;
 	
 	/*     * ***********************Methode static*************************** */
 	
@@ -53,19 +48,6 @@ class netatmoWelcome extends eqLogic {
 			));
 		}
 		return self::$_client;
-	}
-	
-	public static function getWebClient() {
-		if (self::$_webclient == null) {
-			self::$_webclient = new NetatmoWebAPI(config::byKey('username', 'netatmoWelcome'),config::byKey('password', 'netatmoWelcome'));
-			if(config::byKey('web_token', 'netatmoWelcome') != ''){
-				self::$_webclient->setToken(config::byKey('web_token', 'netatmoWelcome'));
-			}else{
-				self::$_webclient->connect();
-				config::save('web_token',self::$_webclient->getToken(),'netatmoWelcome');
-			}
-		}
-		return self::$_webclient;
 	}
 	
 	public static function createCamera($_datas = null) {
@@ -171,91 +153,6 @@ class netatmoWelcome extends eqLogic {
 			$eqLogic->setLogicalId($home['id']);
 			$eqLogic->setConfiguration('homeName',$home['name']);
 			$eqLogic->save();
-			$cmd = $eqLogic->getCmd('info', 'presence_record_humans');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('presence_record_humans');
-				$cmd->setType('info');
-				$cmd->setSubType('string');
-				$cmd->setName(__('Notification humains', __FILE__));
-				$cmd->save();
-			}
-			$cmd = $eqLogic->getCmd('info', 'presence_record_vehicles');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('presence_record_vehicles');
-				$cmd->setType('info');
-				$cmd->setSubType('string');
-				$cmd->setName(__('Notification voitures', __FILE__));
-				$cmd->save();
-			}
-			$cmd = $eqLogic->getCmd('info', 'presence_record_animals');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('presence_record_animals');
-				$cmd->setType('info');
-				$cmd->setSubType('string');
-				$cmd->setName(__('Notification animaux', __FILE__));
-				$cmd->save();
-			}
-			$cmd = $eqLogic->getCmd('info', 'presence_record_movements');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('presence_record_movements');
-				$cmd->setType('info');
-				$cmd->setSubType('string');
-				$cmd->setName(__('Notification mouvements', __FILE__));
-				$cmd->save();
-			}
-			
-			$cmd = $eqLogic->getCmd('action', 'set_presence_record_humans');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('set_presence_record_humans');
-				$cmd->setType('action');
-				$cmd->setSubType('message');
-				$cmd->setName(__('Définir notification humains', __FILE__));
-				$cmd->setDisplay('message_disable', 1);
-				$cmd->save();
-			}
-			$cmd = $eqLogic->getCmd('action', 'set_presence_record_animals');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('set_presence_record_animals');
-				$cmd->setType('action');
-				$cmd->setSubType('message');
-				$cmd->setName(__('Définir notification animaux', __FILE__));
-				$cmd->setDisplay('message_disable', 1);
-				$cmd->save();
-			}
-			$cmd = $eqLogic->getCmd('action', 'set_presence_record_vehicles');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('set_presence_record_vehicles');
-				$cmd->setType('action');
-				$cmd->setSubType('message');
-				$cmd->setName(__('Définir notification voitures', __FILE__));
-				$cmd->setDisplay('message_disable', 1);
-				$cmd->save();
-			}
-			$cmd = $eqLogic->getCmd('action', 'set_presence_record_movements');
-			if (!is_object($cmd)) {
-				$cmd = new netatmoWelcomeCmd();
-				$cmd->setEqLogic_id($eqLogic->getId());
-				$cmd->setLogicalId('set_presence_record_movements');
-				$cmd->setType('action');
-				$cmd->setSubType('message');
-				$cmd->setName(__('Définir notification mouvements', __FILE__));
-				$cmd->setDisplay('message_disable', 1);
-				$cmd->save();
-			}
 			foreach ($home['persons'] as $person) {
 				if (!isset($person['pseudo']) || $person['pseudo'] == '') {
 					continue;
@@ -329,27 +226,29 @@ class netatmoWelcome extends eqLogic {
 					$cmd->setName(__('Status alim', __FILE__));
 					$cmd->save();
 				}
-				$cmd = $eqLogic->getCmd('action', 'monitoringOn');
-				if (!is_object($cmd)) {
-					$cmd = new netatmoWelcomeCmd();
-					$cmd->setEqLogic_id($eqLogic->getId());
-					$cmd->setLogicalId('monitoringOn');
-					$cmd->setType('action');
-					$cmd->setSubType('other');
-					$cmd->setIsVisible(0);
-					$cmd->setName(__('Activer surveillance', __FILE__));
-					$cmd->save();
-				}
-				$cmd = $eqLogic->getCmd('action', 'monitoringOff');
-				if (!is_object($cmd)) {
-					$cmd = new netatmoWelcomeCmd();
-					$cmd->setEqLogic_id($eqLogic->getId());
-					$cmd->setLogicalId('monitoringOff');
-					$cmd->setType('action');
-					$cmd->setSubType('other');
-					$cmd->setIsVisible(0);
-					$cmd->setName(__('Désactiver surveillance', __FILE__));
-					$cmd->save();
+				if($camera['type'] == 'NOC'){
+					$cmd = $eqLogic->getCmd('action', 'monitoringOn');
+					if (!is_object($cmd)) {
+						$cmd = new netatmoWelcomeCmd();
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setLogicalId('monitoringOn');
+						$cmd->setType('action');
+						$cmd->setSubType('other');
+						$cmd->setIsVisible(0);
+						$cmd->setName(__('Activer surveillance', __FILE__));
+						$cmd->save();
+					}
+					$cmd = $eqLogic->getCmd('action', 'monitoringOff');
+					if (!is_object($cmd)) {
+						$cmd = new netatmoWelcomeCmd();
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setLogicalId('monitoringOff');
+						$cmd->setType('action');
+						$cmd->setSubType('other');
+						$cmd->setIsVisible(0);
+						$cmd->setName(__('Désactiver surveillance', __FILE__));
+						$cmd->save();
+					}
 				}
 				if(isset($camera['modules'])){
 					foreach ($camera['modules'] as &$module) {
@@ -494,17 +393,6 @@ class netatmoWelcome extends eqLogic {
 					$message = date('Y-m-d H:i:s', $details['time']) . ' - ' . $details['message'];
 					$eqLogic->checkAndUpdateCmd('lastOneEvent', $message);
 				}
-				try {
-					$webdata = self::getWebData('home',$home['id']);
-					if($webdata !== null && is_array($webdata)){
-						$eqLogic->checkAndUpdateCmd('presence_record_humans', $webdata['presence_record_humans']);
-						$eqLogic->checkAndUpdateCmd('presence_record_vehicles', $webdata['presence_record_vehicles']);
-						$eqLogic->checkAndUpdateCmd('presence_record_animals', $webdata['presence_record_animals']);
-						$eqLogic->checkAndUpdateCmd('presence_record_movements', $webdata['presence_record_movements']);
-					}
-				} catch (\Exception $e) {
-					
-				}
 				$message = '';
 				$eventsByEqLogic = array();
 				foreach ($events as $event) {
@@ -610,30 +498,6 @@ class netatmoWelcome extends eqLogic {
 		}
 	}
 	
-	public static function getWebData($_type,$_id){
-		if(self::$_webData == null || !is_array(self::$_webData)){
-			self::$_webData = self::getWebClient()->getHomeData();
-			if(self::getWebClient()->getToken() != config::byKey('web_token','netatmoWelcome')){
-				config::save('web_token',self::$_webclient->getToken(),'netatmoWelcome');
-			}
-		}
-		if($_type == 'camera'){
-			foreach (self::$_webData['body']['homes'] as $home) {
-				foreach ($home['camera'] as $camera) {
-					if($camera['id'] == $_id){
-						return $camera;
-					}
-				}
-			}
-		}elseif($_type == 'home'){
-			foreach (self::$_webData['body']['homes'] as $home) {
-				if($home['id'] == $_id){
-					return $home;
-				}
-			}
-		}
-		return null;
-	}
 	
 	public static function downloadSnapshot($_snapshot){
 		if($_snapshot == ''){
@@ -716,14 +580,6 @@ class netatmoWelcomeCmd extends cmd {
 			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'off');
 		}else if(strpos($this->getLogicalId(),'monitoringOn') !== false){
 			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'on');
-		}else if($this->getLogicalId() == 'set_presence_record_humans'){
-			netatmoWelcome::getWebClient()->_request('POST',netatmoWebAPI::URL_HOST.'/api/updatehome','home_id='.$this->getEqLogic()->getLogicalId().'&presence_settings[presence_record_humans]='.$_options['title']);
-		}else if($this->getLogicalId() == 'set_presence_record_animals'){
-			netatmoWelcome::getWebClient()->_request('POST',netatmoWebAPI::URL_HOST.'/api/updatehome','home_id='.$this->getEqLogic()->getLogicalId().'&presence_settings[presence_record_animals]='.$_options['title']);
-		}else if($this->getLogicalId() == 'set_presence_record_vehicles'){
-			netatmoWelcome::getWebClient()->_request('POST',netatmoWebAPI::URL_HOST.'/api/updatehome','home_id='.$this->getEqLogic()->getLogicalId().'&presence_settings[presence_record_vehicles]='.$_options['title']);
-		}else if($this->getLogicalId() == 'set_presence_record_movements'){
-			netatmoWelcome::getWebClient()->_request('POST',netatmoWebAPI::URL_HOST.'/api/updatehome','home_id='.$this->getEqLogic()->getLogicalId().'&presence_settings[presence_record_movements]='.$_options['title']);
 		}
 		netatmoWelcome::refresh_info();
 	}
