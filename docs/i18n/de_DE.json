@@ -15,7 +15,7 @@
         "Il est vivement conseillé de supprimer les équipement crées et de refaire une synchronisation": "",
         "21\/06\/2018": "",
         "Correction du framework Netatmo (nouvelle données renvoyé par Netatmo non pris en compte dans leur code)": "",
-        "03\/04\/2018": "",
+        "03\/04\/2018": "2018.03.04",
         "Correction du bug des images": ""
     },
     "index.md": {
@@ -25,7 +25,7 @@
         "connexion Netatmo": "",
         "Client ID": "Kunden-ID",
         "votre client ID (voir partie configuration)": "",
-        "Client secret": "",
+        "Client secret": "Geheimer Kunde",
         "votre client secret (voir partie configuration)": "",
         "Nom d'utilisateur": "Benutzername",
         "nom d'utilisateur de votre compte netatmo": "",

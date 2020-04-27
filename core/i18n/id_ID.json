@@ -1,15 +1,15 @@
 {
     "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
-        "Client ID": "",
-        "Client secret": "",
+        "Client ID": "ID pelanggan",
+        "Client secret": "Pembelanja rahasia",
         "Nom d'utilisateur": "Nama pemakai",
         "Mot de passe": "Password",
         "Récupérer les infos du plugin": "",
         "Netatmo Thermostat": "",
         "Netatmo Station": "",
-        "Synchroniser": "",
-        "Synchroniser mes équipements": "",
-        "Synchronisation réussie": "",
+        "Synchroniser": "Menyinkronkan",
+        "Synchroniser mes équipements": "Sinkronisasi Koubachi sensor saya",
+        "Synchronisation réussie": "Sinkronisasi berhasil",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
     },
@@ -39,7 +39,7 @@
         "Detecteur d'ouverture": "",
         "Sirène": "",
         "Nom": "Nama",
-        "Option": "",
+        "Option": "Pilihan",
         "Action": "Tindakan"
     },
     "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {

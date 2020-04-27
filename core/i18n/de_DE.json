@@ -1,15 +1,15 @@
 {
     "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
         "Client ID": "Kunden-ID",
-        "Client secret": "",
+        "Client secret": "Geheimer Kunde",
         "Nom d'utilisateur": "Benutzername",
         "Mot de passe": "Passwort",
         "Récupérer les infos du plugin": "",
         "Netatmo Thermostat": "",
         "Netatmo Station": "",
         "Synchroniser": "Synchronize",
-        "Synchroniser mes équipements": "",
-        "Synchronisation réussie": "",
+        "Synchroniser mes équipements": "Meine Geräte synchronisieren ",
+        "Synchronisation réussie": "Erfolgreiche Synchronisation",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
     },
@@ -66,7 +66,7 @@
         "Désactiver surveillance": "",
         "Etat": "Zustand",
         "Surveillance": "",
-        "Alimentation": "",
+        "Alimentation": "Versorgung",
         "Erreur sur synchro netatmo welcome ": "",
         "Derniers évènements": "",
         "Evènement": "Ereignis",

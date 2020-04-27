@@ -1,15 +1,15 @@
 {
     "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
-        "Client ID": "",
-        "Client secret": "",
+        "Client ID": "ID Client",
+        "Client secret": "Chiave segreta",
         "Nom d'utilisateur": "Nome utente",
         "Mot de passe": "Password",
         "Récupérer les infos du plugin": "",
         "Netatmo Thermostat": "",
         "Netatmo Station": "",
         "Synchroniser": "Sincronizzare",
-        "Synchroniser mes équipements": "",
-        "Synchronisation réussie": "",
+        "Synchroniser mes équipements": "Sincronizza con i miei dispositivi",
+        "Synchronisation réussie": "Sincronizzazione avvenuta con successo",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
     },
@@ -39,7 +39,7 @@
         "Detecteur d'ouverture": "",
         "Sirène": "",
         "Nom": "Nome",
-        "Option": "",
+        "Option": "Opzione",
         "Action": "Azione"
     },
     "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {

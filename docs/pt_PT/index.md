@@ -5,15 +5,15 @@
 
  :
 
--   **** : 
+-   **ID do cliente** : 
 
--   **** : 
+-   **Cliente secreto** : 
 
 -   **Nome de Usuário** : 
 
 -   **Senha** : 
 
--   **** : 
+-   **Sincronizar** : 
     
     .
 

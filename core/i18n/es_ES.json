@@ -39,7 +39,7 @@
         "Detecteur d'ouverture": "",
         "Sirène": "Sirena",
         "Nom": "Nombre",
-        "Option": "",
+        "Option": "Opción",
         "Action": "Acción"
     },
     "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
@@ -66,7 +66,7 @@
         "Désactiver surveillance": "",
         "Etat": "Estado",
         "Surveillance": "",
-        "Alimentation": "",
+        "Alimentation": "Suministro",
         "Erreur sur synchro netatmo welcome ": "",
         "Derniers évènements": "",
         "Evènement": "Evento",
