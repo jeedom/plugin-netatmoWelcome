@@ -1,81 +1,81 @@
-
+Complemento para recuperar información del equipo de seguridad de Netatmo
 
 # Configuración del plugin
 
+Una vez que se instala el complemento, debe completar su información
+Conexión Netatmo :
 
- :
+-   **ID del cliente** : su ID de cliente (vea la sección de configuración)
 
--   **ID del cliente** : 
+-   **Client secret** : su cliente secreto (vea la sección de configuración)
 
--   **Client secret** : 
+-   **Nombre de usuario** : nombre de usuario de su cuenta netatmo
 
--   **Nombre de usuario** : 
+-   **Contraseña** : contraseña para su cuenta de Netatmo
 
--   **Contraseña** : 
+-   **Synchroniser** : le permite sincronizar Jeedom con su cuenta
+    Netamo para descubrir automáticamente su equipo Netamo. Un
+    hacer después de guardar la configuración anterior.
 
--   **Sincronizar** : 
-    
-    .
+# Recuperando información de conexión
 
-# 
+Para integrar su Bienvenida, debe tener un cliente\_id y un
+client\_secret généré sur le site <http://dev.netatmo.com>.
 
-
-:>.
-
- :
+Una vez que haga clic en Inicio :
 
 ![netatmoWelcome10](../images/netatmoWelcome10.png)
 
-"
+Luego en "crear una aplicación"
 
 ![netatmoWelcome11](../images/netatmoWelcome11.png)
 
-
+Identifícate con tu correo electrónico y contraseña
 
 ![netatmoWelcome12](../images/netatmoWelcome12.png)
 
-
- :
+Complete los campos "Nombre" y "Descripción" (lo que desee
+ponlo no importa) :
 
 ![netatmoWelcome13](../images/netatmoWelcome13.png)
 
-"
-"
+Luego, en la parte inferior de la página, marque la casilla "Acepto los términos de uso"
+luego haga clic en "Crear"
 
 ![netatmoWelcome14](../images/netatmoWelcome14.png)
 
-
-
-
+Recupere la información de "ID de cliente" y "Cliente secreto" y copie el
+en la parte de configuración del complemento en Jeedom (ver capítulo
+anterior)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
 # Configuración del equipo
 
+Se puede acceder a la configuración del equipo Netatmo desde el menú
+plugin -> Seguridad -> Seguridad Netatmo
 
+Una vez que haga clic en un dispositivo, encontrará aquí toda la configuración de su equipo. :
 
-
- :
-
--   **** : 
+-   **Nombre del dispositivo Netatmo** : nombre de su equipo Netatmo
 -   **Objeto padre** : indica el objeto padre al que pertenece el equipo
--   **Activar** : activa su equipo
+-   **Activer** : activa su equipo
 -   **Visible** : lo hace visible en el tablero
 
 A continuación encontrará la lista de pedidos. :
 
--   
+-   el nombre del comando
 -   Guardar historial : permite historizar los datos
 -   configuración avanzada (ruedas con muescas pequeñas) : Muestra
-    
+    configuración avanzada del comando (método de registro, widget, etc.)
 -   Probar : Se usa para probar el comando
 
-# Preguntas frecuentes
+# FAQ
 
->****
+>**No tengo los eventos en tiempo real pero después de 15 minutos**
 >
->. 
+>Para obtener un retorno de eventos en tiempo real (activación de alarma de incendio, persona que pasa frente a la cámara ...) DEBE ABSOLUTAMENTE tener su libertad con una URL externa en https con un certificado válido en el puerto 443 (y solo este puerto). Es una obligación impuesta por netatmo
 
->****
+>**No puedo desactivar / activar la vigilancia**
 >
->
+>Atención, si coloca un código, esta función no es posible mediante el complemento jeedom
