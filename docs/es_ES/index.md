@@ -1,26 +1,21 @@
+# Complemento de seguridad Neatmo (seguridad)
+
 Complemento para recuperar información del equipo de seguridad de Netatmo
 
 # Configuración del plugin
 
-Una vez que se instala el complemento, debe completar su información
-Conexión Netatmo :
+Una vez que se instala el complemento, debe ingresar la información de conexión de Netatmo :
 
 -   **ID del cliente** : su ID de cliente (vea la sección de configuración)
-
 -   **Client secret** : su cliente secreto (vea la sección de configuración)
-
 -   **Nombre de usuario** : nombre de usuario de su cuenta netatmo
-
 -   **Contraseña** : contraseña para su cuenta de Netatmo
-
--   **Synchroniser** : le permite sincronizar Jeedom con su cuenta
-    Netamo para descubrir automáticamente su equipo Netamo. Un
+-   **Synchroniser** : le permite sincronizar Jeedom con su cuenta de Netamo para descubrir automáticamente su equipo Netamo. Un
     hacer después de guardar la configuración anterior.
 
 # Recuperando información de conexión
 
-Para integrar su Bienvenida, debe tener un cliente\_id y un
-client\_secret généré sur le site <http://dev.netatmo.com>.
+Pour intégrer votre Welcome, vous devez posséder un client\_id et unclient\_secret généré sur le site <http://dev.netatmo.com>.
 
 Una vez que haga clic en Inicio :
 
@@ -34,26 +29,21 @@ Identifícate con tu correo electrónico y contraseña
 
 ![netatmoWelcome12](../images/netatmoWelcome12.png)
 
-Complete los campos "Nombre" y "Descripción" (lo que desee
-ponlo no importa) :
+Complete los campos "Nombre" y "Descripción" (no importa lo que ingrese) :
 
 ![netatmoWelcome13](../images/netatmoWelcome13.png)
 
-Luego, en la parte inferior de la página, marque la casilla "Acepto los términos de uso"
-luego haga clic en "Crear"
+Luego, en la parte inferior de la página, marque la casilla "Acepto los términos de uso" y luego haga clic en "Crear"
 
 ![netatmoWelcome14](../images/netatmoWelcome14.png)
 
-Recupere la información de "ID de cliente" y "Cliente secreto" y copie el
-en la parte de configuración del complemento en Jeedom (ver capítulo
-anterior)
+Recupere la información de "ID de cliente" y "Cliente secreto" y cópielos en la parte de configuración del complemento en Jeedom (consulte el capítulo anterior)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
 # Configuración del equipo
 
-Se puede acceder a la configuración del equipo Netatmo desde el menú
-plugin -> Seguridad -> Seguridad Netatmo
+Se puede acceder a la configuración de los dispositivos Netatmo desde el menú del complemento -> Seguridad -> Seguridad Netatmo
 
 Una vez que haga clic en un dispositivo, encontrará aquí toda la configuración de su equipo. :
 
