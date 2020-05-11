@@ -37,15 +37,13 @@ Puis tout en bas de la page cochez la case "I accept the terms of use"puis cliqu
 
 ![netatmoWelcome14](../images/netatmoWelcome14.png)
 
-Recuperer les informations "CLient id" et "Client secret" et copier les
-dans la partie configuration du plugin dans Jeedom (voir chapitre
-précedent)
+Recuperer les informations "CLient id" et "Client secret" et copier les dans la partie configuration du plugin dans Jeedom (voir chapitre précedent)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
 # Configuration des équipements
 
-La configuration des équipements Netatmo est accessible à partir du menuplugin -> Securité -> Netatmo Security
+La configuration des équipements Netatmo est accessible à partir du menu plugin -> Securité -> Netatmo Security
 
 Une fois que vous cliquez sur un équipement vous retrouvez ici toute la configuration de votre équipement :
 
