@@ -1,26 +1,21 @@
+# Plugin Neatmo Security (Security)
+
 Plugin permettant de récupérer les informations des équipements Netatmo Security
 
 # Configuration du plugin
 
-Une fois le plugin installé, il vous faut renseigner vos informations de
-connexion Netatmo :
+Une fois le plugin installé, il vous faut renseigner vos informations deconnexion Netatmo :
 
 -   **Client ID** : votre client ID (voir partie configuration)
-
 -   **Client secret** : votre client secret (voir partie configuration)
-
 -   **Nom d’utilisateur** : nom d’utilisateur de votre compte netatmo
-
 -   **Mot de passe** : mot de passe de votre compte Netatmo
-
--   **Synchroniser** : permet de synchroniser Jeedom avec votre compte
-    Netamo pour découvrir automatiquement vos équipements Netamo. A
+-   **Synchroniser** : permet de synchroniser Jeedom avec votre compte Netamo pour découvrir automatiquement vos équipements Netamo. A
     faire après avoir sauvegardé les paramètres précedent.
 
 # Recupération des informations de connexion
 
-Pour intégrer votre Welcome, vous devez posséder un client\_id et un
-client\_secret généré sur le site <http://dev.netatmo.com>.
+Pour intégrer votre Welcome, vous devez posséder un client\_id et unclient\_secret généré sur le site <http://dev.netatmo.com>.
 
 Une fois dessus cliquez sur start :
 
@@ -34,13 +29,11 @@ Identifiez vous, avec votre mail et mot de passe
 
 ![netatmoWelcome12](../images/netatmoWelcome12.png)
 
-Remplissez les champs "Name" et "Description" (peux importe ce que vous
-mettez ca n’a aucune importance) :
+Remplissez les champs "Name" et "Description" (peux importe ce que vousmettez ca n’a aucune importance) :
 
 ![netatmoWelcome13](../images/netatmoWelcome13.png)
 
-Puis tout en bas de la page cochez la case "I accept the terms of use"
-puis cliquez sur "Create"
+Puis tout en bas de la page cochez la case "I accept the terms of use"puis cliquez sur "Create"
 
 ![netatmoWelcome14](../images/netatmoWelcome14.png)
 
@@ -52,8 +45,7 @@ précedent)
 
 # Configuration des équipements
 
-La configuration des équipements Netatmo est accessible à partir du menu
-plugin -> Securité -> Netatmo Security
+La configuration des équipements Netatmo est accessible à partir du menuplugin -> Securité -> Netatmo Security
 
 Une fois que vous cliquez sur un équipement vous retrouvez ici toute la configuration de votre équipement :
 
