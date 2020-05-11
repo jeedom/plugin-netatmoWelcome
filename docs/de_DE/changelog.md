@@ -1,6 +1,6 @@
->**IMPORTANT**
+>**Wichtig**
 >
->Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt.
+>Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
 # 16.10.2019
 
@@ -17,7 +17,7 @@
 - Umbenennung in Netatmo-Sicherheit
 
 
-Wichtig : Diese Version ist eine vollständige Neufassung des Plugins, daher gibt es Auswirkungen auf Widgets (was jetzt im Kern Standard ist, wesentliche Änderung in der Anzeige dieses Plugins).. Es wird dringend empfohlen, die erstellten Geräte zu löschen und eine Synchronisierung zu wiederholen
+Wichtig : Diese Version ist eine vollständige Neufassung des Plugins, daher gibt es Auswirkungen auf Widgets (was jetzt im Kern Standard ist, wesentliche Änderung in der Anzeige dieses Plugins). Es wird dringend empfohlen, die erstellten Geräte zu löschen und eine Synchronisierung zu wiederholen
 
 # 21.06.2008
 

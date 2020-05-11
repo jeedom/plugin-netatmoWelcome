@@ -10,7 +10,7 @@ Once the plugin is installed, you need to enter your Netatmo connection informat
 -   **Client secret** : your secret client (see configuration section)
 -   **Username** : username of your netatmo account
 -   **Password** : password for your Netatmo account
--   **Synchroniser** : allows you to synchronize Jeedom with your Netamo account to automatically discover your Netamo equipment. AT
+-   **Synchronize** : allows you to synchronize Jeedom with your Netamo account to automatically discover your Netamo equipment. AT
     do after saving the previous settings.
 
 # Retrieving connection information
@@ -49,7 +49,7 @@ Once you click on a device you will find here all the configuration of your equi
 
 -   **Name of the Netatmo device** : name of your Netatmo equipment
 -   **Parent object** : indicates the parent object to which the equipment belongs
--   **Activer** : makes your equipment active
+-   **Activate** : makes your equipment active
 -   **Visible** : makes it visible on the dashboard
 
 Below you find the list of orders :

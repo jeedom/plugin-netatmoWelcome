@@ -10,7 +10,7 @@ Depois que o plug-in estiver instalado, você precisará inserir suas informaç�
 -   **Cliente secreto** : seu cliente secreto (consulte a seção de configuração)
 -   **Nome de Usuário** : nome de usuário da sua conta netatmo
 -   **Senha** : senha para sua conta Netatmo
--   **Synchroniser** : permite sincronizar o Jeedom com sua conta Netamo para descobrir automaticamente seu equipamento Netamo. Um
+-   **Sincronizar** : permite sincronizar o Jeedom com sua conta Netamo para descobrir automaticamente seu equipamento Netamo. Um
     faça depois de salvar as configurações anteriores.
 
 # Recuperando informações de conexão
@@ -49,8 +49,8 @@ Depois de clicar em um dispositivo, você encontrará aqui toda a configuração
 
 -   **Nome do dispositivo Netatmo** : nome do seu equipamento Netatmo
 -   **Objeto pai** : indica o objeto pai ao qual o equipamento pertence
--   **Activer** : torna seu equipamento ativo
--   **Visible** : torna visível no painel
+-   **Ativar** : torna seu equipamento ativo
+-   **Visivél** : torna visível no painel
 
 Abaixo você encontra a lista de pedidos :
 

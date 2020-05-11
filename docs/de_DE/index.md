@@ -10,7 +10,7 @@ Sobald das Plugin installiert ist, müssen Sie Ihre Netatmo-Verbindungsinformati
 -   **Geheimer Kunde** : Ihr geheimer Client (siehe Konfigurationsabschnitt)
 -   **Benutzername** : Benutzername Ihres Netatmo-Kontos
 -   **Passwort** : Passwort für Ihr Netatmo-Konto
--   **Synchroniser** : Mit dieser Option können Sie Jeedom mit Ihrem Netamo-Konto synchronisieren, um Ihre Netamo-Geräte automatisch zu erkennen. A.
+-   **Synchronize** : Mit dieser Option können Sie Jeedom mit Ihrem Netamo-Konto synchronisieren, um Ihre Netamo-Geräte automatisch zu erkennen. A
     tun, nachdem Sie die vorherigen Einstellungen gespeichert haben.
 
 # Verbindungsinformationen abrufen
@@ -37,7 +37,7 @@ Aktivieren Sie dann ganz unten auf der Seite das Kontrollkästchen "Ich akzeptie
 
 ![netatmoWelcome14](../images/netatmoWelcome14.png)
 
-Stellen Sie die Informationen "CLient ID" und "Secret Client" wieder her und kopieren Sie sie in den Konfigurationsteil des Plugins in Jeedom (siehe vorheriges Kapitel).
+Stellen Sie die Informationen "CLient ID" und "Secret Client" wieder her und kopieren Sie sie in den Konfigurationsteil des Plugins in Jeedom (siehe vorheriges Kapitel)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
@@ -49,8 +49,8 @@ Sobald Sie auf ein Gerät klicken, finden Sie hier die gesamte Konfiguration Ihr
 
 -   **Name des Netatmo-Geräts** : Name Ihrer Netatmo-Ausrüstung
 -   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört
--   **Activer** : macht Ihre Ausrüstung aktiv
--   **Visible** : macht es auf dem Dashboard sichtbar
+-   **Aktivieren** : macht Ihre Ausrüstung aktiv
+-   **Sichtbar** : macht es auf dem Dashboard sichtbar
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
@@ -64,7 +64,7 @@ Nachfolgend finden Sie die Liste der Bestellungen :
 
 >**Ich habe die Ereignisse nicht in Echtzeit, sondern nach 15 Minuten**
 >
->Um Ereignisse in Echtzeit zurückgeben zu können (Auslösen eines Feueralarms, Person, die vor der Kamera vorbeikommt usw.), MUSS Ihr Jeedom ABSOLUT eine externe URL in https mit einem gültigen Zertifikat an Port 443 (und nur an diesem Port) haben.. Es ist eine Verpflichtung von Netatmo
+>Um Ereignisse in Echtzeit zurückgeben zu können (Auslösen eines Feueralarms, Person, die vor der Kamera vorbeikommt usw.), MUSS Ihr Jeedom ABSOLUT eine externe URL in https mit einem gültigen Zertifikat an Port 443 (und nur an diesem Port) haben. Es ist eine Verpflichtung von Netatmo
 
 >**Ich kann die Überwachung nicht deaktivieren / aktivieren**
 >

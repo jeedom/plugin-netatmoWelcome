@@ -10,7 +10,7 @@ Una vez que se instala el complemento, debe ingresar la información de conexió
 -   **Client secret** : su cliente secreto (vea la sección de configuración)
 -   **Nombre de usuario** : nombre de usuario de su cuenta netatmo
 -   **Contraseña** : contraseña para su cuenta de Netatmo
--   **Synchroniser** : le permite sincronizar Jeedom con su cuenta de Netamo para descubrir automáticamente su equipo Netamo. Un
+-   **Sincronizar** : le permite sincronizar Jeedom con su cuenta de Netamo para descubrir automáticamente su equipo Netamo. Un
     hacer después de guardar la configuración anterior.
 
 # Recuperando información de conexión
@@ -45,14 +45,14 @@ Recupere la información de "ID de cliente" y "Cliente secreto" y cópielos en l
 
 Se puede acceder a la configuración de los dispositivos Netatmo desde el menú del complemento -> Seguridad -> Seguridad Netatmo
 
-Una vez que haga clic en un dispositivo, encontrará aquí toda la configuración de su equipo. :
+Una vez que haga clic en un dispositivo, encontrará aquí toda la configuración de su equipo :
 
 -   **Nombre del dispositivo Netatmo** : nombre de su equipo Netatmo
 -   **Objeto padre** : indica el objeto padre al que pertenece el equipo
--   **Activer** : activa su equipo
+-   **Activar** : activa su equipo
 -   **Visible** : lo hace visible en el tablero
 
-A continuación encontrará la lista de pedidos. :
+A continuación encontrará la lista de pedidos :
 
 -   el nombre del comando
 -   Guardar historial : permite historizar los datos

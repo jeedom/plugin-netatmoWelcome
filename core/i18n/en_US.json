@@ -11,7 +11,7 @@
         "Synchroniser mes équipements": "Synchronize my equipment",
         "Synchronisation réussie": "Synchronization successful",
         "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "This will recover the identifiers configured in the Netatmo Thermostat plugin, it will be necessary to save before starting synchronization. Do you want to proceed?",
-        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "\nThis will recover the identifiers configured in the Netatmo Weather plugin, it will be necessary to save before starting synchronization. Do you want to proceed?"
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "This will recover the identifiers configured in the Netatmo Weather plugin, it will be necessary to save before starting synchronization. Do you want to proceed?"
     },
     "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",

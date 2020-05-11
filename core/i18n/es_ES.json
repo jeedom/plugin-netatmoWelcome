@@ -27,7 +27,7 @@
         "Equipement": "Dispositivos",
         "Commandes": "Comandos",
         "Nom de l'équipement Welcome Netatmo": "Nombre del equipo Bienvenido Netatmo",
-        "Nom de l'équipement météo Netatmo": "Nombre del equipo meteorológico Netatmo.",
+        "Nom de l'équipement météo Netatmo": "Nombre del equipo meteorológico Netatmo",
         "Objet parent": "Objeto padre",
         "Aucun": "Ninguna",
         "Activer": "Activar",
@@ -50,7 +50,7 @@
         "Tester": "Probar"
     },
     "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
-        "Vous n\\'etes pas autorisé à effectuer cette action": "No tiene autorización para realizar esta acción."
+        "Vous n\\'etes pas autorisé à effectuer cette action": "No tiene autorización para realizar esta acción"
     },
     "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
