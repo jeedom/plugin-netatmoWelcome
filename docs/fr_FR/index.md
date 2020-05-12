@@ -1,4 +1,4 @@
-# Plugin Neatmo Security (Security)
+# Plugin Neatmo Security
 
 Plugin permettant de récupérer les informations des équipements Netatmo Security
 
