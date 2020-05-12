@@ -1,6 +1,75 @@
 {
-    "plugins/netatmoWelcome/plugin_info/info.xml": {
-        "Plugin pour les caméras netatmo Welcome": "Plugin for camera Netatmo Welcome",
-        "Aucune": "None"
+    "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
+        "Client ID": "Client ID",
+        "Client secret": "Client secret",
+        "Nom d'utilisateur": "Username",
+        "Mot de passe": "Password",
+        "Récupérer les infos du plugin": "Get plugin info",
+        "Netatmo Thermostat": "Netatmo Thermostat",
+        "Netatmo Station": "Netatmo Station",
+        "Synchroniser": "Synchronize",
+        "Synchroniser mes équipements": "Synchronize my equipment",
+        "Synchronisation réussie": "Synchronization successful",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "This will recover the identifiers configured in the Netatmo Thermostat plugin, it will be necessary to save before starting synchronization. Do you want to proceed?",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "This will recover the identifiers configured in the Netatmo Weather plugin, it will be necessary to save before starting synchronization. Do you want to proceed?"
+    },
+    "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
+        "401 - Accès non autorisé": "401 - Unauthorized access",
+        "Gestion": "Management",
+        "Configuration": "Setup",
+        "Mes caméras": "My cameras",
+        "Rechercher": "Search",
+        "Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer": "You do not have Netatmo Security equipment yet, click on configuration and click on synchronize to start",
+        "Configuration avancée": "Advanced configuration",
+        "Dupliquer": "Duplicate",
+        "Sauvegarder": "Save",
+        "Supprimer": "Delete",
+        "Equipement": "Equipment",
+        "Commandes": "Commands",
+        "Nom de l'équipement Welcome Netatmo": "Netatmo Welcome equipment name",
+        "Nom de l'équipement météo Netatmo": "Name of the Netatmo weather equipment",
+        "Objet parent": "Parent object",
+        "Aucun": "None",
+        "Activer": "Activate",
+        "Visible": "Visible",
+        "Type": "Type",
+        "Présence": "Presence",
+        "Welcome": "Welcome",
+        "Smokedetector": "Smokedetector",
+        "Detecteur d'ouverture": "Opening detector",
+        "Sirène": "Siren",
+        "Nom": "Name",
+        "Option": "Option",
+        "Action": "Action"
+    },
+    "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
+        "Nom": "Name",
+        "Afficher": "Show",
+        "Historiser": "Historize",
+        "Inverser": "Invert",
+        "Tester": "Test"
+    },
+    "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "You are not authorized to perform this action"
+    },
+    "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
+        "401 - Accès non autorisé": "401 - Unauthorized access",
+        "Aucune methode correspondante à : ": "No method corresponding to:"
+    },
+    "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
+        "Présence": "Presence",
+        "Derniere fois": "Last time",
+        "Status": "Status",
+        "Status SD": "SD Status",
+        "Status alim": "Power Status",
+        "Activer surveillance": "Enable surveillance",
+        "Désactiver surveillance": "Disable surveillance",
+        "Etat": "Statet",
+        "Surveillance": "Surveillance",
+        "Alimentation": "Power",
+        "Erreur sur synchro netatmo welcome ": "Error while syncing Netatmo Welcome",
+        "Derniers évènements": "Last events",
+        "Evènement": "Event",
+        "Rafraichir": "Refresh"
     }
 }

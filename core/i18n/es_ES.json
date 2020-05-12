@@ -1,6 +1,75 @@
 {
-    "plugins/netatmoWelcome/plugin_info/info.xml": {
-        "Plugin pour les caméras netatmo Welcome": "Plugin para las cámaras netatmo Welcome",
-        "Aucune": "Ninguna"
+    "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
+        "Client ID": "ID del cliente",
+        "Client secret": "Client secret",
+        "Nom d'utilisateur": "Nombre de usuario",
+        "Mot de passe": "Contraseña",
+        "Récupérer les infos du plugin": "Obtener información del plugin",
+        "Netatmo Thermostat": "Netatmo Thermostat",
+        "Netatmo Station": "Netatmo Station",
+        "Synchroniser": "Sincronizar",
+        "Synchroniser mes équipements": "Sincronizar mi equipo",
+        "Synchronisation réussie": "Sincronización exitosa",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Esto recuperará los identificadores configurados en el plugin Thermostat de Netatmo, será necesario guardar antes de comenzar la sincronización. ¿Quieres proceder?",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Esto recuperará los identificadores configurados en el complemento Netatmo Weather, será necesario guardar antes de iniciar la sincronización. ¿Quieres proceder?"
+    },
+    "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Gestion": "Gestión",
+        "Configuration": "Configuración",
+        "Mes caméras": "Mis camaras",
+        "Rechercher": "Buscar",
+        "Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer": "Aún no tiene el equipo de Netatmo Security, haga clic en configuración y haga clic en sincronizar para comenzar",
+        "Configuration avancée": "Configuración avanzada",
+        "Dupliquer": "Duplicar",
+        "Sauvegarder": "Guardar",
+        "Supprimer": "Borrar",
+        "Equipement": "Dispositivos",
+        "Commandes": "Comandos",
+        "Nom de l'équipement Welcome Netatmo": "Nombre del equipo Bienvenido Netatmo",
+        "Nom de l'équipement météo Netatmo": "Nombre del equipo meteorológico Netatmo",
+        "Objet parent": "Objeto padre",
+        "Aucun": "Ninguna",
+        "Activer": "Activar",
+        "Visible": "Visible",
+        "Type": "Tipo",
+        "Présence": "Presencia",
+        "Welcome": "Bienvenido",
+        "Smokedetector": "Detector de humo",
+        "Detecteur d'ouverture": "Detector de apertura",
+        "Sirène": "Sirena",
+        "Nom": "Nombre",
+        "Option": "Opción",
+        "Action": "Acción"
+    },
+    "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
+        "Nom": "Nombre",
+        "Afficher": "Mostrar",
+        "Historiser": "Guardar historial",
+        "Inverser": "Invertir",
+        "Tester": "Probar"
+    },
+    "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "No tiene autorización para realizar esta acción"
+    },
+    "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Aucune methode correspondante à : ": "Ningún método correspondiente a:"
+    },
+    "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
+        "Présence": "Presencia",
+        "Derniere fois": "Última vez",
+        "Status": "Estado",
+        "Status SD": "Estado SD",
+        "Status alim": "Estado de energía",
+        "Activer surveillance": "Activar monitoreo",
+        "Désactiver surveillance": "Desactivar monitoreo",
+        "Etat": "Estado",
+        "Surveillance": "Vigilancia",
+        "Alimentation": "Suministro",
+        "Erreur sur synchro netatmo welcome ": "Error de sincronización netatmo bienvenido",
+        "Derniers évènements": "Últimos eventos",
+        "Evènement": "Evento",
+        "Rafraichir": "Refrescar"
     }
 }

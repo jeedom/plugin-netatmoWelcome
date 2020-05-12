@@ -1,6 +1,75 @@
 {
-    "plugins/netatmoWelcome/plugin_info/info.xml": {
-        "Plugin pour les caméras netatmo Welcome": "Plugin untuk kamera Netatmo Selamat",
-        "Aucune": "Tak ada"
+    "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
+        "Client ID": "ID pelanggan",
+        "Client secret": "Pembelanja rahasia",
+        "Nom d'utilisateur": "Nama pemakai",
+        "Mot de passe": "Password",
+        "Récupérer les infos du plugin": "",
+        "Netatmo Thermostat": "",
+        "Netatmo Station": "",
+        "Synchroniser": "Menyinkronkan",
+        "Synchroniser mes équipements": "Sinkronisasi Koubachi sensor saya",
+        "Synchronisation réussie": "Sinkronisasi berhasil",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+    },
+    "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
+        "401 - Accès non autorisé": "401 - Akses tidak sah",
+        "Gestion": "Manajemen",
+        "Configuration": "Konfigurasi",
+        "Mes caméras": "",
+        "Rechercher": "Pencarian",
+        "Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Configuration avancée": "Konfigurasi lanjutan",
+        "Dupliquer": "Duplikat",
+        "Sauvegarder": "Menyimpan",
+        "Supprimer": "Menghapus",
+        "Equipement": "Peralatan",
+        "Commandes": "Perintah",
+        "Nom de l'équipement Welcome Netatmo": "",
+        "Nom de l'équipement météo Netatmo": "",
+        "Objet parent": "Objek induk",
+        "Aucun": "Tak ada",
+        "Activer": "Mengaktifkan",
+        "Visible": "Terlihat",
+        "Type": "Jenis",
+        "Présence": "",
+        "Welcome": "",
+        "Smokedetector": "",
+        "Detecteur d'ouverture": "",
+        "Sirène": "",
+        "Nom": "Nama",
+        "Option": "Pilihan",
+        "Action": "Tindakan"
+    },
+    "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
+        "Nom": "Nama",
+        "Afficher": "Memenitikan",
+        "Historiser": "Historicize",
+        "Inverser": "Membalikkan",
+        "Tester": "Coba"
+    },
+    "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": ""
+    },
+    "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
+        "401 - Accès non autorisé": "401 - Akses tidak sah",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
+    },
+    "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
+        "Présence": "",
+        "Derniere fois": "",
+        "Status": "",
+        "Status SD": "",
+        "Status alim": "",
+        "Activer surveillance": "",
+        "Désactiver surveillance": "",
+        "Etat": "Negara",
+        "Surveillance": "",
+        "Alimentation": "",
+        "Erreur sur synchro netatmo welcome ": "",
+        "Derniers évènements": "",
+        "Evènement": "Peristiwa",
+        "Rafraichir": "Dingin"
     }
 }

@@ -1,6 +1,75 @@
 {
-    "plugins/netatmoWelcome/plugin_info/info.xml": {
-        "Plugin pour les caméras netatmo Welcome": "Plugin für Netatmo Welcome Kameras",
-        "Aucune": "Ohne"
+    "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
+        "Client ID": "Kunden-ID",
+        "Client secret": "Geheimer Kunde",
+        "Nom d'utilisateur": "Benutzername",
+        "Mot de passe": "Passwort",
+        "Récupérer les infos du plugin": "Holen Sie sich Plugin-Informationen",
+        "Netatmo Thermostat": "Netatmo Thermostat",
+        "Netatmo Station": "Netatmo Station",
+        "Synchroniser": "Synchronize",
+        "Synchroniser mes équipements": "Meine Geräte synchronisieren",
+        "Synchronisation réussie": "Erfolgreiche Synchronisation",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Dadurch werden die im Netatmo Thermostat-Plugin konfigurierten Kennungen wiederhergestellt. Sie müssen vor dem Start der Synchronisierung gespeichert werden. Möchten Sie fortfahren?",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Dadurch werden die im Netatmo Weather-Plugin konfigurierten Kennungen wiederhergestellt. Sie müssen vor dem Start der Synchronisierung gespeichert werden. Möchten Sie fortfahren?"
+    },
+    "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "Gestion": "Verwaltung",
+        "Configuration": "Konfiguration",
+        "Mes caméras": "Meine Kameras",
+        "Rechercher": "Suchen nach",
+        "Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer": "Sie haben noch keine Netatmo Security-Ausrüstung. Klicken Sie auf Konfiguration und dann auf Synchronisieren, um zu starten",
+        "Configuration avancée": "Erweiterte Konfiguration",
+        "Dupliquer": "Duplikat",
+        "Sauvegarder": "Speichern",
+        "Supprimer": "Löschen",
+        "Equipement": "Gerät",
+        "Commandes": "Befehle",
+        "Nom de l'équipement Welcome Netatmo": "Name der Ausrüstung Willkommen Netatmo",
+        "Nom de l'équipement météo Netatmo": "Name der Netatmo-Wetterausrüstung",
+        "Objet parent": "Übergeordnetes Objekt",
+        "Aucun": "Ohne",
+        "Activer": "Aktivieren",
+        "Visible": "Sichtbar",
+        "Type": "Typ",
+        "Présence": "Präsenz",
+        "Welcome": "Willkommen",
+        "Smokedetector": "Rauchmelder",
+        "Detecteur d'ouverture": "Detektor öffnen",
+        "Sirène": "Meerjungfrau",
+        "Nom": "Name",
+        "Option": "Option",
+        "Action": "Aktion"
+    },
+    "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
+        "Nom": "Name",
+        "Afficher": "Anzeige",
+        "Historiser": "Chronik",
+        "Inverser": "Umgekehrt",
+        "Tester": "Test"
+    },
+    "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "Sie sind nicht berechtigt, diese Aktion auszuführen"
+    },
+    "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "Aucune methode correspondante à : ": "Keine Methode entsprechend:"
+    },
+    "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
+        "Présence": "Präsenz",
+        "Derniere fois": "Letztes Mal",
+        "Status": "STATUS",
+        "Status SD": "Status SD",
+        "Status alim": "Stromstatus",
+        "Activer surveillance": "Überwachung aktivieren",
+        "Désactiver surveillance": "Überwachung deaktivieren",
+        "Etat": "Zustand",
+        "Surveillance": "Überwachung",
+        "Alimentation": "Versorgung",
+        "Erreur sur synchro netatmo welcome ": "Synchronisationsfehler netatmo willkommen",
+        "Derniers évènements": "Neueste Veranstaltungen",
+        "Evènement": "Ereignis",
+        "Rafraichir": "Aktualisieren"
     }
 }
