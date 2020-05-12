@@ -27,7 +27,7 @@
         "IMPORTANT*": "Important*"
     },
     "index.md": {
-        "Plugin Neatmo Security (Security)": "Neatmo Security Plugin (Security)",
+        "Plugin Neatmo Security": "Neatmo Security plugin",
         "Plugin permettant de récupérer les informations des équipements Netatmo Security": "Plugin to retrieve information from Netatmo Security equipment",
         "Configuration du plugin": "Plugin configuration",
         "Une fois le plugin installé, il vous faut renseigner vos informations deconnexion Netatmo": "Once the plugin is installed, you need to enter your Netatmo connection information",

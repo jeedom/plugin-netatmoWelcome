@@ -1,4 +1,4 @@
-# Complemento de seguridad Neatmo (seguridad)
+# Complemento de seguridad Neatmo
 
 Complemento para recuperar información del equipo de seguridad de Netatmo
 

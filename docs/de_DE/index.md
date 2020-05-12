@@ -1,4 +1,4 @@
-# Neatmo Security Plugin (Sicherheit)
+# Neatmo Sicherheits-Plugin
 
 Plugin zum Abrufen von Informationen von Netatmo Security-Geräten
 
