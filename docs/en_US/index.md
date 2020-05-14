@@ -69,3 +69,7 @@ Below you find the list of orders :
 >**I cannot deactivate / activate surveillance**
 >
 >Attention if you put a code this function is not possible by the jeedom plugin
+
+>**I have an error of type "Incorrect string value: '\ xF0 \ x9F \ x98 \ x98 "when synchronizing**
+>
+>Check that you do not have a non-standard character (smiley type) on the name of a camera or a person

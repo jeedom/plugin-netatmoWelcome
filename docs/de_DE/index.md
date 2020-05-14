@@ -69,3 +69,7 @@ Nachfolgend finden Sie die Liste der Bestellungen :
 >**Ich kann die Überwachung nicht deaktivieren / aktivieren**
 >
 >Achtung, wenn Sie einen Code eingeben, ist diese Funktion vom jeedom-Plugin nicht möglich
+
+>**Ich habe einen Fehler vom Typ "Falscher Zeichenfolgenwert: '\ xF0 \ x9F \ x98 \ x98 "beim Synchronisieren**
+>
+>Stellen Sie sicher, dass der Name einer Kamera oder einer Person kein nicht standardmäßiges Zeichen (Smiley-Typ) enthält

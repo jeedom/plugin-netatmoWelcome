@@ -68,6 +68,9 @@
         "Pour avoir un retour en temps réel des évenements (déclenchement alarme incendie, personne qui passe devant la camera..) il faut ABSOLUMENT que votre jeedom ait une URL externe en https avec un certificat valide sur le port 443 (et uniquement ce port la)": "Pour avoir un retour en temps réel des évenements (déclenchement alarme incendie, personne qui passe devant la camera..) il faut ABSOLUMENT que votre jeedom ait une URL externe en https avec un certificat valide sur le port 443 (et uniquement ce port la)",
         "C'est une obligation imposé par netatmo": "C'est une obligation imposé par netatmo",
         "Je n'arrive pas a desactiver\/activer la surveillance": "Je n'arrive pas a desactiver\/activer la surveillance",
-        "Attention si vous avez mis un code cette fonction n'est pas possible par le plugin jeedom": "Attention si vous avez mis un code cette fonction n'est pas possible par le plugin jeedom"
+        "Attention si vous avez mis un code cette fonction n'est pas possible par le plugin jeedom": "Attention si vous avez mis un code cette fonction n'est pas possible par le plugin jeedom",
+        "J'ai une erreur de type \"Incorrect string value": "J'ai une erreur de type \"Incorrect string value",
+        "\\xF0\\x9F\\x98\\x98\" lors de la synchronisation": "\\xF0\\x9F\\x98\\x98\" lors de la synchronisation",
+        "Vérifiez que vous n'avez pas un caractere non standard (type smiley) sur le nom d'une camera ou d'une personne": "Vérifiez que vous n'avez pas un caractere non standard (type smiley) sur le nom d'une camera ou d'une personne"
     }
 }

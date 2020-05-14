@@ -69,3 +69,7 @@ Abaixo você encontra a lista de pedidos :
 >**Não consigo desativar / ativar a vigilância**
 >
 >Atenção, se você colocar um código, essa função não é possível pelo plugin jeedom
+
+>**Estou com um erro do tipo "Valor incorreto da string: '\ xF0 \ x9F \ x98 \ x98 "ao sincronizar**
+>
+>Verifique se você não possui um caractere não padrão (tipo smiley) no nome de uma câmera ou pessoa

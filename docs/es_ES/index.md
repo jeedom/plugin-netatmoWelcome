@@ -69,3 +69,7 @@ A continuación encontrará la lista de pedidos :
 >**No puedo desactivar / activar la vigilancia**
 >
 >Atención, si coloca un código, esta función no es posible mediante el complemento jeedom
+
+>**Tengo un error de tipo "Valor de cadena incorrecto: '\ xF0 \ x9F \ x98 \ x98 "al sincronizar**
+>
+>Compruebe que no tiene un carácter no estándar (tipo de carita sonriente) en el nombre de una cámara o una persona
