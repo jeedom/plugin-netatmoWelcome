@@ -1,26 +1,21 @@
+# Neatmo Sicherheits-Plugin
+
 Plugin zum Abrufen von Informationen von Netatmo Security-Geräten
 
 # Plugin Konfiguration
 
-Sobald das Plugin installiert ist, müssen Sie Ihre Informationen eingeben
-Netatmo-Verbindung :
+Sobald das Plugin installiert ist, müssen Sie Ihre Netatmo-Verbindungsinformationen eingeben :
 
 -   **Kunden-ID** : Ihre Client-ID (siehe Konfigurationsabschnitt)
-
 -   **Geheimer Kunde** : Ihr geheimer Client (siehe Konfigurationsabschnitt)
-
 -   **Benutzername** : Benutzername Ihres Netatmo-Kontos
-
 -   **Passwort** : Passwort für Ihr Netatmo-Konto
-
--   **Synchroniser** : ermöglicht es Ihnen, Jeedom mit Ihrem Konto zu synchronisieren
-    Netamo, um Ihre Netamo-Geräte automatisch zu erkennen. A.
+-   **Synchronize** : Mit dieser Option können Sie Jeedom mit Ihrem Netamo-Konto synchronisieren, um Ihre Netamo-Geräte automatisch zu erkennen. A
     tun, nachdem Sie die vorherigen Einstellungen gespeichert haben.
 
 # Verbindungsinformationen abrufen
 
-Um Ihre Begrüßung zu integrieren, benötigen Sie eine client\_id und eine
-client\_secret généré sur le site <http://dev.netatmo.com>.
+Pour intégrer votre Welcome, vous devez posséder un client\_id et unclient\_secret généré sur le site <http://dev.netatmo.com>.
 
 Klicken Sie einmal auf Start :
 
@@ -34,33 +29,28 @@ Identifizieren Sie sich mit Ihrer E-Mail-Adresse und Ihrem Passwort
 
 ![netatmoWelcome12](../images/netatmoWelcome12.png)
 
-Füllen Sie die Felder "Name" und "Beschreibung" aus (was auch immer Sie wollen
-es ist egal) :
+Füllen Sie die Felder "Name" und "Beschreibung" aus (was auch immer Sie eingeben, spielt keine Rolle) :
 
 ![netatmoWelcome13](../images/netatmoWelcome13.png)
 
-Aktivieren Sie dann unten auf der Seite das Kontrollkästchen "Ich akzeptiere die Nutzungsbedingungen"
-Klicken Sie dann auf "Erstellen"
+Aktivieren Sie dann ganz unten auf der Seite das Kontrollkästchen "Ich akzeptiere die Nutzungsbedingungen" und klicken Sie auf "Erstellen""
 
 ![netatmoWelcome14](../images/netatmoWelcome14.png)
 
-Rufen Sie die Informationen "CLient ID" und "Secret Client" ab und kopieren Sie die
-im Konfigurationsteil des Plugins in Jeedom (siehe Kapitel
-vorherige)
+Stellen Sie die Informationen "CLient ID" und "Secret Client" wieder her und kopieren Sie sie in den Konfigurationsteil des Plugins in Jeedom (siehe vorheriges Kapitel)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
 # Gerätekonfiguration
 
-Die Konfiguration der Netatmo-Ausrüstung ist über das Menü zugänglich
-Plugin -> Sicherheit -> Netatmo Sicherheit
+Auf die Konfiguration von Netatmo-Geräten kann über das Plugin-Menü -> Sicherheit -> Netatmo-Sicherheit zugegriffen werden
 
 Sobald Sie auf ein Gerät klicken, finden Sie hier die gesamte Konfiguration Ihrer Geräte :
 
 -   **Name des Netatmo-Geräts** : Name Ihrer Netatmo-Ausrüstung
 -   **Übergeordnetes Objekt** : Gibt das übergeordnete Objekt an, zu dem das Gerät gehört
--   **Activer** : macht Ihre Ausrüstung aktiv
--   **Visible** : macht es auf dem Dashboard sichtbar
+-   **Aktivieren** : macht Ihre Ausrüstung aktiv
+-   **Sichtbar** : macht es auf dem Dashboard sichtbar
 
 Nachfolgend finden Sie die Liste der Bestellungen :
 
@@ -74,7 +64,7 @@ Nachfolgend finden Sie die Liste der Bestellungen :
 
 >**Ich habe die Ereignisse nicht in Echtzeit, sondern nach 15 Minuten**
 >
->Um Ereignisse in Echtzeit zurückgeben zu können (Auslösen eines Feueralarms, Person, die vor der Kamera vorbeikommt usw.), MUSS Ihr Jeedom ABSOLUT eine externe URL in https mit einem gültigen Zertifikat an Port 443 (und nur an diesem Port) haben.. Es ist eine Verpflichtung von Netatmo
+>Um Ereignisse in Echtzeit zurückgeben zu können (Auslösen eines Feueralarms, Person, die vor der Kamera vorbeikommt usw.), MUSS Ihr Jeedom ABSOLUT eine externe URL in https mit einem gültigen Zertifikat an Port 443 (und nur an diesem Port) haben. Es ist eine Verpflichtung von Netatmo
 
 >**Ich kann die Überwachung nicht deaktivieren / aktivieren**
 >

@@ -1,3 +1,9 @@
+# Registro de cambios de seguridad de Netatmo
+
+>**Importante**
+>
+>Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
+
 # 16/10/2019
 
 - Actualizando el documento
@@ -5,8 +11,8 @@
 # 10/14/2019
 
 - Posibilidad de cambiar el estado de monitoreo
-- Soporte para sensores de apertura de puerta.
-- Soporte para cámaras de presencia.
+- Soporte para sensores de apertura de puerta
+- Soporte para cámaras de presencia
 - Soporte de sirena (solo comentarios de estado)
 - Revisión completa del motor de comunicación con Netatmo
 - Soporte detector de incendios
@@ -21,4 +27,4 @@ Importante : esta versión es una reescritura completa del complemento, por lo q
 
 # 03/04/2018
 
-- Corrección del error de imagen.
+- Corrección del error de imagen

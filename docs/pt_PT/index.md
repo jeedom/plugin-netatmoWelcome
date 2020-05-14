@@ -1,26 +1,21 @@
+# Plugin Neatmo Security
+
 Plug-in para recuperar informações do equipamento Netatmo Security
 
 # Configuração do plugin
 
-Após a instalação do plug-in, é necessário preencher suas informações
-Conexão Netatmo :
+Depois que o plug-in estiver instalado, você precisará inserir suas informações de conexão Netatmo :
 
 -   **ID do cliente** : seu ID de cliente (consulte a seção de configuração)
-
 -   **Cliente secreto** : seu cliente secreto (consulte a seção de configuração)
-
 -   **Nome de Usuário** : nome de usuário da sua conta netatmo
-
 -   **Senha** : senha para sua conta Netatmo
-
--   **Synchroniser** : permite sincronizar o Jeedom com sua conta
-    Netamo para descobrir automaticamente seu equipamento Netamo. Um
+-   **Sincronizar** : permite sincronizar o Jeedom com sua conta Netamo para descobrir automaticamente seu equipamento Netamo. Um
     faça depois de salvar as configurações anteriores.
 
 # Recuperando informações de conexão
 
-Para integrar sua Bem-vindo, você deve ter um cliente\_id e um
-client\_secret généré sur le site <http://dev.netatmo.com>.
+Pour intégrer votre Welcome, vous devez posséder un client\_id et unclient\_secret généré sur le site <http://dev.netatmo.com>.
 
 Uma vez clique em Iniciar :
 
@@ -34,33 +29,28 @@ Identifique-se, com seu email e senha
 
 ![netatmoWelcome12](../images/netatmoWelcome12.png)
 
-Preencha os campos "Nome" e "Descrição" (o que você quiser
-coloque isso não importa) :
+Preencha os campos "Nome" e "Descrição" (o que você inserir não importa) :
 
 ![netatmoWelcome13](../images/netatmoWelcome13.png)
 
-Em seguida, na parte inferior da página, marque a caixa "Aceito os termos de uso"
-depois clique em "Criar"
+Em seguida, na parte inferior da página, marque a caixa "Aceito os termos de uso" e clique em "Criar"
 
 ![netatmoWelcome14](../images/netatmoWelcome14.png)
 
-Recupere as informações "ID do cliente" e "Cliente secreto" e copie o
-na parte de configuração do plug-in no Jeedom (consulte o capítulo
-anterior)
+Recupere as informações "ID do cliente" e "Cliente secreto" e copie-as na parte de configuração do plug-in no Jeedom (consulte o capítulo anterior)
 
 ![netatmoWelcome15](../images/netatmoWelcome15.png)
 
 # Configuração do equipamento
 
-A configuração do equipamento Netatmo pode ser acessada no menu
-plugin -> Segurança -> Netatmo Security
+A configuração dos dispositivos Netatmo pode ser acessada no menu do plug-in -> Segurança -> Netatmo Security
 
 Depois de clicar em um dispositivo, você encontrará aqui toda a configuração do seu equipamento :
 
 -   **Nome do dispositivo Netatmo** : nome do seu equipamento Netatmo
 -   **Objeto pai** : indica o objeto pai ao qual o equipamento pertence
--   **Activer** : torna seu equipamento ativo
--   **Visible** : torna visível no painel
+-   **Ativar** : torna seu equipamento ativo
+-   **Visivél** : torna visível no painel
 
 Abaixo você encontra a lista de pedidos :
 
