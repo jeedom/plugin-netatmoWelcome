@@ -632,6 +632,8 @@ class netatmoWelcomeCmd extends cmd {
 			}else{
 				if($this->getConfiguration('mode')=='on'){
 					$config = '{"mode":"on","intensity":"100"}';
+				}else if($this->getConfiguration('mode')=='auto'){
+					$config = '{"mode":"auto"}';
 				}else{
 					$config = '{"mode":"off","intensity":"0"}';
 				}
