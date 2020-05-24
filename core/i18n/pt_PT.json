@@ -1,6 +1,75 @@
 {
-    "plugins/netatmoWelcome/plugin_info/info.xml": {
-        "Plugin pour les caméras netatmo Welcome": "Plugin para câmeras Netatmo Bem-vindo",
-        "Aucune": "Nenhum"
+    "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
+        "Client ID": "ID do cliente",
+        "Client secret": "Cliente secreto",
+        "Nom d'utilisateur": "Nome de Usuário",
+        "Mot de passe": "Senha",
+        "Récupérer les infos du plugin": "Obter informações do plug-in",
+        "Netatmo Thermostat": "Netatmo Thermostat",
+        "Netatmo Station": "Estação Netatmo",
+        "Synchroniser": "Sincronizar",
+        "Synchroniser mes équipements": "Sincronizar o meu equipamento",
+        "Synchronisation réussie": "Sincronização bem-sucedida",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Isso recuperará os identificadores configurados no plug-in Netatmo Thermostat, será necessário salvar antes de iniciar a sincronização. Deseja continuar?",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "Isso recuperará os identificadores configurados no plug-in Netatmo Weather, será necessário salvar antes de iniciar a sincronização. Deseja continuar?"
+    },
+    "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Gestion": "Gestão",
+        "Configuration": "Configuração",
+        "Mes caméras": "Minhas câmeras",
+        "Rechercher": "Pesquisa",
+        "Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer": "Você ainda não possui o equipamento Netatmo Security, clique em configuração e em sincronizar para iniciar",
+        "Configuration avancée": "Configuração avançada",
+        "Dupliquer": "Duplicar",
+        "Sauvegarder": "Salvar",
+        "Supprimer": "Remover",
+        "Equipement": "Equipamento",
+        "Commandes": "Comandos",
+        "Nom de l'équipement Welcome Netatmo": "Nome do equipamento Welcome Netatmo",
+        "Nom de l'équipement météo Netatmo": "Nome do equipamento meteorológico Netatmo",
+        "Objet parent": "Objeto pai",
+        "Aucun": "Nemhum",
+        "Activer": "Ativar",
+        "Visible": "Visivél",
+        "Type": "Tipo",
+        "Présence": "Presença",
+        "Welcome": "Bem-vindo",
+        "Smokedetector": "Detector de fumaça",
+        "Detecteur d'ouverture": "Detector de abertura",
+        "Sirène": "Sereia",
+        "Nom": "Nome",
+        "Option": "Opção",
+        "Action": "Ação"
+    },
+    "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
+        "Nom": "Nome",
+        "Afficher": "Display",
+        "Historiser": "Historicizar",
+        "Inverser": "Inverter",
+        "Tester": "Teste"
+    },
+    "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "Não está autorizado a executar esta ação"
+    },
+    "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
+    },
+    "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
+        "Présence": "Presença",
+        "Derniere fois": "Última vez",
+        "Status": "Estado",
+        "Status SD": "Status SD",
+        "Status alim": "Status de energia",
+        "Activer surveillance": "Ativar monitoramento",
+        "Désactiver surveillance": "Desativar monitoramento",
+        "Etat": "Estado",
+        "Surveillance": "Vigilância",
+        "Alimentation": "Alimento",
+        "Erreur sur synchro netatmo welcome ": "Erro de sincronização netatmo welcome",
+        "Derniers évènements": "Últimos eventos",
+        "Evènement": "Evento",
+        "Rafraichir": "Legal"
     }
 }

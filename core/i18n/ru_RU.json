@@ -1,6 +1,75 @@
 {
-    "plugins/netatmoWelcome/plugin_info/info.xml": {
-        "Plugin pour les caméras netatmo Welcome": "Плагин для камер Netatmo Добро пожаловать",
-        "Aucune": "Нет"
+    "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
+        "Client ID": "Идентификатор клиента",
+        "Client secret": "секрет покупателя",
+        "Nom d'utilisateur": "Имя пользователя",
+        "Mot de passe": "Пароль",
+        "Récupérer les infos du plugin": "",
+        "Netatmo Thermostat": "",
+        "Netatmo Station": "",
+        "Synchroniser": "Синхронизировать",
+        "Synchroniser mes équipements": "Синхронизировать мое оборудование",
+        "Synchronisation réussie": "Успешная синхронизация",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+    },
+    "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
+        "Gestion": "Управление",
+        "Configuration": "Конфигурация",
+        "Mes caméras": "",
+        "Rechercher": "поиск",
+        "Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Configuration avancée": "Расширенные настройки",
+        "Dupliquer": "дубликат",
+        "Sauvegarder": "Сохранить",
+        "Supprimer": "удаление",
+        "Equipement": "Оборудование",
+        "Commandes": "Команды",
+        "Nom de l'équipement Welcome Netatmo": "",
+        "Nom de l'équipement météo Netatmo": "",
+        "Objet parent": "Родительский объект",
+        "Aucun": "Нет",
+        "Activer": "активировать",
+        "Visible": "Видимый",
+        "Type": "Тип",
+        "Présence": "",
+        "Welcome": "",
+        "Smokedetector": "",
+        "Detecteur d'ouverture": "",
+        "Sirène": "",
+        "Nom": "Имя",
+        "Option": "Опция",
+        "Action": "Действие"
+    },
+    "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
+        "Nom": "Имя",
+        "Afficher": "дисплей",
+        "Historiser": "История",
+        "Inverser": "Обратный",
+        "Tester": "Тест"
+    },
+    "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": ""
+    },
+    "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
+        "401 - Accès non autorisé": "401 - Несанкционированный доступ",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
+    },
+    "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
+        "Présence": "",
+        "Derniere fois": "",
+        "Status": "Статус",
+        "Status SD": "",
+        "Status alim": "",
+        "Activer surveillance": "",
+        "Désactiver surveillance": "",
+        "Etat": "состояние",
+        "Surveillance": "",
+        "Alimentation": "",
+        "Erreur sur synchro netatmo welcome ": "",
+        "Derniers évènements": "",
+        "Evènement": "событие",
+        "Rafraichir": "Обновить"
     }
 }

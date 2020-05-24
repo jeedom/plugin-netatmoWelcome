@@ -1,6 +1,75 @@
 {
-    "plugins/netatmoWelcome/plugin_info/info.xml": {
-        "Plugin pour les caméras netatmo Welcome": "カメラNetatmoようこそためのプラグイン",
-        "Aucune": "何でもありません"
+    "plugins\/netatmoWelcome\/plugin_info\/configuration.php": {
+        "Client ID": "顧客ID",
+        "Client secret": "秘密の買い物客",
+        "Nom d'utilisateur": "ユーザー名",
+        "Mot de passe": "パスワード",
+        "Récupérer les infos du plugin": "",
+        "Netatmo Thermostat": "",
+        "Netatmo Station": "",
+        "Synchroniser": "同期",
+        "Synchroniser mes équipements": "私の機器を同期",
+        "Synchronisation réussie": "正常な同期",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Thermostat, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": "",
+        "Cela récupérera les identifiants configurés dans le plugin Netatmo Weather, il faudra sauver avant de lancer la synchronisation. Voulez vous procéder ? ": ""
+    },
+    "plugins\/netatmoWelcome\/desktop\/php\/netatmoWelcome.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Gestion": "管理",
+        "Configuration": "コンフィギュレーション",
+        "Mes caméras": "",
+        "Rechercher": "検索",
+        "Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer": "",
+        "Configuration avancée": "高度な構成",
+        "Dupliquer": "重複",
+        "Sauvegarder": "セーブ",
+        "Supprimer": "取り除きます",
+        "Equipement": "設備",
+        "Commandes": "コマンド",
+        "Nom de l'équipement Welcome Netatmo": "",
+        "Nom de l'équipement météo Netatmo": "",
+        "Objet parent": "親オブジェクト",
+        "Aucun": "何でもありません",
+        "Activer": "アクティブ",
+        "Visible": "目に見えます",
+        "Type": "タイプ",
+        "Présence": "",
+        "Welcome": "",
+        "Smokedetector": "",
+        "Detecteur d'ouverture": "",
+        "Sirène": "",
+        "Nom": "表題",
+        "Option": "オプション",
+        "Action": "アクション"
+    },
+    "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
+        "Nom": "表題",
+        "Afficher": "ディスプレイ",
+        "Historiser": "Historicize",
+        "Inverser": "逆",
+        "Tester": "テスト"
+    },
+    "plugins\/netatmoWelcome\/core\/php\/jeeWelcome.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "このアクションを実行する権限がありません"
+    },
+    "plugins\/netatmoWelcome\/core\/ajax\/netatmoWelcome.ajax.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Aucune methode correspondante à : ": "以下に対応するメソッドはありません："
+    },
+    "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
+        "Présence": "",
+        "Derniere fois": "",
+        "Status": "ステータス",
+        "Status SD": "",
+        "Status alim": "",
+        "Activer surveillance": "",
+        "Désactiver surveillance": "",
+        "Etat": "状態",
+        "Surveillance": "",
+        "Alimentation": "",
+        "Erreur sur synchro netatmo welcome ": "",
+        "Derniers évènements": "",
+        "Evènement": "イベント",
+        "Rafraichir": "クール"
     }
 }
