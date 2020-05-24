@@ -29,7 +29,7 @@ Identifique-se, com seu email e senha
 
 ![netatmoWelcome12](../images/netatmoWelcome12.png)
 
-Preencha os campos "Nome" e "Descrição" (o que você inserir não importa) :
+Preencha os campos "Nome" e "Descrição" (o que você colocar, não importa) :
 
 ![netatmoWelcome13](../images/netatmoWelcome13.png)
 
@@ -56,15 +56,15 @@ Abaixo você encontra a lista de pedidos :
 
 -   o nome do comando
 -   Historicizar : permite historiar os dados
--   configuração avançada (pequenas rodas dentadas) : permite exibir
-    configuração avançada do comando (método de registro, widget, etc.)
+-   Configuração avançada (pequenas rodas dentadas) : permite exibir
+    configuração avançada do comando (método de registro, widget, etc.))
 -   Teste : permite testar o comando
 
 # FAQ
 
 >**Eu não tenho os eventos em tempo real, mas depois de 15min**
 >
->Para ter um retorno em tempo real dos eventos (acionamento do alarme de incêndio, pessoa que passa na frente da câmera ..), você DEVE ABSOLUTAMENTE que seu jeedom tenha uma URL externa em https com um certificado válido na porta 443 (e somente nesta porta). É uma obrigação imposta pela netatmo
+>Para ter um retorno em tempo real dos eventos (acionamento do alarme de incêndio, pessoa que passa na frente da câmera etc.), DEVE ABSOLUTAMENTE que seu jeedom tenha uma URL externa em https com um certificado válido na porta 443 (e somente esta porta o). É uma obrigação imposta pela netatmo
 
 >**Não consigo desativar / ativar a vigilância**
 >

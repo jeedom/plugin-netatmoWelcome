@@ -59,6 +59,10 @@
     "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
         "Présence": "Presence",
         "Derniere fois": "Last time",
+        "Lumière ON": "Light ON",
+        "Lumière OFF": "OFF light",
+        "Lumière AUTO": "AUTO light",
+        "Lumière Variation": "Light Variation",
         "Status": "Status",
         "Status SD": "SD Status",
         "Status alim": "Power Status",
