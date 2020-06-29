@@ -4,7 +4,7 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
-# 24/05/2020
+# 29/06/2020
 
 - Possibilidade de controlar a iluminação da câmera Presença
 

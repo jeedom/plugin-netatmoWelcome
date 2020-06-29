@@ -4,7 +4,7 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
 
-# 24.05.2020
+# 29.06.2020
 
 - Möglichkeit zur Steuerung der Beleuchtung der Kamera Präsenz
 

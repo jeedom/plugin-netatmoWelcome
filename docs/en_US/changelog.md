@@ -4,7 +4,7 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
-# 5/24/2020
+# 06/29/2020
 
 - Possibility to control the lighting of the camera Presence
 

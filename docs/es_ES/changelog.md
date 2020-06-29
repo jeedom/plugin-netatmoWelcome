@@ -4,7 +4,7 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
-# 24/05/2020
+# 29/06/2020
 
 - Posibilidad de controlar la iluminación de la cámara Presencia
 
