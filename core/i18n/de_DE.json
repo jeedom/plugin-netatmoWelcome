@@ -39,7 +39,7 @@
         "Detecteur d'ouverture": "Detektor öffnen",
         "Sirène": "Meerjungfrau",
         "Nom": "Name",
-        "Option": "Option",
+        "Option": "Möglichkeit",
         "Action": "Aktion"
     },
     "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
@@ -59,6 +59,10 @@
     "plugins\/netatmoWelcome\/core\/class\/netatmoWelcome.class.php": {
         "Présence": "Präsenz",
         "Derniere fois": "Letztes Mal",
+        "Lumière ON": "Licht an",
+        "Lumière OFF": "AUS Licht",
+        "Lumière AUTO": "AUTO Licht",
+        "Lumière Variation": "Lichtvariation",
         "Status": "STATUS",
         "Status SD": "Status SD",
         "Status alim": "Stromstatus",

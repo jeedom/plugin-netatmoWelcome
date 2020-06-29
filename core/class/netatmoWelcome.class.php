@@ -80,6 +80,7 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom->setConfiguration('home_id',$home['id']);
 				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
 				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
+				$camera_jeedom->setConfiguration('cameraStreamAccessUrl', 'http://#ip#'.str_replace('snapshot_720.jpg','index.m3u8',$url_parse['path']));
 				if ($camera['type'] == 'NOC') {
 					$camera_jeedom->setConfiguration('device', 'presence');
 				} else {
@@ -196,6 +197,52 @@ class netatmoWelcome extends eqLogic {
 				$eqLogic->setConfiguration('homeId',$home['id']);
 				$eqLogic->setConfiguration('homeName',$home['name']);
 				$eqLogic->save();
+				if ($camera['type'] == 'NOC') {
+					$cmd = $eqLogic->getCmd('action', 'lighton');
+					if (!is_object($cmd)) {
+						$cmd = new netatmoWelcomeCmd();
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setLogicalId('lighton');
+						$cmd->setType('action');
+						$cmd->setSubType('other');
+						$cmd->setName(__('Lumière ON', __FILE__));
+						$cmd->setConfiguration('mode','on');
+						$cmd->save();
+					}
+					$cmd = $eqLogic->getCmd('action', 'lightoff');
+					if (!is_object($cmd)) {
+						$cmd = new netatmoWelcomeCmd();
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setLogicalId('lightoff');
+						$cmd->setType('action');
+						$cmd->setSubType('other');
+						$cmd->setName(__('Lumière OFF', __FILE__));
+						$cmd->setConfiguration('mode','off');
+						$cmd->save();
+					}
+					$cmd = $eqLogic->getCmd('action', 'lightauto');
+					if (!is_object($cmd)) {
+						$cmd = new netatmoWelcomeCmd();
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setLogicalId('lightauto');
+						$cmd->setType('action');
+						$cmd->setSubType('other');
+						$cmd->setName(__('Lumière AUTO', __FILE__));
+						$cmd->setConfiguration('mode','auto');
+						$cmd->save();
+					}
+					$cmd = $eqLogic->getCmd('action', 'lightintensity');
+					if (!is_object($cmd)) {
+						$cmd = new netatmoWelcomeCmd();
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setLogicalId('lightintensity');
+						$cmd->setType('action');
+						$cmd->setSubType('slider');
+						$cmd->setName(__('Lumière Variation', __FILE__));
+						$cmd->setConfiguration('action','on');
+						$cmd->save();
+					}
+				}
 				$cmd = $eqLogic->getCmd('info', 'state');
 				if (!is_object($cmd)) {
 					$cmd = new netatmoWelcomeCmd();
@@ -578,6 +625,27 @@ class netatmoWelcomeCmd extends cmd {
 			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'off');
 		}else if(strpos($this->getLogicalId(),'monitoringOn') !== false){
 			$eqLogic->setMonitoring($this->getConfiguration('cameraId'),'on');
+		}else if(strpos($this->getLogicalId(),'light') !== false){
+			$vpn = $eqLogic->getCache('vpnUrl');
+			$command = '/command/floodlight_set_config?config=';
+			if($this->getSubType() == 'slider'){
+				$config = '{"mode":"on","intensity":"'.$_options['slider'].'"}';
+			}else{
+				if($this->getConfiguration('mode')=='on'){
+					$config = '{"mode":"on","intensity":"100"}';
+				}else if($this->getConfiguration('mode')=='auto'){
+					$config = '{"mode":"auto"}';
+				}else{
+					$config = '{"mode":"off","intensity":"0"}';
+				}
+			}
+			$url = $vpn.$command.urlencode($config);
+			try {
+				$request_http = new com_http($url);
+				$result = json_decode(trim($request_http->exec(5, 1)), true);
+				log::add('netatmoWelcome','debug','Set light : '.json_encode($result));
+			} catch (Exception $e) {
+			}
 		}
 		netatmoWelcome::refresh_info();
 	}
