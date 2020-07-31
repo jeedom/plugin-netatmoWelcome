@@ -75,5 +75,8 @@
         "Derniers évènements": "Neueste Veranstaltungen",
         "Evènement": "Ereignis",
         "Rafraichir": "Aktualisieren"
+    },
+    "info.json": {
+        "Plugin pour Netatmo Security. Attention pour afficher le flux vidéo il faut le plugin caméra": "Plugin für Netatmo Security. Achtung, um den Videostream anzuzeigen, benötigen Sie das Kamera-Plugin"
     }
 }

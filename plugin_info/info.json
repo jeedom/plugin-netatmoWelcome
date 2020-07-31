@@ -1,13 +1,33 @@
 {
     "id": "netatmoWelcome",
     "name": "Netatmo Security",
-    "description": "Plugin pour Netatmo Security. Attention pour afficher le flux vidéo il faut le plugin caméra",
+    "description": {
+        "fr_FR": "Plugin pour Netatmo Security. Attention pour afficher le flux vidéo il faut le plugin caméra",
+        "en_US": "Plugin for Netatmo Security. Attention to display the video stream you need the camera plugin",
+        "es_ES": "Complemento para Netatmo Security. Atención para mostrar la transmisión de video, necesita el complemento de la cámara",
+        "de_DE": "Plugin für Netatmo Security. Achtung, um den Videostream anzuzeigen, benötigen Sie das Kamera-Plugin",
+        "pt_PT": "Plugin para Netatmo Security. Atenção para exibir o fluxo de vídeo, você precisa do plug-in da câmera"
+    },
     "licence": "AGPL",
     "author": "Loïc",
     "require": "3.3",
     "category": "security",
     "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/security\/netatmoWelcome\/changelog",
     "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/security\/netatmoWelcome\/",
-    "language" : ["fr_FR","en_US","de_DE","sp_SP"],
-	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile","v4"]
+    "language": [
+        "fr_FR",
+        "en_US",
+        "es_ES",
+        "de_DE",
+        "pt_PT"
+    ],
+    "compatibility": [
+        "miniplus",
+        "smart",
+        "rpi",
+        "docker",
+        "diy",
+        "mobile",
+        "v4"
+    ]
 }

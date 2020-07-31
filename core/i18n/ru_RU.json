@@ -75,5 +75,8 @@
         "Derniers évènements": "",
         "Evènement": "событие",
         "Rafraichir": "Обновить"
+    },
+    "info.json": {
+        "Plugin pour Netatmo Security. Attention pour afficher le flux vidéo il faut le plugin caméra": ""
     }
 }
