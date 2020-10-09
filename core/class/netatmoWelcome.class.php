@@ -26,7 +26,7 @@ class netatmoWelcome extends eqLogic {
 	/*     * *************************Attributs****************************** */
 	
 	private static $_client = null;
-	public static $_encryptConfigKey = array('password','client_id','client_secret');
+	public static $_encryptConfigKey = array('password','client_secret');
 	
 	/*     * ***********************Methode static*************************** */
 	
