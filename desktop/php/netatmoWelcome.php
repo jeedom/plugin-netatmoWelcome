@@ -103,6 +103,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="NIS">{{Sirène}}</option>
 										</select>
 									</div>
+								</div
+									<div class="form-group">
+									<label class="col-sm-4 control-label">{{Ne pas mettre à jour l'ip sur le plugin caméra}}</label>
+									<div class="col-sm-8">
+										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="disableIpCamUpdate" /></label>
+									</div>
 								</div>
 							</fieldset>
 						</form>
