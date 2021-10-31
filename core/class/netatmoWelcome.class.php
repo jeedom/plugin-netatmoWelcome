@@ -79,7 +79,9 @@ class netatmoWelcome extends eqLogic {
 					$camera_jeedom->setName($camera['name']);
 				}
 				$camera_jeedom->setConfiguration('home_id',$home['id']);
-				$camera_jeedom->setConfiguration('ip', $url_parse['host']);
+				if($eqLogic->getConfiguration('disableIpCamUpdate',0) == 0){
+					$camera_jeedom->setConfiguration('ip', $url_parse['host']);
+				}
 				$camera_jeedom->setConfiguration('urlStream', $url_parse['path']);
 				$camera_jeedom->setConfiguration('cameraStreamAccessUrl', 'http://#ip#'.str_replace('snapshot_720.jpg','index.m3u8',$url_parse['path']));
 				if ($camera['type'] == 'NOC') {
