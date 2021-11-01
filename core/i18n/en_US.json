@@ -38,6 +38,7 @@
         "Smokedetector": "Smokedetector",
         "Detecteur d'ouverture": "Opening detector",
         "Sirène": "Siren",
+        "Ne pas mettre à jour l'ip sur le plugin caméra": "Do not update the ip on the camera plugin",
         "Nom": "Name",
         "Option": "Option",
         "Action": "Action"

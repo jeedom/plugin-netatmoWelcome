@@ -2,6 +2,7 @@
     "changelog.md": {
         "Changelog Netatmo Security": "Registro de cambios de seguridad de Netatmo",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto",
+        "POssibilité de désactiver la mise à jour automatique des ip des cameras dans le plugin camera": "Posibilidad de deshabilitar la actualización automática de la ip de la cámara en el complemento de la cámara",
         "29\/06\/2020": "29\/06\/2020",
         "Possibilité de contrôler l'éclairage de la caméra Présence": "Posibilidad de controlar la iluminación de la cámara Presencia",
         "16\/10\/2019": "16\/10\/2019",
