@@ -38,6 +38,7 @@
         "Smokedetector": "Detector de humo",
         "Detecteur d'ouverture": "Detector de apertura",
         "Sirène": "Sirena",
+        "Ne pas mettre à jour l'ip sur le plugin caméra": "No actualice la ip en el complemento de la cámara",
         "Nom": "Nombre",
         "Option": "Opción",
         "Action": "Acción"
@@ -75,5 +76,8 @@
         "Derniers évènements": "Últimos eventos",
         "Evènement": "Evento",
         "Rafraichir": "Refrescar"
+    },
+    "info.json": {
+        "Plugin pour Netatmo Security. Attention pour afficher le flux vidéo il faut le plugin caméra": "Complemento para Netatmo Security. Atención para mostrar la transmisión de video, necesita el complemento de la cámara"
     }
 }

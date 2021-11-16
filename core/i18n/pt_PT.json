@@ -5,7 +5,7 @@
         "Nom d'utilisateur": "Nome de Usuário",
         "Mot de passe": "Senha",
         "Récupérer les infos du plugin": "Obter informações do plug-in",
-        "Netatmo Thermostat": "Netatmo Thermostat",
+        "Netatmo Thermostat": "Termostato Netatmo",
         "Netatmo Station": "Estação Netatmo",
         "Synchroniser": "Sincronizar",
         "Synchroniser mes équipements": "Sincronizar o meu equipamento",
@@ -38,6 +38,7 @@
         "Smokedetector": "Detector de fumaça",
         "Detecteur d'ouverture": "Detector de abertura",
         "Sirène": "Sereia",
+        "Ne pas mettre à jour l'ip sur le plugin caméra": "Não atualize o ip no plugin da câmera",
         "Nom": "Nome",
         "Option": "Opção",
         "Action": "Ação"
@@ -75,5 +76,8 @@
         "Derniers évènements": "Últimos eventos",
         "Evènement": "Evento",
         "Rafraichir": "Legal"
+    },
+    "info.json": {
+        "Plugin pour Netatmo Security. Attention pour afficher le flux vidéo il faut le plugin caméra": "Plugin para Netatmo Security. Atenção para exibir o fluxo de vídeo, você precisa do plug-in da câmera"
     }
 }

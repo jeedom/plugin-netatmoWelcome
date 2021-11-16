@@ -75,9 +75,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 											<option value="">{{Aucun}}</option>
 											<?php
-											foreach (jeeObject::all() as $object) {
-												echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
+											$options = '';
+											foreach ((jeeObject::buildTree(null, false)) as $object) {
+												$options .= '<option value="' . $object->getId() . '">' . str_repeat('&nbsp;&nbsp;', $object->getConfiguration('parentNumber')) . $object->getName() . '</option>';
 											}
+											echo $options;
 											?>
 										</select>
 									</div>
@@ -100,6 +102,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="NACamDoorTag">{{Detecteur d'ouverture}}</option>
 											<option value="NIS">{{Sirène}}</option>
 										</select>
+									</div>
+								</div
+									<div class="form-group">
+									<label class="col-sm-4 control-label">{{Ne pas mettre à jour l'ip sur le plugin caméra}}</label>
+									<div class="col-sm-8">
+										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="disableIpCamUpdate" /></label>
 									</div>
 								</div>
 							</fieldset>
