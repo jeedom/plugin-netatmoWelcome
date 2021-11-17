@@ -2,7 +2,8 @@
     "changelog.md": {
         "Changelog Netatmo Security": "Changelog Netatmo Security",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
-        "POssibilité de désactiver la mise à jour automatique des ip des cameras dans le plugin camera": "Possibility to disable the automatic update of camera ip in the camera plugin",
+        "16\/11\/2021": "11\/16\/2021",
+        "Possibilité de désactiver la mise à jour automatique des ip des cameras dans le plugin camera": "Possibility to disable the automatic update of camera ip in the camera plugin",
         "29\/06\/2020": "06\/29\/2020",
         "Possibilité de contrôler l'éclairage de la caméra Présence": "Possibility to control the lighting of the camera Presence",
         "16\/10\/2019": "10\/16\/2019",
