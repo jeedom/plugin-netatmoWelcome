@@ -103,7 +103,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="NIS">{{Sirène}}</option>
 										</select>
 									</div>
-								</div
+								</div>
 									<div class="form-group">
 									<label class="col-sm-4 control-label">{{Ne pas mettre à jour l'ip sur le plugin caméra}}</label>
 									<div class="col-sm-8">

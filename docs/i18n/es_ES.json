@@ -2,7 +2,8 @@
     "changelog.md": {
         "Changelog Netatmo Security": "Registro de cambios de seguridad de Netatmo",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto",
-        "POssibilité de désactiver la mise à jour automatique des ip des cameras dans le plugin camera": "Posibilidad de deshabilitar la actualización automática de la ip de la cámara en el complemento de la cámara",
+        "16\/11\/2021": "16\/11\/2021",
+        "Possibilité de désactiver la mise à jour automatique des ip des cameras dans le plugin camera": "Posibilidad de deshabilitar la actualización automática de la ip de la cámara en el complemento de la cámara",
         "29\/06\/2020": "29\/06\/2020",
         "Possibilité de contrôler l'éclairage de la caméra Présence": "Posibilidad de controlar la iluminación de la cámara Presencia",
         "16\/10\/2019": "16\/10\/2019",
@@ -45,6 +46,7 @@
         "permet de synchroniser Jeedom avec votre compte Netamo pour découvrir automatiquement vos équipements Netamo. A": "le permite sincronizar Jeedom con su cuenta de Netamo para descubrir automáticamente su equipo Netamo. Un",
         "faire après avoir sauvegardé les paramètres précedent": "hacer después de guardar la configuración anterior",
         "Recupération des informations de connexion": "Recuperando información de conexión",
+        "next_url=https%3A%2F%2Fdev.netatmo.com%2Fbusiness-showcase": "next_url=https%3A%2F%2Fdev.netatmo.com%2Fnegocio-exhibición",
         "Une fois dessus cliquez sur start": "Una vez que haga clic en Inicio",
         "Puis sur \"create an app": "Luego en \"crear una aplicación",
         "Identifiez vous, avec votre mail et mot de passe": "Identifícate con tu correo electrónico y contraseña",
