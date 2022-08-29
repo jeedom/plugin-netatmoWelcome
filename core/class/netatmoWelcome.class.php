@@ -49,7 +49,7 @@ class netatmoWelcome extends eqLogic {
 				'client_secret' => config::byKey('client_secret', 'netatmoWelcome'),
 				'username' => config::byKey('username', 'netatmoWelcome'),
 				'password' => config::byKey('password', 'netatmoWelcome'),
-				'scope' => 'read_camera access_camera read_presence access_presence read_smokedetector',
+				'scope' => 'read_doorbell access_doorbell read_camera access_camera read_presence access_presence read_smokedetector',
 			));
 		}
 		return self::$_client;
@@ -90,8 +90,10 @@ class netatmoWelcome extends eqLogic {
 				$camera_jeedom->setConfiguration('cameraStreamAccessUrl', 'http://#ip#'.str_replace('snapshot_720.jpg','index.m3u8',$url_parse['path']));
 				if ($camera['type'] == 'NOC') {
 					$camera_jeedom->setConfiguration('device', 'presence');
+				} else if ($camera['type'] == 'NDB') {
+						$camera_jeedom->setConfiguration('device', 'doorbell');
 				} else {
-					$camera_jeedom->setConfiguration('device', 'welcome');
+						$camera_jeedom->setConfiguration('device', 'welcome');
 				}
 				$camera_jeedom->setEqType_name('camera');
 				$camera_jeedom->setConfiguration('protocole', $url_parse['scheme']);
