@@ -251,6 +251,16 @@ class netatmoWelcome extends eqLogic {
 						$cmd->setConfiguration('action','on');
 						$cmd->save();
 					}
+					$cmd = $eqLogic->getCmd('info', 'stateLight');
+					if (!is_object($cmd)) {
+						$cmd = new netatmoWelcomeCmd();
+						$cmd->setEqLogic_id($eqLogic->getId());
+						$cmd->setLogicalId('stateLight');
+						$cmd->setType('info');
+						$cmd->setSubType('string');
+						$cmd->setName(__('Status lumière', __FILE__));
+						$cmd->save();
+					}
 				}
 				$cmd = $eqLogic->getCmd('info', 'state');
 				if (!is_object($cmd)) {
@@ -525,6 +535,9 @@ class netatmoWelcome extends eqLogic {
 					$eqLogic->checkAndUpdateCmd('state', ($camera['status'] == 'on'));
 					$eqLogic->checkAndUpdateCmd('stateSd', ($camera['sd_status'] == 'on'));
 					$eqLogic->checkAndUpdateCmd('stateAlim', ($camera['alim_status'] == 'on'));
+					if(isset($camera['light_mode_status'])){
+						$eqLogic->checkAndUpdateCmd('stateLight', $camera['light_mode_status']);
+					}
 				}
 				foreach ($home['cameras'] as &$camera) {
 					if(isset($camera['modules'])){
