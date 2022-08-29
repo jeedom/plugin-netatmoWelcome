@@ -6,6 +6,7 @@
 
 
 - Correction d'un warning lors des backups
+- Support de la Doorbell
 
 # 16/11/2021
 
