@@ -3,6 +3,7 @@
         "Changelog Netatmo Security": "Changelog Netatmo Sicherheit",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
         "Correction d'un warning lors des backups": "Korrektur einer Warnung während Backups",
+        "Support de la Doorbell (il faut refaire la connexion entre Jeedom et Netatmo": "Türklingelunterstützung (Sie müssen die Verbindung zwischen Jeedom und Netatmo neu herstellen",
         "16\/11\/2021": "16.11.2021",
         "Possibilité de désactiver la mise à jour automatique des ip des cameras dans le plugin camera": "Möglichkeit, die automatische Aktualisierung der Kamera-IP im Kamera-Plugin zu deaktivieren",
         "29\/06\/2020": "29.06.2020",

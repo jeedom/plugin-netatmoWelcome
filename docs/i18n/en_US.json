@@ -3,6 +3,7 @@
         "Changelog Netatmo Security": "Changelog Netatmo Security",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
         "Correction d'un warning lors des backups": "Correction of a warning during backups",
+        "Support de la Doorbell (il faut refaire la connexion entre Jeedom et Netatmo": "Doorbell support (you have to redo the connection between Jeedom and Netatmo",
         "16\/11\/2021": "11\/16\/2021",
         "Possibilité de désactiver la mise à jour automatique des ip des cameras dans le plugin camera": "Possibility to disable the automatic update of camera ip in the camera plugin",
         "29\/06\/2020": "06\/29\/2020",
