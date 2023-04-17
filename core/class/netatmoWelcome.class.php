@@ -410,9 +410,10 @@ class netatmoWelcome extends eqLogic {
 			
 		}
 		try {
+			log::add('netatmoWelcome','debug','Add webhook : '.network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . jeedom::getApiKey('netatmoWelcome'));
 			self::getClient()->api('addwebhook','POST',array('url' => network::getNetworkAccess('external') . '/plugins/netatmoWelcome/core/php/jeeWelcome.php?apikey=' . jeedom::getApiKey('netatmoWelcome')));
 		} catch (\Exception $e) {
-			
+			log::add('netatmoWelcome','debug','Error on webhook :'.$e->getMessage());
 		}
 	}
 	
