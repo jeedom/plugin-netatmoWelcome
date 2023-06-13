@@ -42,6 +42,7 @@
         "Ne pas mettre à jour l'ip sur le plugin caméra": "Não atualize o ip no plugin da câmera",
         "Nom": "Nome",
         "Option": "Opção",
+        "Etat": "Estado",
         "Action": "Ação"
     },
     "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {

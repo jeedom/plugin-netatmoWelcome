@@ -2,6 +2,11 @@
     "changelog.md": {
         "Changelog Netatmo Security": "Changelog Netatmo Security",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto",
+        "13\/06\/2023": "13\/06\/2023",
+        "Version minimum du core requise": "Versão mínima do núcleo necessária",
+        "Mise à jours liste des commandes pour Jeedom v4.3": "Lista atualizada de comandos para Jeedom v4.3",
+        "Corrections & optimisations mineures dans l'écran de gestion des équipements": "Pequenas correções e otimizações na tela de gerenciamento de equipamentos",
+        "29\/08\/2022": "29\/08\/2022",
         "Correction d'un warning lors des backups": "Correção de um aviso durante os backups",
         "Support de la Doorbell (il faut refaire la connexion entre Jeedom et Netatmo": "Suporte a campainha (você precisa refazer a conexão entre Jeedom e Netatmo",
         "16\/11\/2021": "16\/11\/2021",

@@ -42,6 +42,7 @@
         "Ne pas mettre à jour l'ip sur le plugin caméra": "Do not update the ip on the camera plugin",
         "Nom": "Name",
         "Option": "Option",
+        "Etat": "State",
         "Action": "Action"
     },
     "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
@@ -71,7 +72,7 @@
         "Status alim": "Power Status",
         "Activer surveillance": "Enable surveillance",
         "Désactiver surveillance": "Disable surveillance",
-        "Etat": "Statet",
+        "Etat": "State",
         "Surveillance": "Surveillance",
         "Alimentation": "Power",
         "Erreur sur synchro netatmo welcome ": "Error while syncing Netatmo Welcome",

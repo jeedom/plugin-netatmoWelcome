@@ -42,6 +42,7 @@
         "Ne pas mettre à jour l'ip sur le plugin caméra": "Ne pas mettre à jour l'ip sur le plugin caméra",
         "Nom": "表題",
         "Option": "オプション",
+        "Etat": "Etat",
         "Action": "アクション"
     },
     "plugins\/netatmoWelcome\/desktop\/js\/netatmoWelcome.js": {
