@@ -9,26 +9,26 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 <div class="row row-overflow">
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
-		<legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
+		<legend><i class="fas fa-cog"></i> {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
 			<div class="cursor eqLogicAction logoPrimary" data-action="gotoPluginConf">
 				<i class="fa fa-wrench"></i>
-				<br/>
+				<br />
 				<span>{{Configuration}}</span>
 			</div>
 		</div>
-		<legend><i class="fas fa-video"></i>  {{Mes caméras}}</legend>
+		<legend><i class="fas fa-video"></i> {{Mes caméras}}</legend>
 		<input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 		<?php
 		if (count($eqLogics) == 0) {
 			echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n’avez pas encore d'équipement Netatmo Security, cliquez sur configuration et cliquez sur synchroniser pour commencer}}</span></center>";
 		} else {
-			?>
+		?>
 			<div class="eqLogicThumbnailContainer">
 				<?php
 				foreach ($eqLogics as $eqLogic) {
 					$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
-					echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
+					echo '<div class="eqLogicDisplayCard cursor ' . $opacity . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
 					if ($eqLogic->getConfiguration('type', '') != '') {
 						echo '<img src="' . $eqLogic->getImage() . '"/>';
 					} else {
@@ -54,10 +54,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
 			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Commandes}}</a></li>
 		</ul>
-		
+
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="eqlogictab">
-				<br/>
+				<br />
 				<div class="row">
 					<div class="col-sm-6">
 						<form class="form-horizontal">
@@ -66,11 +66,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<label class="col-sm-4 control-label">{{Nom de l'équipement Welcome Netatmo}}</label>
 									<div class="col-sm-6">
 										<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-										<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement météo Netatmo}}"/>
+										<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement météo Netatmo}}" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-4 control-label" >{{Objet parent}}</label>
+									<label class="col-sm-4 control-label">{{Objet parent}}</label>
 									<div class="col-sm-6">
 										<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 											<option value="">{{Aucun}}</option>
@@ -87,8 +87,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="form-group">
 									<label class="col-sm-4 control-label"></label>
 									<div class="col-sm-8">
-										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
-										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
 									</div>
 								</div>
 								<div class="form-group">
@@ -105,7 +105,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										</select>
 									</div>
 								</div>
-									<div class="form-group">
+								<div class="form-group">
 									<label class="col-sm-4 control-label">{{Ne pas mettre à jour l'ip sur le plugin caméra}}</label>
 									<div class="col-sm-8">
 										<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="disableIpCamUpdate" /></label>
@@ -125,7 +125,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<table id="table_cmd" class="table table-bordered table-condensed">
 					<thead>
 						<tr>
-							<th>{{Nom}}</th><th>{{Option}}</th><th>{{Action}}</th>
+							<th>{{Nom}}</th>
+							<th>{{Option}}</th>
+							<th>{{Etat}}</th>
+							<th>{{Action}}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -137,5 +140,5 @@ $eqLogics = eqLogic::byType($plugin->getId());
 </div>
 
 
-<?php include_file('desktop', 'netatmoWelcome', 'js', 'netatmoWelcome');?>
-<?php include_file('core', 'plugin.template', 'js');?>
+<?php include_file('desktop', 'netatmoWelcome', 'js', 'netatmoWelcome'); ?>
+<?php include_file('core', 'plugin.template', 'js'); ?>
